@@ -1,6 +1,5 @@
 <script>
-  export let name;
-  import Tiles from "./TilesV1.svelte";
+  import Tiles from "./TilesV2.svelte";
 </script>
 
 <style>
@@ -23,8 +22,7 @@
 </svelte:head>
 
 <main>
-  <div id="main" class="content">
-    <h1>Hello {name}!</h1>
+  <div class="content">
     <Tiles />
   </div>
 </main>
