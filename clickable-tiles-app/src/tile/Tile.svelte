@@ -6,7 +6,7 @@
 
   import ParentTile from "./ParentTile.svelte";
   import { getColor } from "./func";
-  $: classes = getColor(color);
+  let classes = getColor(color);
   const onClick = event => alert(`tile: ${id}`);
 </script>
 

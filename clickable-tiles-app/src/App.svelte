@@ -1,12 +1,9 @@
 <script>
-  export let name;
   import Tiles from "./Tiles.svelte";
 </script>
 
 <style>
-  #main {
-    text-align: center;
-  }
+
 </style>
 
 <svelte:head>
@@ -19,12 +16,10 @@
 
   </script>
   <title>A first svelte app</title>
-  ;
 </svelte:head>
 
 <main>
-  <div id="main" class="content">
-    <h1>Hello {name}!</h1>
+  <div class="content">
     <Tiles />
   </div>
 </main>

@@ -3,7 +3,6 @@
   import AncestorTile from "./tile/AncestorTile.svelte";
   import Tile from "./tile/TileDispatch.svelte";
   let currentId = 1;
-  setTimeout;
   const onClick = event => {
     currentId = event.detail.id;
   };
