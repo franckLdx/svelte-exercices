@@ -1,5 +1,5 @@
 <script>
-  import { filter as filterStore } from "../store/filter";
+  import { filter as filterStore } from "../stores/filter";
   export let filter;
 </script>
 

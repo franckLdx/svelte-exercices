@@ -1,5 +1,5 @@
 <script>
-  import { FILTER_ALL, FILTER_DONE, FILTER_UNDONE } from "../store/filter";
+  import { FILTER_ALL, FILTER_DONE, FILTER_UNDONE } from "../stores/filter";
   import FilterButton from "./FilterButton.svelte";
 </script>
 
