@@ -3,9 +3,9 @@ import { writable } from 'svelte/store';
 const create = () => {
   const { subscribe, update } = writable([
     { id: 0, description: "foo", done: false },
-    { id: 1, description: "bar", done: true }
-  ]
-  );
+    { id: 1, description: "lorem ispum", done: true },
+    { id: 2, description: "Lorem ipsum dolor sit amet consectetuer", done: true },
+  ]);
   return {
     subscribe,
     add: todo => update(todos => [...todos, todo]),
