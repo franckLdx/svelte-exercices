@@ -12,3 +12,5 @@
   <FilterButton filter={FILTER_DONE}>DONE</FilterButton>
   <FilterButton filter={FILTER_UNDONE}>UNDONE</FilterButton>
 </div>
+
+<svelte:options immutable />

@@ -13,8 +13,10 @@
 
 <div class="margin-top-lg">
   <div class="container">
-    {#each $filteredTodos as todo (todo.id + todo.done)}
+    {#each $filteredTodos as todo (todo.id)}
       <Checkbox {todo} on:click={onClick} />
     {/each}
   </div>
 </div>
+
+<svelte:options immutable />

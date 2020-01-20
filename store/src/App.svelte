@@ -16,3 +16,5 @@
   <Filter />
   <Todos />
 </main>
+
+<svelte:options immutable />

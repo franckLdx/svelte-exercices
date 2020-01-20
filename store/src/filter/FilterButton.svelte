@@ -9,3 +9,5 @@
   on:click={() => filterStore.set(filter)}>
   <slot />
 </button>
+
+<svelte:options immutable />

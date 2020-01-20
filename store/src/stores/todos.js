@@ -11,15 +11,13 @@ const create = () => {
     add: todo => update(todos => [...todos, todo]),
     remove: todoId => update(todos => {
       const filter = isId(todoId);
-      todos.filter(todo => !filter(todo));
+      return todos.filter(todo => !filter(todo));
     }),
     toggle: todoId => update(todos => {
       const filter = isId(todoId);
-      const todo = todos.find(filter);
-      if (todo !== undefined) {
-        todo.done = !todo.done;
-      }
-      return todos;
+      return todos.map(todo =>
+        filter(todo) ? { ...todo, done: !todo.done } : todo
+      );
     }),
   };
 }
