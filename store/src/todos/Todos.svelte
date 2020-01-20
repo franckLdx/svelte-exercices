@@ -13,7 +13,7 @@
 
 <div class="margin-top-lg">
   <div class="container">
-    {#each $filteredTodos as todo}
+    {#each $filteredTodos as todo (todo.id + todo.done)}
       <Checkbox {todo} on:click={onClick} />
     {/each}
   </div>
