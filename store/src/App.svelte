@@ -4,7 +4,12 @@
 </script>
 
 <style>
-
+  :global(.margin-top) {
+    margin-top: 20px;
+  }
+  :global(.margin-top-lg) {
+    margin-top: 50px;
+  }
 </style>
 
 <main class="container">

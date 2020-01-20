@@ -11,8 +11,10 @@
   }
 </style>
 
-<div class="container">
-  {#each $filteredTodos as todo}
-    <Checkbox {todo} on:click={onClick} />
-  {/each}
+<div class="margin-top-lg">
+  <div class="container">
+    {#each $filteredTodos as todo}
+      <Checkbox {todo} on:click={onClick} />
+    {/each}
+  </div>
 </div>
