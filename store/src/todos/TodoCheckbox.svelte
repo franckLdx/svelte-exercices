@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Checked from "../components/icons/Checked.svelte";
-  import Unchecked from "../components/icons/Unchecked.svelte";
+  import Checked from "@icons/Checked.svelte";
+  import Unchecked from "@icons/Unchecked.svelte";
 
   export let todo;
 
