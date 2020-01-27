@@ -280,11 +280,6 @@ console-clear@^1.1.0:
   resolved "https://registry.yarnpkg.com/console-clear/-/console-clear-1.1.1.tgz#995e20cbfbf14dd792b672cde387bd128d674bf7"
   integrity sha512-pMD+MVR538ipqkG5JXeOEbKWS5um1H4LUUccUQG68qpeqBYbzYy79Gh55jkd2TtPdRfUaLWdv6LPP//5Zt0aPQ==
 
-cool-checkboxes-for-bulma.io@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/cool-checkboxes-for-bulma.io/-/cool-checkboxes-for-bulma.io-1.1.0.tgz#4715f5144b952b9c9d19eab5315d738359fae833"
-  integrity sha512-RDEXOeS9COGTbQjlwRQzPRwOA8ycP4azc/GDVF5qYSOs4tYk6dc9SWNOj7Bb/NvhVUsb+H95pNtGgOBwCENBQg==
-
 copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
@@ -1111,10 +1106,22 @@ supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
+svelte-awesome@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/svelte-awesome/-/svelte-awesome-2.2.1.tgz#976c05378ae4350e00f4551c9709a6309a8c56b3"
+  integrity sha512-CkGRVoMMLJsQ+TQpK+qOBAUH1Gl+l14EhX47KZA02XgXHahJZkRvLi4XAunBFcU+Zlik3oyxEnBvmT6BHF1CUA==
+  dependencies:
+    svelte "^3.15.0"
+
 svelte@^3.0.0:
   version "3.16.7"
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.16.7.tgz#9ade80a4bbbac95595c676dd817222f632fa2c07"
   integrity sha512-egrva1UklB1n7KAv179IhDpQzMGAvubJUlOQ9PitmmZmAfrCUEgrQnx2vPxn2s+mGV3aYegXvJ/yQ35N2SfnYQ==
+
+svelte@^3.15.0:
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.18.0.tgz#39dc8314e3b0f660b945fe0e23abf65bba20a0ef"
+  integrity sha512-p3V6wcxkkKbWhCwty1tZ8nh9zXNKg/fUWwdzzh38ERUDnhCodiLzIFcp8LVSBPXy1JS4qfAZfjjujobHGt6AWQ==
 
 terser@^4.1.0:
   version "4.6.2"

@@ -1,9 +1,13 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Checked from "@icons/Checked.svelte";
-  import Unchecked from "@icons/Unchecked.svelte";
+  import Icon from "svelte-awesome";
+  import check from "svelte-awesome/icons/check-circle";
+  import circle from "svelte-awesome/icons/circle-o";
+  //  import circle from "svelte-awesome/icons/hourglass-3";
 
   export let todo;
+
+  $: icon = todo.done ? check : circle;
 
   const dispatch = createEventDispatcher();
   const onClick = () => dispatch("click", { id: todo.id });
@@ -14,9 +18,8 @@
     width: 15rem;
   }
   .todo:hover {
-    opacity: 0.7;
+    opacity: 0.9;
     cursor: pointer;
-    box-shadow: 10px 5px 15px;
   }
   .is-center {
     display: flex;
@@ -27,11 +30,7 @@
 <div class="notification is-success todo" on:click={onClick}>
   <div class="tile is-ancestor">
     <div class="tile is-child is-2 is-center">
-      {#if todo.done}
-        <Checked />
-      {:else}
-        <Unchecked />
-      {/if}
+      <Icon data={icon} scale="1.3" />
     </div>
     <div class="tile is-child">{todo.description}</div>
   </div>

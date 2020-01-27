@@ -1,6 +1,7 @@
 <script>
   import { filteredTodos } from "../stores/filteredTodos";
   import Checkbox from "./TodoCheckbox.svelte";
+
   const onClick = ({ detail }) => filteredTodos.toggle(detail.id);
 </script>
 
