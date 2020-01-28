@@ -1,13 +1,11 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import Icon from "svelte-awesome";
-  import check from "svelte-awesome/icons/check-circle";
-  import circle from "svelte-awesome/icons/circle-o";
-  //  import circle from "svelte-awesome/icons/hourglass-3";
+  import Done from "./icons/Done.svelte";
+  import Undone from "./icons/Undone.svelte";
+
+  $: icon = todo.done ? Done : Undone;
 
   export let todo;
-
-  $: icon = todo.done ? check : circle;
 
   const dispatch = createEventDispatcher();
   const onClick = () => dispatch("click", { id: todo.id });
@@ -30,7 +28,7 @@
 <div class="notification is-success todo" on:click={onClick}>
   <div class="tile is-ancestor">
     <div class="tile is-child is-2 is-center">
-      <Icon data={icon} scale="1.3" />
+      <svelte:component this={icon} />
     </div>
     <div class="tile is-child">{todo.description}</div>
   </div>
