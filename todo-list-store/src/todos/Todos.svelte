@@ -1,6 +1,6 @@
 <script>
   import { filteredTodos } from "../stores/filteredTodos";
-  import Checkbox from "./TodoCheckbox.svelte";
+  import Todo from "./Todo.svelte";
 
   const onClick = ({ detail }) => filteredTodos.toggle(detail.id);
 </script>
@@ -14,7 +14,7 @@
 <div class="margin-top-lg">
   <div class="container">
     {#each $filteredTodos as todo (todo.id)}
-      <Checkbox {todo} on:click={onClick} />
+      <Todo {todo} on:click={onClick} />
     {/each}
   </div>
 </div>

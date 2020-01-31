@@ -18,9 +18,9 @@ const getFilterFunction = filter => {
     case FILTER_ALL:
       return undefined;
     case FILTER_DONE:
-      return todo => todo.done;
+      return todo => todo.completed;
     case FILTER_UNDONE:
-      return todo => !todo.done;
+      return todo => !todo.completed;
     default:
       throw new Error(`Unexpected filter: ${filter}`)
   }

@@ -3,7 +3,7 @@
   import Done from "./icons/Done.svelte";
   import Undone from "./icons/Undone.svelte";
 
-  $: icon = todo.done ? Done : Undone;
+  $: icon = todo.completed ? Done : Undone;
 
   export let todo;
 
@@ -30,7 +30,7 @@
     <div class="tile is-child is-2 is-center">
       <svelte:component this={icon} />
     </div>
-    <div class="tile is-child">{todo.description}</div>
+    <div class="tile is-child">{todo.title}</div>
   </div>
 </div>
 
