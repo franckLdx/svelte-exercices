@@ -6,20 +6,16 @@
 
   export let userId;
 
-  let posts;
   async function loadPost(id) {
     if (id) {
       const res = await fetch(
         `https://jsonplaceholder.typicode.com/posts?userId=${id}`
       );
       const text = await res.text();
-      posts = JSON.parse(text);
-    } else {
-      posts = [];
+      return JSON.parse(text);
     }
+    return [];
   }
-
-  $: promise = loadPost(userId);
 </script>
 
 <style>
@@ -30,16 +26,16 @@
   {#if !userId}
     <div />
   {:else}
-    {#await promise}
+    {#await loadPost(userId)}
       <Loading />
-    {:then}
+    {:then posts}
       {#if posts.length === 0}
         <NoPost />
       {:else}
         <DisplayPosts {posts} />
       {/if}
     {:catch error}
-      <LoadError />
+      <LoadError error />
     {/await}
   {/if}
 </section>

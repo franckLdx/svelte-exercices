@@ -5,5 +5,5 @@
 <div class="notification is-danger">
   Loading failed
   <br />
-  Sorry, shits happen {console.log(error)}
+  Sorry, shit happens {console.log(error)}
 </div>
