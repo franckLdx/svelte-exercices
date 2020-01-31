@@ -1,9 +1,6 @@
-const getIsClass = (value) => value ? `is-${value} ` : undefined;
+export const getColor = isActive => isActive ? 'is-danger ' : undefined;
 
-export const getColor = getIsClass;
+export const getSize = value => value ? `is-${value} ` : undefined;
 
-export const getSize = getIsClass;
+export const getIsVertical = isVertical => isVertical ? "is-vertical" : undefined;
 
-export function getIsVertical(isVertical) {
-  return isVertical ? "is-vertical" : undefined;
-}

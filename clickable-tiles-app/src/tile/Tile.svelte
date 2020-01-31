@@ -1,13 +1,20 @@
 <script>
+  export let id;
   export let isVertical = false;
   export let size = undefined;
-  export let color = undefined;
-  export let id;
+  export let active = undefined;
 
-  import ParentTile from "./ParentTile.svelte";
   import { getColor } from "./func";
-  let classes = getColor(color);
-  const onClick = event => alert(`tile: ${id}`);
+  import ParentTile from "./ParentTile.svelte";
+  import { createEventDispatcher } from "svelte";
+
+  $: color = getColor(active);
+
+  const dispatch = createEventDispatcher();
+  const onClick = () =>
+    dispatch("clicked", {
+      id
+    });
 </script>
 
 <style>
@@ -20,7 +27,7 @@
 
 <ParentTile {isVertical} {size}>
   <article
-    class="tile is-child notification {classes} clickable"
+    class="tile is-child notification {color} clickable"
     on:click={onClick}>
     <p class="title">
       <slot name="title" />
