@@ -7,14 +7,14 @@
   export let userId;
 
   async function loadPost(id) {
-    if (id) {
-      const res = await fetch(
-        `https://jsonplaceholder.typicode.com/posts?userId=${id}`
-      );
-      const text = await res.text();
-      return JSON.parse(text);
+    if (!id) {
+      return [];
     }
-    return [];
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts?userId=${id}`
+    );
+    const text = await res.text();
+    return JSON.parse(text);
   }
 </script>
 

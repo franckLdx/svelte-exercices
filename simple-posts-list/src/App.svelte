@@ -29,3 +29,5 @@
     <p style="color: red">{error.message}</p>
   {/await}
 </main>
+
+<svelte:options immutable />
