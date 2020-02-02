@@ -6,6 +6,7 @@
   const onClick = event => {
     currentId = event.detail.id;
   };
+
   $: isActive = id => currentId === id;
 </script>
 

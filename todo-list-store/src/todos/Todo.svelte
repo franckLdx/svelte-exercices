@@ -3,7 +3,7 @@
   import Done from "./icons/Done.svelte";
   import Undone from "./icons/Undone.svelte";
 
-  $: icon = todo.completed ? Done : Undone;
+  const icons = { true: Done, false: Undone };
 
   export let todo;
 
@@ -28,7 +28,7 @@
 <div class="notification is-success todo" on:click={onClick}>
   <div class="tile is-ancestor">
     <div class="tile is-child is-2 is-center">
-      <svelte:component this={icon} />
+      <svelte:component this={icons[todo.completed]} />
     </div>
     <div class="tile is-child">{todo.title}</div>
   </div>
