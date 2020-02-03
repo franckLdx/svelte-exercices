@@ -8,6 +8,7 @@
   };
 
   $: isActive = id => currentId === id;
+  // const isActive = (id, idRef) => idRef === id;
 </script>
 
 <style>
