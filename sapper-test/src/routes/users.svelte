@@ -1,25 +1,22 @@
 <script context="module">
   export async function preload(page, session) {
-    const res = await this.fetch(`https://jsonplaceholder.typicode.com/posts`);
+    const res = await this.fetch(`https://jsonplaceholder.typicode.com/users`);
     const text = await res.text();
-    return { posts: JSON.parse(text) };
+    return { users: JSON.parse(text) };
   }
 </script>
 
 <script>
   import Grid from "../components/Grid.svelte";
   import Cell from "../components/Cell.svelte";
-  import Post from "../components/posts/Post.svelte";
 
-  export let posts;
+  export let users;
 </script>
 
 <main>
   <Grid>
-    {#each posts as post (post.id)}
-      <Cell>
-        <Post {post} />
-      </Cell>
+    {#each users as user (user.id)}
+      <Cell>{user.name}</Cell>
     {/each}
   </Grid>
 </main>
