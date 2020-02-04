@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
+import alias from '@rollup/plugin-alias';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
@@ -13,6 +14,21 @@ const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
+const aliases = {
+	entries: [
+		{ find: 'Grid.svelte', replacement: `${__dirname}/src/components/grids/Grid.svelte` },
+		{
+			find: 'Cell.svelte', replacement: `${__dirname}/src/components/grids/Cell.svelte`
+		},
+		{
+			find: '@Users', replacement: `${__dirname}/src/components/users`
+		},
+		{
+			find: '@Posts', replacement: `${__dirname}/src/components/posts`
+		},
+	]
+};
+
 export default {
 	client: {
 		input: config.client.input(),
@@ -22,6 +38,7 @@ export default {
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
+			alias(aliases),
 			svelte({
 				dev,
 				hydratable: true,
@@ -66,6 +83,7 @@ export default {
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
+			alias(aliases),
 			svelte({
 				generate: 'ssr',
 				dev

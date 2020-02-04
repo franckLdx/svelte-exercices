@@ -7,9 +7,9 @@
 </script>
 
 <script>
-  import Grid from "../components/Grid.svelte";
-  import Cell from "../components/Cell.svelte";
-  import Post from "../components/posts/Post.svelte";
+  import Grid from "Grid.svelte";
+  import Cell from "Cell.svelte";
+  import Post from "@Posts/Post.svelte";
 
   export let posts;
 </script>
@@ -17,7 +17,7 @@
 <main>
   <Grid>
     {#each posts as post (post.id)}
-      <Cell>
+      <Cell link={`posts\\post?${post.id}`}>
         <Post {post} />
       </Cell>
     {/each}

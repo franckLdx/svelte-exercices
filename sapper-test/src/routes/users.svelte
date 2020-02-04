@@ -7,8 +7,9 @@
 </script>
 
 <script>
-  import Grid from "../components/Grid.svelte";
-  import Cell from "../components/Cell.svelte";
+  import Grid from "Grid.svelte";
+  import Cell from "Cell.svelte";
+  import User from "@Users/User.svelte";
 
   export let users;
 </script>
@@ -16,7 +17,9 @@
 <main>
   <Grid>
     {#each users as user (user.id)}
-      <Cell>{user.name}</Cell>
+      <Cell link={`uers\\user?${user.id}`}>
+        <User {user} />
+      </Cell>
     {/each}
   </Grid>
 </main>
