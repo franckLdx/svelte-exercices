@@ -26,6 +26,9 @@ const aliases = {
 		{
 			find: '@Posts', replacement: `${__dirname}/src/components/posts`
 		},
+		{
+			find: '@Utils', replacement: `${__dirname}/src/utils`
+		},
 	]
 };
 

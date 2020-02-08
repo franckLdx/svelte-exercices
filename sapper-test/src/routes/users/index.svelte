@@ -1,7 +1,12 @@
 <script context="module">
   export async function preload(page, session) {
-    const res = await this.fetch(`https://jsonplaceholder.typicode.com/users`);
-    const text = await res.text();
+    const response = await this.fetch(
+      `https://jsonplaceholder.typicode.com/users`
+    );
+    if (!response.ok) {
+      this.error("503", "Failed to load data");
+    }
+    const text = await response.text();
     return { users: JSON.parse(text) };
   }
 </script>
@@ -17,7 +22,7 @@
 <main>
   <Grid>
     {#each users as user (user.id)}
-      <Cell link={`uers\\user?${user.id}`}>
+      <Cell link={`users\\user?id=${user.id}`}>
         <User {user} />
       </Cell>
     {/each}
