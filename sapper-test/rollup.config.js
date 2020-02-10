@@ -18,7 +18,7 @@ const aliases = {
 	entries: [
 		{ find: 'Grid.svelte', replacement: `${__dirname}/src/components/grids/Grid.svelte` },
 		{
-			find: 'Cell.svelte', replacement: `${__dirname}/src/components/grids/Cell.svelte`
+			find: 'ClickableCell.svelte', replacement: `${__dirname}/src/components/grids/ClickableCell.svelte`
 		},
 		{
 			find: '@Users', replacement: `${__dirname}/src/components/users`

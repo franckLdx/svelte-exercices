@@ -13,18 +13,22 @@
 
 <script>
   import Grid from "Grid.svelte";
-  import Cell from "Cell.svelte";
-  import Post from "@Posts/Post.svelte";
+  import ClickableCell from "ClickableCell.svelte";
+  import Post from "./_PostItem.svelte";
 
   export let posts;
 </script>
 
-<main>
-  <Grid>
+<style>
+  .row {
+    margin: auto 0;
+  }
+</style>
+
+<div class="container-fluid">
+  <div class="row">
     {#each posts as post (post.id)}
-      <Cell link={`posts\\post?id=${post.id}`}>
-        <Post {post} />
-      </Cell>
+      <Post {post} />
     {/each}
-  </Grid>
-</main>
+  </div>
+</div>

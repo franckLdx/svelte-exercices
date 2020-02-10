@@ -13,7 +13,6 @@
 
 <script>
   import Grid from "Grid.svelte";
-  import Cell from "Cell.svelte";
   import User from "@Users/User.svelte";
 
   export let users;
@@ -22,9 +21,7 @@
 <main>
   <Grid>
     {#each users as user (user.id)}
-      <Cell link={`users\\user?id=${user.id}`}>
-        <User {user} />
-      </Cell>
+      <User {user} />
     {/each}
   </Grid>
 </main>
