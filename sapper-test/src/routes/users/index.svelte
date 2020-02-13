@@ -1,19 +1,18 @@
 <script context="module">
+  import { loadUsers } from "@Services";
+
   export async function preload(page, session) {
-    const response = await this.fetch(
-      `https://jsonplaceholder.typicode.com/users`
-    );
-    if (!response.ok) {
-      this.error("503", "Failed to load data");
+    try {
+      return { users: await loadUsers(this) };
+    } catch (err) {
+      onError(this, err, "Sorry, failed to load users");
     }
-    const text = await response.text();
-    return { users: JSON.parse(text) };
   }
 </script>
 
 <script>
   import Grid from "Grid.svelte";
-  import User from "@Users/User.svelte";
+  import User from "./_UserItem.svelte";
 
   export let users;
 </script>

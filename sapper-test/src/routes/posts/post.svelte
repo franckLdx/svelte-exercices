@@ -1,21 +1,33 @@
 <script context="module">
-  import { assertInteger } from "@Utils/Validation";
+  import { assertInteger, onError } from "@Utils";
+  import { loadPost, loadPostComments } from "@Services";
 
   export async function preload(page, session) {
-    const id = assertInteger(page.query.id, this);
-    const response = await this.fetch(
-      `https://jsonplaceholder.typicode.com/posts/${id}`
-    );
-    if (!response.ok) {
-      this.error("503", "Failed to load data");
+    try {
+      const id = assertInteger(page.query.id);
+      return {
+        post: await loadPost(this, id),
+        comments: await loadPostComments(this, id)
+      };
+    } catch (err) {
+      onError(this, err, "Sorry, failed to load this post");
     }
-    const text = await response.text();
-    return { post: JSON.parse(text) };
   }
 </script>
 
 <script>
+  import Comment from "./_CommentItem.svelte";
   export let post;
+  export let comments;
 </script>
 
-{JSON.stringify(post)}
+<div class="jumbotron">
+  <h3>{post.title}</h3>
+  <hr class="my-4" />
+  {post.body}
+</div>
+<div class="jumbotron p-3">
+  {#each comments as comment (comment.id)}
+    <Comment {comment} />
+  {/each}
+</div>

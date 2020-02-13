@@ -1,13 +1,13 @@
 <script context="module">
+  import { loadPosts } from "@Services";
+  import { onError } from "@Utils";
+
   export async function preload(page, session) {
-    const response = await this.fetch(
-      `https://jsonplaceholder.typicode.com/posts`
-    );
-    if (!response.ok) {
-      this.error("503", "Failed to load data");
+    try {
+      return { posts: await loadPosts(this) };
+    } catch (err) {
+      onError(this, err, "Sorry, failed to load posts");
     }
-    const text = await response.text();
-    return { posts: JSON.parse(text) };
   }
 </script>
 
