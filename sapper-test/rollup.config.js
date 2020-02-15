@@ -21,7 +21,7 @@ const aliases = {
 			find: 'ClickableCell.svelte', replacement: `${__dirname}/src/components/grids/ClickableCell.svelte`
 		},
 		{
-			find: '@Posts', replacement: `${__dirname}/src/components/posts`
+			find: '@Card', replacement: `${__dirname}/src/components/Card.svelte`
 		},
 		{
 			find: '@Utils', replacement: `${__dirname}/src/utils`
