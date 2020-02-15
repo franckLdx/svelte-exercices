@@ -1,15 +1,23 @@
 <script context="module">
   import { assertInteger, onError } from "@Utils";
-  import { loadPost, loadPostComments } from "@Services";
+  import { loadPost, loadPostComments, loadUser } from "@Services";
+
+  const loadPostAndUser = async (context, id) => {
+    const post = await loadPost(context, id);
+    post.user = await loadUser(context, post.userId);
+    return post;
+  };
 
   export async function preload(page, session) {
     try {
       const id = assertInteger(page.query.id);
-      return {
-        post: await loadPost(this, id),
-        comments: await loadPostComments(this, id)
-      };
+      const [post, comments] = await Promise.all([
+        loadPostAndUser(this, id),
+        loadPostComments(this, id)
+      ]);
+      return { post, comments };
     } catch (err) {
+      console.log(err);
       onError(this, err, "Sorry, failed to load this post");
     }
   }
@@ -17,17 +25,28 @@
 
 <script>
   import Comment from "./_CommentItem.svelte";
+  import Card from "@Card";
+  import { userLink } from "@Utils";
+
   export let post;
   export let comments;
 </script>
 
-<div class="jumbotron">
-  <h3>{post.title}</h3>
-  <hr class="my-4" />
+<Card>
+  <div class="foo" slot="title">
+    <h3>{post.title}</h3>
+    <a
+      href={userLink(post.userId)}
+      class="h5 card-subtitle mt-1 ml-4 text-muted">
+      {post.user.username}
+    </a>
+  </div>
   {post.body}
-</div>
-<div class="jumbotron p-3">
-  {#each comments as comment (comment.id)}
-    <Comment {comment} />
-  {/each}
-</div>
+  <div class="mt-4 p-3">
+    {#each comments as comment (comment.id)}
+      <div class="mb-2">
+        <Comment {comment} />
+      </div>
+    {/each}
+  </div>
+</Card>

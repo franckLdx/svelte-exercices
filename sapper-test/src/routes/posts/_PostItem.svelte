@@ -1,6 +1,7 @@
 <script>
   import ClickableCell from "ClickableCell.svelte";
   import Card from "@Card";
+  import { postLink } from "@Utils";
   export let post;
 </script>
 
@@ -10,7 +11,7 @@
   }
 </style>
 
-<ClickableCell link={`posts\\post?id=${post.id}`}>
+<ClickableCell link={postLink(post.id)}>
   <Card>
     <h3 class="title" slot="title">{post.title}</h3>
     <div class="content">{post.userName}</div>

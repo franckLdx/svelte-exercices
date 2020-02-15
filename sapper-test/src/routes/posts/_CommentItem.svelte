@@ -1,4 +1,5 @@
 <script>
+  import Card from "@Card";
   export let comment;
 </script>
 
@@ -8,9 +9,10 @@
   }
 </style>
 
-<div class="border border-dark rounded-lg px-3 py-2 mb-3">
-  <div class="border-bottom border-dark">
-    <h6>{comment.name}</h6>
+<Card>
+  <div slot="title">
+    <p class="h5">{comment.name}</p>
+    <p class="h6 card-subtitle mt-1 ml-4 text-muted">{comment.email}</p>
   </div>
   {comment.body}
-</div>
+</Card>

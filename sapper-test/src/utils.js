@@ -16,3 +16,6 @@ export const onError = (context, error, message) => {
   const errorCode = Number.isNaN(code) ? 500 : code;
   context.error(errorCode, message);
 }
+
+export const userLink = userId => `users\\user?id=${userId}`;
+export const postLink = postId => `posts\\post?id=${postId}`;
