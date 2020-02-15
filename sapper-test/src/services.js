@@ -10,10 +10,23 @@ export const loadPostComments = async (context, postId) => await load(context,
   `${url}/posts/${postId}/comments`
 );
 
-export const loadUsers = async (context, ) => await load(context,
+export const loadUsers = async (context) => await load(context,
   `${url}/users`
 );
 
+export const loadUser = async (context, userId) => await load(context,
+  `${url}/users/${userId}`
+);
+
+export const makeUserLoader = (context) => {
+  const userRequests = new Map();
+  return async userId => {
+    if (!userRequests.has(userId)) {
+      userRequests.set(userId, loadUser(context, userId));
+    }
+    return await userRequests.get(userId);
+  };
+}
 
 const load = async (context, request) => {
   const response = await context.fetch(request);

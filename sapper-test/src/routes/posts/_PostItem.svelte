@@ -4,12 +4,12 @@
 </script>
 
 <style>
-  .content {
-    overflow: auto;
-    height: 5em;
+  .title {
+    min-height: 2.4em;
   }
 </style>
 
-<ClickableCell title={post.title} link={`posts\\post?id=${post.id}`}>
-  <div class="content">{post.body}</div>
+<ClickableCell link={`posts\\post?id=${post.id}`}>
+  <h3 class="title" slot="title">{post.title}</h3>
+  <div class="content">{post.userName}</div>
 </ClickableCell>

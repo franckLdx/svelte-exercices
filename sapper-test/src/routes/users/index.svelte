@@ -19,8 +19,10 @@
 
 <main>
   <Grid>
-    {#each users as user (user.id)}
-      <User {user} />
-    {/each}
+    <div class="row">
+      {#each users as user (user.id)}
+        <User {user} />
+      {/each}
+    </div>
   </Grid>
 </main>

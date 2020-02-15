@@ -2,7 +2,6 @@
   import { goto } from "@sapper/app";
 
   export let link;
-  export let title;
 </script>
 
 <style>
@@ -10,7 +9,6 @@
     margin-bottom: 15px;
   }
   .card-header {
-    min-height: 6em;
     overflow: auto;
   }
   .card:hover {
@@ -20,10 +18,10 @@
   }
 </style>
 
-<div class="col col-11 col-lg-6">
-  <div class="card border-dark" on:click={() => goto(link)}>
+<div class="col col-11 col-lg-6" on:click={() => goto(link)}>
+  <div class="card border-dark">
     <div class="card-header">
-      <h5>{title}</h5>
+      <slot name="title" />
     </div>
     <div class="card-body">
       <div class="card-text">

@@ -7,6 +7,11 @@
 
 </style>
 
-<ClickableCell title={user.username} link={`users\\user?id=${user.id}`}>
-  <div>{user.name}{user.email}</div>
+<ClickableCell link={`users\\user?id=${user.id}`}>
+  <h5 slot="title">{user.username} / {user.name}</h5>
+  <div>
+    Mail : {user.email}
+    <br />
+    City: {user.address.city},
+  </div>
 </ClickableCell>
