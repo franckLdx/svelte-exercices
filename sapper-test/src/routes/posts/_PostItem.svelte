@@ -13,7 +13,7 @@
 
 <ClickableCell link={postLink(post.id)}>
   <Card>
-    <h3 class="title" slot="title">{post.title}</h3>
+    <h5 class="title" slot="title">{post.title}</h5>
     <div class="content">{post.userName}</div>
   </Card>
 </ClickableCell>

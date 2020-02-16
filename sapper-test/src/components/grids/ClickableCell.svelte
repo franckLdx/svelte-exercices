@@ -10,7 +10,7 @@
     margin-bottom: 15px;
   }
 
-  span:hover {
+  .clickable:hover {
     cursor: pointer;
     opacity: 0.7;
     box-shadow: 10px 5px 15px;
@@ -18,7 +18,7 @@
 </style>
 
 <div class="col col-11 col-lg-6" on:click={() => goto(link)}>
-  <span>
+  <div class="clickable">
     <slot />
-  </span>
+  </div>
 </div>
