@@ -11,7 +11,7 @@
 </script>
 
 <script>
-  import Grid from "Grid.svelte";
+  import Grid from "@Grid/Grid.svelte";
   import User from "./_UserItem.svelte";
 
   export let users;

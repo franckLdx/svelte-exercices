@@ -33,8 +33,8 @@
 </script>
 
 <script>
-  import Grid from "Grid.svelte";
-  import ClickableCell from "ClickableCell.svelte";
+  import Grid from "@Grid/Grid.svelte";
+  import ClickableCell from "@Grid/ClickableCell.svelte";
   import Post from "./_PostItem.svelte";
 
   export let posts;

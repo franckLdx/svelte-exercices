@@ -26,7 +26,7 @@
 <script>
   import Comment from "./_CommentItem.svelte";
   import AddComment from "./_AddComment.svelte";
-  import Card from "@Card";
+  import Card from "@Components/Card.svelte";
   import { userLink } from "@Utils";
 
   export let post;

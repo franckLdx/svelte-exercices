@@ -1,6 +1,6 @@
 <script>
-  import ClickableCell from "ClickableCell.svelte";
-  import Card from "@Card";
+  import ClickableCell from "@Grid/ClickableCell.svelte";
+  import Card from "@Components/Card.svelte";
   import { userLink } from "@Utils";
   export let user;
 </script>
