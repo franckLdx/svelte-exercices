@@ -5,7 +5,7 @@
   export { className as class };
   export let disabled = false;
 
-  let dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
   const onClick = () => dispatch("click");
 </script>
 
