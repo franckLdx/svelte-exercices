@@ -9,3 +9,5 @@
 
 <Button disabled={!$canSave}>Save</Button>
 <Button on:click={onClose}>Cancel</Button>
+
+<svelte:options immutable={true} />

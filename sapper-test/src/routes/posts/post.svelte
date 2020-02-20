@@ -57,3 +57,5 @@
   </button>
   <AddComment {modalOpen} on:close={() => (modalOpen = false)} />
 </Card>
+
+<svelte:options immutable={true} />

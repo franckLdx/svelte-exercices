@@ -16,3 +16,5 @@
   </div>
   {comment.body}
 </Card>
+
+<svelte:options immutable={true} />

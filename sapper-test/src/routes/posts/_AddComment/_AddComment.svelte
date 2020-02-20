@@ -1,7 +1,7 @@
 <script>
   import { Modal, ModalBody, ModalFooter, ModalHeader } from "sveltestrap/src";
   import { createEventDispatcher } from "svelte";
-  import { store } from "./_store";
+  import { store, canSave } from "./_store";
   import Inputs from "./_Inputs.svelte";
   import Message from "./_Message.svelte";
   import Buttons from "./_Buttons.svelte";
@@ -10,6 +10,7 @@
   const onClose = () => dispatch("close");
 
   export let modalOpen;
+  $: console.log($store.email);
 </script>
 
 <Modal fade isOpen={modalOpen}>
@@ -23,3 +24,5 @@
     <Buttons on:close={onClose} />
   </ModalFooter>
 </Modal>
+
+<svelte:options immutable={true} />

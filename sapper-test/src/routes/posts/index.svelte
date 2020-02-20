@@ -53,3 +53,5 @@
     {/each}
   </div>
 </div>
+
+<svelte:options immutable={true} />

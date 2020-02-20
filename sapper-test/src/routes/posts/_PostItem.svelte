@@ -17,3 +17,5 @@
     <div class="content">{post.userName}</div>
   </Card>
 </ClickableCell>
+
+<svelte:options immutable={true} />

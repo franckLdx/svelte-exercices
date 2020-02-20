@@ -26,3 +26,5 @@
     </div>
   </Grid>
 </main>
+
+<svelte:options immutable={true} />

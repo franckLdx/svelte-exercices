@@ -45,3 +45,5 @@
     {user.company.bs}
   </div>
 </Card>
+
+<svelte:options immutable={true} />

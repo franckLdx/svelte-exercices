@@ -19,3 +19,5 @@
     </div>
   </Card>
 </ClickableCell>
+
+<svelte:options immutable={true} />

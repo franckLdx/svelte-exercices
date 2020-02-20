@@ -37,3 +37,5 @@
       aria-describedby="comment" />
   </div>
 </form>
+
+<svelte:options immutable={true} />
