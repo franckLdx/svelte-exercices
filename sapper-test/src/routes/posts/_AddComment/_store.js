@@ -21,7 +21,7 @@ export const store = {
 
 export const canSave = derived(
   [store],
-  ([$state]) => isFilled($state.email) && isFilled($state.name) && isFilled($state.body)
+  ([$state]) => [$state.email, $state.name, $state.body].every(isFilled)
 );
 
 const isFilled = field => field && field.trim().length;
