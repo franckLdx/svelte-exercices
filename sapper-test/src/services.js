@@ -34,11 +34,16 @@ const load = async (context, request) => {
   return await parseResponse(response);
 }
 
+export const AddComment = async (comment) => {
+  const uri = `${url}/comments`
+  const response = await fetch(uri, { method: 'POST', body: comment });
+  assertResponse(uri, response);
+}
+
 const assertResponse = (request, response) => {
   if (!response.ok) {
     const msg = `Request failure: ${request} got ${response.status} -${response.statusText} `;
-    console.error(msg);
-    throw new Error(response.status);
+    throw new Error(msg);
   }
 }
 
