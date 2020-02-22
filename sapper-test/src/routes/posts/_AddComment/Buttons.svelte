@@ -1,5 +1,4 @@
 <script>
-  import { AddComment } from "@Services";
   import Button from "@Components/Button.svelte";
   import { createEventDispatcher } from "svelte";
   import {
@@ -9,24 +8,15 @@
     SAVED,
     ERROR,
     canSave,
-    canClose
+    canClose,
+    canClear
   } from "./store";
+  import { save } from "./save";
 
   let dispatch = createEventDispatcher();
-  const onClose = () => dispatch("close");
-  const onSave = async () => {
-    store.setState(SAVING);
-    try {
-      await AddComment({
-        name: $store.name,
-        title: $store.title,
-        body: $store.body
-      });
-      store.setState(SAVED);
-    } catch (err) {
-      store.setState(ERROR);
-    }
-  };
+  const onClose = () => $canClose && dispatch("close");
+  const onSave = () => $canSave && save(store);
+  const onClear = () => $canClear && store.clearFields();
 
   $: closeLabel = [EDITING, SAVING, ERROR].includes($store.state)
     ? "Cancel"
@@ -41,6 +31,7 @@
 
 <span>
   <Button disabled={!$canSave} on:click={onSave}>Save</Button>
+  <Button disabled={!$canClear} on:click={onClear}>Clear</Button>
   <Button disabled={!$canClose} on:click={onClose}>{closeLabel}</Button>
 </span>
 
