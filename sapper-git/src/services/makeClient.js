@@ -1,5 +1,5 @@
 import ApolloClient from 'apollo-boost';
-import { token } from './_token';
+import { token } from './.token';
 
 export const getClient = (fetch) => {
   return new ApolloClient({

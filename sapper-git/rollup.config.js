@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import alias from '@rollup/plugin-alias';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 
@@ -12,6 +13,17 @@ const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+
+const srcDir = `${__dirname}/src`;
+const aliases = {
+	entries: [
+		{ find: '@Components', replacement: `${srcDir}/components` },
+		{
+			find: '@Services', replacement: `${srcDir}/services`
+		},
+	]
+};
+
 
 export default {
 	client: {
@@ -22,6 +34,7 @@ export default {
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
+			alias(aliases),
 			svelte({
 				dev,
 				hydratable: true,
@@ -66,6 +79,7 @@ export default {
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
+			alias(aliases),
 			svelte({
 				generate: 'ssr',
 				dev

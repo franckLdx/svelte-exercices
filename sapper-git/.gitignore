@@ -4,4 +4,4 @@
 yarn-error.log
 /cypress/screenshots/
 /__sapper__/
-src/services/_token.ts
+src/services/.token.js

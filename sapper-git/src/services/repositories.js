@@ -6,12 +6,12 @@ const GET_VIEWER_REPOSITORIES = gql`
     viewer {
       login
       repositories(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {
+        totalCount,
         nodes {
-          createdAt
           id
-          url
+          name
           description
-          languages(first: 10, orderBy: {field: SIZE, direction: ASC}) {
+          languages(first: 5, orderBy: {field: SIZE, direction: ASC}) {
             nodes {
               name,
               color
@@ -19,7 +19,10 @@ const GET_VIEWER_REPOSITORIES = gql`
           }
         }
         pageInfo {
+          startCursor
+          hasPreviousPage
           endCursor
+          hasNextPage
         }
       }
     }
@@ -31,6 +34,5 @@ export async function getRepositories(fetch) {
   const response = await client.query({
     query: GET_VIEWER_REPOSITORIES
   });
-  // console.log(JSON.stringify(response, null, 2))
-  return response.data.viewer.repositories.nodes;
+  return response.data.viewer.repositories;
 }
