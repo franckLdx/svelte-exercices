@@ -15,13 +15,16 @@ const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
 const srcDir = `${__dirname}/src`;
+const components = `${srcDir}/components`;
+const services = `${srcDir}/services`;
+const routes = `${srcDir}/routes`;
+
 const aliases = {
 	entries: [
-		{ find: '@Components', replacement: `${srcDir}/components` },
-		{ find: '@Pagination', replacement: `${srcDir}/components/pagination/Pagination.svelte` },
-		{
-			find: '@Services', replacement: `${srcDir}/services`
-		},
+		{ find: '@Routes', replacement: routes },
+		{ find: '@Services', replacement: services },
+		{ find: '@Components', replacement: components },
+		{ find: '@Pagination', replacement: `${components}/pagination/Pagination.svelte` },
 	]
 };
 

@@ -1,5 +1,6 @@
 <script context="module">
   import { getFirstRepositories } from "../services/repositories";
+  import { displayErrorPage } from "@Routes/Error.svelte";
 
   export async function preload() {
     const { nodes: repositories, pageInfo } = await getFirstRepositories(
@@ -10,8 +11,10 @@
 </script>
 
 <script>
-  import Repository from "./_Repository.svelte";
+  import { goto } from "@sapper/app";
+  import Repository from "@Routes/_Repository.svelte";
   import Pagination from "@Pagination";
+  import LoadingModal from "@Components/Loading.svelte";
   import {
     getPreviousRepositories,
     getNextRepositories,
@@ -20,11 +23,19 @@
 
   export let repositories;
   export let pageInfo;
+  let isLoading = false;
 
   async function update(requestPromise) {
-    const result = await requestPromise;
-    repositories = result.nodes;
-    pageInfo = result.pageInfo;
+    try {
+      isLoading = true;
+      const result = await requestPromise;
+      repositories = result.nodes;
+      pageInfo = result.pageInfo;
+      isLoading = false;
+    } catch (err) {
+      isLoading = true;
+      displayErrorPage(err);
+    }
   }
 
   async function onFirstPage() {
@@ -58,6 +69,7 @@
   }
 </style>
 
+<LoadingModal open={isLoading} />
 <div class="repositories row no-gutters">
   {#each repositories as repository (repository.id)}
     <div class="col-12 col-lg-6">

@@ -1127,6 +1127,11 @@ cli-boxes@^1.0.0:
   resolved "https://registry.yarnpkg.com/cli-boxes/-/cli-boxes-1.0.0.tgz#4fa917c3e59c94a004cd61f8ee509da651687143"
   integrity sha1-T6kXw+WclKAEzWH47lCdplFocUM=
 
+clsx@^1.0.4:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.0.tgz#62937c6adfea771247c34b54d320fb99624f5702"
+  integrity sha512-3avwM37fSK5oP6M5rQ9CNe99lwxhXDOeSWVPAOYF6OazUTgZCMb0yWlJpmdD74REy1gkEaFiub2ULv4fq9GUhA==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -1785,6 +1790,16 @@ load-json-file@^4.0.0:
     parse-json "^4.0.0"
     pify "^3.0.0"
     strip-bom "^3.0.0"
+
+lodash.isobject@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
+  integrity sha1-PI+41bW/S/kK4G4U8qUwpO2TXh0=
+
+lodash.tonumber@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
+  integrity sha1-C5azGzVnJ5Prf1pj7nkfG56QJdk=
 
 lodash@^4.17.13:
   version "4.17.15"
@@ -2556,13 +2571,6 @@ svelte-apollo@^0.3.0:
     apollo-utilities "^1.2.1"
     svelte-observable "^0.4.0"
 
-svelte-awesome@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/svelte-awesome/-/svelte-awesome-2.2.1.tgz#976c05378ae4350e00f4551c9709a6309a8c56b3"
-  integrity sha512-CkGRVoMMLJsQ+TQpK+qOBAUH1Gl+l14EhX47KZA02XgXHahJZkRvLi4XAunBFcU+Zlik3oyxEnBvmT6BHF1CUA==
-  dependencies:
-    svelte "^3.15.0"
-
 svelte-observable@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/svelte-observable/-/svelte-observable-0.4.0.tgz#74756e42fa3516c154d53f4244fa9cf691854224"
@@ -2573,10 +2581,14 @@ svelte@^3.0.0:
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.18.2.tgz#f136b9e169049f8bb6a364bd8b8f3b619ed957d9"
   integrity sha512-jRk7jdYULb9V4Z+0BKlfofombmdIIQph4leojrOSHzvZBRmCredz7fZsJBiUDLO6h83XYekuLbwfy5zx1i95GQ==
 
-svelte@^3.15.0:
-  version "3.19.1"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.19.1.tgz#2455e443f8ca67b98f3b7eb58285eaeb8af0c4b9"
-  integrity sha512-MGBh6LiWwwOfzlH9epQ8mP5DNWsuc6fWsZpLy47beqNG8wSkrQ/ez7TxaV+8VZ5KOwJJnfesj5gqgGjM2NcWVw==
+sveltestrap@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/sveltestrap/-/sveltestrap-3.3.2.tgz#1671c4753f4749ceb9c76a01fa0bb3cf70ddf518"
+  integrity sha512-woVEyT3hsdcnBtBdupCgn/8sM+dSMsMNEkYhAfpz12Ptwr8n5qThammjASwAwBHP8mL/EbpjoFthxHg6OmZtBQ==
+  dependencies:
+    clsx "^1.0.4"
+    lodash.isobject "^3.0.2"
+    lodash.tonumber "^4.0.3"
 
 symbol-observable@^1.0.2:
   version "1.2.0"
