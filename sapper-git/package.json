@@ -19,7 +19,8 @@
     "graphql": "^14.6.0",
     "polka": "next",
     "sirv": "^0.4.0",
-    "svelte-apollo": "^0.3.0"
+    "svelte-apollo": "^0.3.0",
+    "svelte-awesome": "^2.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

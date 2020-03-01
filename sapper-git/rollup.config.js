@@ -18,6 +18,7 @@ const srcDir = `${__dirname}/src`;
 const aliases = {
 	entries: [
 		{ find: '@Components', replacement: `${srcDir}/components` },
+		{ find: '@Pagination', replacement: `${srcDir}/components/pagination/Pagination.svelte` },
 		{
 			find: '@Services', replacement: `${srcDir}/services`
 		},
