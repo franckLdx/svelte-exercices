@@ -1,5 +1,5 @@
-import { getClient } from './makeClient';
 import { gql } from 'apollo-boost';
+import { getClient } from '@Services/makeClient';
 
 const pageSize = 10;
 

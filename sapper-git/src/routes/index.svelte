@@ -1,5 +1,5 @@
 <script context="module">
-  import { getFirstRepositories } from "../services/repositories";
+  import { getFirstRepositories } from "@Services/repositories";
   import { displayErrorPage } from "@Routes/Error.svelte";
 
   export async function preload() {
@@ -12,7 +12,7 @@
 
 <script>
   import { goto } from "@sapper/app";
-  import Repository from "@Routes/_Repository.svelte";
+  import Repository from "@Repositories/Repository.svelte";
   import Pagination from "@Pagination";
   import LoadingModal from "@Components/Loading.svelte";
   import {

@@ -9,7 +9,7 @@
   export async function preload(page) {
     const message = page.query.message || "unknwon error";
     return {
-      status: page.query.status || 503,
+      status: page.query.status || 500,
       error: { message }
     };
   }
