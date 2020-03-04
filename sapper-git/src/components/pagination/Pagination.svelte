@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import PageItem from "./PageItem.svelte";
+  import PageItem from "@Components/Pagination/PageItem.svelte";
 
   export let hasPreviousPage;
   export let hasNextPage;

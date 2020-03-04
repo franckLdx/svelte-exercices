@@ -19,6 +19,9 @@ nodes {
    stargazers {
     totalCount
   }
+  owner {
+    login
+  }
 }`;
 
 const PAGE_INFO = `

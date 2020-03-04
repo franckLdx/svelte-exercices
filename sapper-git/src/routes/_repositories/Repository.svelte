@@ -1,9 +1,13 @@
 <script>
+  import { goto } from "@sapper/app";
+  import PageItem from "@Components/Pagination/PageItem.svelte";
   import Language from "@Components/Language.svelte";
+  import LoadingModal from "@Components/Loading.svelte";
 
   export let repository;
   let className = "";
   export { className as class };
+  let isLoading = false;
 </script>
 
 <style>
@@ -20,9 +24,21 @@
   }
 </style>
 
+<LoadingModal open={isLoading} />
 <article class={`card ${className}`}>
   <div class="card-header">
-    <span class="font-weight-bold">{repository.name}</span>
+    <nav aria-label="Page navigation ">
+      <ul class="pagination m-0">
+        <PageItem
+          aria-label="go to first page"
+          on:click={async () => {
+            isLoading = true;
+            await goto(`/repository?name=${repository.name}&owner=${repository.owner.login}`);
+          }}>
+          {repository.name}
+        </PageItem>
+      </ul>
+    </nav>
     <span class="star badge badge-warning">
       Stars: {repository.stargazers.totalCount}
     </span>

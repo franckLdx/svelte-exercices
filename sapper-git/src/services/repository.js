@@ -33,6 +33,15 @@ query($name: String!, $owner: String!) {
         publishedAt
       }
     }
+    object(expression: "master:") {
+      ...on Tree {
+        entries {
+          oid
+          name
+          type
+        }
+      }
+    }
   }
 }`;
 
@@ -44,3 +53,17 @@ export async function getRepository(fetch, name, owner) {
   });
   return response.data.repository;
 }
+
+// query($name: String!, $owner: String!) {
+//   repository(name: $name, owner: $owner) {
+//     object(expression: "master:", oid: "2537861c82889438a814ba835f380b33199af76b") {
+//       ...on Tree {
+//         entries {
+//           oid
+//           name
+//           type
+//         }
+//       }
+//     }
+//   }
+// }

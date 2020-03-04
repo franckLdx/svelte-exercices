@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
 
   $: ariaLabel = $$props["aria-label"];
-  export let disabled;
+  export let disabled = false;
 
   const dispatch = createEventDispatcher();
 </script>
