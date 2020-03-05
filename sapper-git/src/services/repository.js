@@ -45,6 +45,11 @@ query($name: String!, $owner: String!) {
   }
 }`;
 
+// refs(first: 100, refPrefix: "refs/heads/") {
+//   nodes {
+//     name
+//   }
+// }
 export async function getRepository(fetch, name, owner) {
   const client = getClient(fetch);
   const response = await client.query({

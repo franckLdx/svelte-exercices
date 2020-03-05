@@ -18,7 +18,7 @@ const srcDir = `${__dirname}/src`;
 const components = `${srcDir}/components`;
 const services = `${srcDir}/services`;
 const routes = `${srcDir}/routes`;
-const repositories = `${routes}/_repositories`;
+const repositories = `${routes}/repositories`;
 
 const aliases = {
 	entries: [

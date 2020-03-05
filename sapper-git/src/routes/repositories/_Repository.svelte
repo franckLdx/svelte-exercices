@@ -33,7 +33,7 @@
           aria-label="go to first page"
           on:click={async () => {
             isLoading = true;
-            await goto(`/repository?name=${repository.name}&owner=${repository.owner.login}`);
+            await goto(`/repositories/repository?name=${repository.name}&owner=${repository.owner.login}`);
           }}>
           {repository.name}
         </PageItem>
