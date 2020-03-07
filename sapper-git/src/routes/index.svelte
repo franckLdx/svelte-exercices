@@ -1,6 +1,7 @@
 <script context="module">
+  import { getUrl } from "./repositories/index.svelte";
   export function preload(page, session) {
-    this.redirect(302, "repositories");
+    this.redirect(302, getUrl());
   }
 </script>
 

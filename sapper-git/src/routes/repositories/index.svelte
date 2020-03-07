@@ -2,6 +2,10 @@
   import { getFirstRepositories } from "@Services/repositories";
   import { displayErrorPage } from "@Routes/Error.svelte";
 
+  export function getUrl() {
+    return "/repositories";
+  }
+
   export async function preload() {
     const { nodes: repositories, pageInfo } = await getFirstRepositories(
       this.fetch
@@ -12,9 +16,10 @@
 
 <script>
   import { goto } from "@sapper/app";
+  import Loading from "@Components/Loading.svelte";
   import Pagination from "@Pagination";
   import Repository from "@Repositories/_Repository.svelte";
-  import LoadingModal from "@Components/Loading.svelte";
+  import { getURL } from "@Repositories/repository.svelte";
   import {
     getPreviousRepositories,
     getNextRepositories,
@@ -23,6 +28,7 @@
 
   export let repositories;
   export let pageInfo;
+
   let isLoading = false;
 
   async function update(requestPromise) {
@@ -33,7 +39,7 @@
       pageInfo = result.pageInfo;
       isLoading = false;
     } catch (err) {
-      isLoading = true;
+      isLoading = false;
       displayErrorPage(err);
     }
   }
@@ -57,6 +63,10 @@
     const request = getLastRepositories(fetch);
     await update(request);
   }
+
+  function onLoadRepository() {
+    isLoading = true;
+  }
 </script>
 
 <style>
@@ -69,11 +79,14 @@
   }
 </style>
 
-<LoadingModal open={isLoading} />
+<Loading {isLoading} />
 <div class="repositories row no-gutters">
   {#each repositories as repository (repository.id)}
     <div class="col-12 col-lg-6">
-      <Repository class="repository-margin" {repository} />
+      <Repository
+        class="repository-margin"
+        on:loading={onLoadRepository}
+        {repository} />
     </div>
   {/each}
 </div>

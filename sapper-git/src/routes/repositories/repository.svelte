@@ -2,6 +2,10 @@
   import { getRepository } from "@Services/repository";
   import { displayErrorPage } from "@Routes/Error.svelte";
 
+  export function getURL(name, login) {
+    return `/repositories/repository?name=${name}&owner=${login}`;
+  }
+
   export async function preload(page) {
     const { name, owner } = page.query;
     return {
