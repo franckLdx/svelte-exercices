@@ -39,6 +39,7 @@ query($name: String!, $owner: String!) {
           oid
           name
           type
+
         }
       }
     }
@@ -59,16 +60,32 @@ export async function getRepository(fetch, name, owner) {
   return response.data.repository;
 }
 
-// query($name: String!, $owner: String!) {
-//   repository(name: $name, owner: $owner) {
-//     object(expression: "master:", oid: "2537861c82889438a814ba835f380b33199af76b") {
-//       ...on Tree {
-//         entries {
-//           oid
-//           name
-//           type
-//         }
-//       }
-//     }
-//   }
+const GET_ENTRIES = gql`
+query($name: String!, $owner: String!, $branch: String!, $oid: String!) {
+  repository(name: $name, owner: $owner) {
+    object(expression: "master:", oid: $oid) {
+      ...on Tree {
+        entries {
+          oid
+          name
+          type
+          object {
+            ...on Blob {
+              byteSize
+            }
+          }
+        }
+      }
+    }
+  }
+}`;
+
+// export async function getEntries(name, owner, branch, oid) {
+//   const client = getClient(fetch);
+//   const response = await client.query({
+//     query: GET_ENTRIES,
+//     variables: { name, owner, branch, oid }
+//   });
+//   return response.data.repository;
 // }
+

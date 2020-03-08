@@ -1,15 +1,34 @@
 <script context="module">
   import { getRepository } from "@Services/repository";
+  import { getLastCommit } from "@Services/commit";
   import { displayErrorPage } from "@Routes/Error.svelte";
+  import Folder from "@Repositories/_Folder.svelte";
 
   export function getURL(name, login) {
     return `/repositories/repository?name=${name}&owner=${login}`;
   }
 
+  const validator = RegExp(/^[\w\-]{1,100}$/);
+
   export async function preload(page) {
     const { name, owner } = page.query;
+    if (!name || !validator.test(name) || !owner || !validator.test(owner)) {
+      return this.error(400, "Bad parameters");
+    }
+    const repository = await getRepository(this.fetch, name, owner);
+    const loading = [];
+    for (const entry of repository.object.entries) {
+      const loadCommit = getLastCommit(
+        this.fetch,
+        name,
+        owner,
+        entry.name
+      ).then(commit => (entry.commit = commit.object.history.nodes[0]));
+      loading.push(loadCommit);
+    }
+    await Promise.all(loading);
     return {
-      repository: await getRepository(this.fetch, name, owner)
+      repository
     };
   }
 </script>
@@ -22,12 +41,6 @@
 <style>
   .card-body :global(.add-margin) {
     margin-right: 20px;
-  }
-  .item:hover {
-    opacity: 0.7;
-    cursor: pointer;
-    box-shadow: 10px 5px 15px;
-    background-color: aqua;
   }
 </style>
 
@@ -49,10 +62,6 @@
         <Language class="add-margin" {language} />
       {/each}
     </div>
-    <div class="border border-dark pt-2 pl-2 pr-2 mb-2">
-      {#each repository.object.entries as entry (entry.oid)}
-        <div class="item border border-dark mb-2 p-2">{entry.name}</div>
-      {/each}
-    </div>
+    <Folder entries={repository.object.entries} />
   </div>
 </article>

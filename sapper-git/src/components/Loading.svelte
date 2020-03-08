@@ -3,8 +3,8 @@
 
   export let isLoading = false;
   export let initial = 10;
-  export let incement = 14;
-  export let timeout = 40;
+  export let incement = 10;
+  export let timeout = 200;
 
   let progress = 0;
   let interval = undefined;
