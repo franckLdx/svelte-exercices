@@ -28,6 +28,8 @@
     }
     await Promise.all(loading);
     return {
+      name,
+      owner,
       repository
     };
   }
@@ -36,6 +38,8 @@
 <script>
   import Language from "@Components/Language.svelte";
   export let repository;
+  export let name;
+  export let owner;
 </script>
 
 <style>
@@ -62,6 +66,6 @@
         <Language class="add-margin" {language} />
       {/each}
     </div>
-    <Folder entries={repository.object.entries} />
+    <Folder entries={repository.object.entries} {name} {owner} />
   </div>
 </article>
