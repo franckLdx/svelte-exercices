@@ -25,17 +25,23 @@
 </script>
 
 <style>
+  /* .item:nth-child(even) {
+    background: #ccc;
+  }*/
+  .item:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.05);
+  }
   .item:hover {
     opacity: 0.7;
     cursor: pointer;
     box-shadow: 10px 5px 15px;
     font-weight: bold;
-    background-color: blanchedalmond;
+    background-color: rgba(0, 0, 0, 0.3);
   }
 </style>
 
 <div class="border border-dark pt-2 pl-2 pr-2 mb-2" bind:clientWidth={width}>
-  {#each entries as entry (entry.oid)}
+  {#each entries as entry, index (entry.oid)}
     <div
       class="item border border-dark mb-2 p-2 row no-gutters"
       on:click={async () => await onLoad(entry)}>
