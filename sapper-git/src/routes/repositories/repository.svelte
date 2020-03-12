@@ -3,24 +3,23 @@
   import { getLastCommit } from "@Services/commit";
   import { displayErrorPage } from "@Routes/Error.svelte";
   import Folder from "@Repositories/_Folder.svelte";
+  import { checkRepository, checkOwner } from "@Lib/verify";
 
-  export function getURL(name, login) {
-    return `/repositories/repository?name=${name}&owner=${login}`;
+  export function getURL(repository, login) {
+    return `/repositories/repository?repository=${repository}&owner=${login}`;
   }
 
-  const validator = RegExp(/^[\w\-]{1,100}$/);
-
   export async function preload(page) {
-    const { name, owner } = page.query;
-    if (!name || !validator.test(name) || !owner || !validator.test(owner)) {
+    const { repository: repositoryName, owner } = page.query;
+    if (!checkRepository(repositoryName) || !checkRepository(owner)) {
       return this.error(400, "Bad parameters");
     }
-    const repository = await getRepository(this.fetch, name, owner);
+    const repository = await getRepository(this.fetch, repositoryName, owner);
     const loading = [];
     for (const entry of repository.object.entries) {
       const loadCommit = getLastCommit(
         this.fetch,
-        name,
+        repositoryName,
         owner,
         entry.name
       ).then(commit => (entry.commit = commit.object.history.nodes[0]));
@@ -28,7 +27,7 @@
     }
     await Promise.all(loading);
     return {
-      name,
+      repositoryName,
       owner,
       repository
     };
@@ -38,7 +37,7 @@
 <script>
   import Language from "@Components/Language.svelte";
   export let repository;
-  export let name;
+  export let repositoryName;
   export let owner;
 </script>
 
@@ -66,6 +65,6 @@
         <Language class="add-margin" {language} />
       {/each}
     </div>
-    <Folder entries={repository.object.entries} {name} {owner} />
+    <Folder entries={repository.object.entries} {repositoryName} {owner} />
   </div>
 </article>

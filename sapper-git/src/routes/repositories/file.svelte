@@ -1,26 +1,22 @@
 <script context="module">
   import { getContent } from "@Services/blob";
   import { displayErrorPage } from "@Routes/Error.svelte";
+  import { checkRepository, checkOwner, checkOid } from "@Lib/verify";
 
-  export function getURL(name, login, oid) {
-    return `/repositories/file?name=${name}&owner=${login}&oid=${oid}`;
+  export function getURL(repositoryName, login, oid) {
+    return `/repositories/file?repository=${repositoryName}&owner=${login}&oid=${oid}`;
   }
 
-  const validator = RegExp(/^[\w\-]{1,100}$/);
-
   export async function preload(page) {
-    const { name, owner, oid } = page.query;
+    const { repository: repositoryName, owner, oid } = page.query;
     if (
-      !name ||
-      !validator.test(name) ||
-      !owner ||
-      !validator.test(owner) ||
-      !oid ||
-      !validator.test(oid)
+      !checkRepository(repositoryName) ||
+      !checkRepository(owner) ||
+      !checkOid(oid)
     ) {
       return this.error(400, "Bad parameters");
     }
-    const content = await getContent(this.fetch, name, owner, oid);
+    const content = await getContent(this.fetch, repositoryName, owner, oid);
     return {
       content
     };

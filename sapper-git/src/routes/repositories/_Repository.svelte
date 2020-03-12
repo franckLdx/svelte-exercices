@@ -12,9 +12,14 @@
   export { className as class };
 
   async function onLoad() {
-    dispatch("loading");
-    const repositoryURL = getURL(repository.name, repository.owner.login);
-    await goto(repositoryURL);
+    try {
+      dispatch("loading");
+      const repositoryURL = getURL(repository.name, repository.owner.login);
+      await goto(repositoryURL);
+    } catch (err) {
+      isLoading = false;
+      displayErrorPage(err);
+    }
   }
 </script>
 

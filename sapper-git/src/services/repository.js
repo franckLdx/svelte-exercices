@@ -2,8 +2,8 @@ import { gql } from 'apollo-boost';
 import { getClient } from '@Services/makeClient';
 
 const GET_REPOSITORY = gql`
-query($name: String!, $owner: String!) {
-  repository(name: $name, owner: $owner) {
+query($repositoryName: String!, $owner: String!) {
+  repository(name: $repositoryName, owner: $owner) {
     name
     description
     createdAt
@@ -46,23 +46,18 @@ query($name: String!, $owner: String!) {
   }
 }`;
 
-// refs(first: 100, refPrefix: "refs/heads/") {
-//   nodes {
-//     name
-//   }
-// }
-export async function getRepository(fetch, name, owner) {
+export async function getRepository(fetch, repositoryName, owner) {
   const client = getClient(fetch);
   const response = await client.query({
     query: GET_REPOSITORY,
-    variables: { name, owner }
+    variables: { repositoryName, owner }
   });
   return response.data.repository;
 }
 
 const GET_ENTRIES = gql`
-query($name: String!, $owner: String!, $branch: String!, $oid: String!) {
-  repository(name: $name, owner: $owner) {
+query($repository: String!, $owner: String!, $branch: String!, $oid: String!) {
+  repository(name: $repository, owner: $owner) {
     object(expression: "master:", oid: $oid) {
       ...on Tree {
         entries {

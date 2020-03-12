@@ -8,7 +8,7 @@
   import file from "svelte-awesome/icons/file-o";
 
   export let owner;
-  export let name;
+  export let repositoryName;
   export let entries;
 
   let width;
@@ -19,15 +19,12 @@
   }
 
   async function onLoad(entry) {
-    const url = getURL(name, owner, entry.oid);
+    const url = getURL(repositoryName, owner, entry.oid);
     await goto(url);
   }
 </script>
 
 <style>
-  /* .item:nth-child(even) {
-    background: #ccc;
-  }*/
   .item:nth-child(odd) {
     background: rgba(0, 0, 0, 0.05);
   }

@@ -16,6 +16,7 @@ const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /
 
 const srcDir = `${__dirname}/src`;
 const components = `${srcDir}/components`;
+const lib = `${srcDir}/lib`;
 const services = `${srcDir}/services`;
 const routes = `${srcDir}/routes`;
 const repositories = `${routes}/repositories`;
@@ -26,7 +27,8 @@ const aliases = {
 		{ find: '@Services', replacement: services },
 		{ find: '@Components', replacement: components },
 		{ find: '@Pagination', replacement: `${components}/pagination/Pagination.svelte` },
-		{ find: '@Repositories', replacement: repositories }
+		{ find: '@Repositories', replacement: repositories },
+		{ find: '@Lib', replacement: lib }
 	]
 };
 

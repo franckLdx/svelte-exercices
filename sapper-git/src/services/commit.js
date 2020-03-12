@@ -2,8 +2,8 @@ import { gql } from 'apollo-boost';
 import { getClient } from '@Services/makeClient';
 
 const GET_LAST_COMMIT = gql`
-query($name: String!, $owner: String!, $resourceName: String!) {
-  repository(name: $name, owner: $owner) {
+query($repositoryName: String!, $owner: String!, $resourceName: String!) {
+  repository(name: $repositoryName, owner: $owner) {
     object(expression: "master") {
       ...on Commit {
         history(path: $resourceName, first: 1) {
@@ -17,11 +17,11 @@ query($name: String!, $owner: String!, $resourceName: String!) {
 }
 `;
 
-export async function getLastCommit(fetch, name, owner, resourceName) {
+export async function getLastCommit(fetch, repositoryName, owner, resourceName) {
   const client = getClient(fetch);
   const response = await client.query({
     query: GET_LAST_COMMIT,
-    variables: { name, owner, resourceName }
+    variables: { repositoryName, owner, resourceName }
   });
   return response.data.repository;
 }
