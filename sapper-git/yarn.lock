@@ -1261,9 +1261,9 @@ crypto-random-string@^1.0.0:
   integrity sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4=
 
 date-fns@^2.10.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.10.0.tgz#abd10604d8bafb0bcbd2ba2e9b0563b922ae4b6b"
-  integrity sha512-EhfEKevYGWhWlZbNeplfhIU/+N+x0iCIx7VzKlXma2EdQyznVlZhCptXUY+BegNpPW2kjdx15Rvq503YcXXrcA==
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.11.0.tgz#ec2b44977465b9dcb370021d5e6c019b19f36d06"
+  integrity sha512-8P1cDi8ebZyDxUyUprBXwidoEtiQAawYPGvpfb+Dg0G6JrQ+VozwOmm91xYC0vAv1+0VmLehEPb+isg4BGUFfA==
 
 debug@2.6.9:
   version "2.6.9"
@@ -2636,9 +2636,9 @@ svelte@^3.0.0, svelte@^3.15.0:
   integrity sha512-Jswg065u8R9QYcN0rdpTQSFIr0hFq7YUzcPpEY6ZpFSAWkJKZG9AJvHE1d8+NJDTfr7SzKrO6EYssYYkUmszpA==
 
 sveltestrap@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/sveltestrap/-/sveltestrap-3.3.2.tgz#1671c4753f4749ceb9c76a01fa0bb3cf70ddf518"
-  integrity sha512-woVEyT3hsdcnBtBdupCgn/8sM+dSMsMNEkYhAfpz12Ptwr8n5qThammjASwAwBHP8mL/EbpjoFthxHg6OmZtBQ==
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/sveltestrap/-/sveltestrap-3.3.3.tgz#28c2192ed17b6e81dc67332c500eaa87dba8c31d"
+  integrity sha512-/uCWhyYkKA2BTZfwukXvGaxocrsG6WRyaqmNZsYXKUaPkbsf8nSeKOJqHFVjDXnSuSsrvkOBEaRP/TSNI6htdw==
   dependencies:
     clsx "^1.0.4"
     lodash.isobject "^3.0.2"
