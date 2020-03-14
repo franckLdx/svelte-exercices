@@ -3,8 +3,8 @@
   import { displayErrorPage } from "@Routes/Error.svelte";
   import { checkRepository, checkOwner, checkOid } from "@Lib/verify";
 
-  export function getURL(repositoryName, login, oid) {
-    return `/repositories/file?repository=${repositoryName}&owner=${login}&oid=${oid}`;
+  export function getURL(repositoryName, login, fileName, oid) {
+    return `/repositories/file?repository=${repositoryName}&owner=${login}&fileName=${fileName}&oid=${oid}`;
   }
 
   export async function preload(page) {
@@ -24,13 +24,18 @@
 </script>
 
 <script>
+  import { stores } from "@sapper/app";
+  import History from "@Components/History.svelte";
+  import { addItem } from "@Lib/history";
+
   export let content;
 </script>
 
-And the content is:
-<br />
+<!-- <History history={session.history} /> -->
 {@html content
   .replace(/\r\n/g, '<br/>')
   .replace(/\n/g, '<br/>')
   .replace(/\r/g, '<br/>')
   .replace(/\s/g, '&nbsp')}
+
+<svelte:options immutable />

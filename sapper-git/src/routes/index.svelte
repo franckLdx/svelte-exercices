@@ -8,3 +8,5 @@
 <main>
   <div>Loading posts, please wait...</div>
 </main>
+
+<svelte:options immutable />

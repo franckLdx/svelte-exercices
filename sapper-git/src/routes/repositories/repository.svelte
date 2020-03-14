@@ -36,9 +36,16 @@
 
 <script>
   import Language from "@Components/Language.svelte";
+  import Loading from "@Components/Loading.svelte";
+  import { addItem } from "@Lib/history";
   export let repository;
   export let repositoryName;
   export let owner;
+
+  let isLoading = false;
+  function onLoad() {
+    isLoading = true;
+  }
 </script>
 
 <style>
@@ -47,6 +54,7 @@
   }
 </style>
 
+<Loading {isLoading} />
 <article class="card">
   <div class="card-header mb-0">
     <p class="h1 mb-4">{repository.name}</p>
@@ -65,6 +73,12 @@
         <Language class="add-margin" {language} />
       {/each}
     </div>
-    <Folder entries={repository.object.entries} {repositoryName} {owner} />
+    <Folder
+      entries={repository.object.entries}
+      {repositoryName}
+      {owner}
+      on:loading={onLoad} />
   </div>
 </article>
+
+<svelte:options immutable />

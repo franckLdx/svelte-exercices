@@ -52,3 +52,5 @@
     aria-valuemax="100"
     style={`width: ${progress}%`} />
 </div>
+
+<svelte:options immutable />

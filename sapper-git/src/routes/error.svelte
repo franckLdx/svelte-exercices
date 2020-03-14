@@ -22,3 +22,5 @@
 </script>
 
 <Error {status} {error} />
+
+<svelte:options immutable />

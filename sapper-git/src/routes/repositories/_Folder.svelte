@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import { parseISO, format } from "date-fns";
   import { goto } from "@sapper/app";
   import { getLastCommit } from "@Services/commit";
@@ -11,6 +12,8 @@
   export let repositoryName;
   export let entries;
 
+  const dispatch = createEventDispatcher();
+
   let width;
 
   function formatDate(date) {
@@ -19,7 +22,8 @@
   }
 
   async function onLoad(entry) {
-    const url = getURL(repositoryName, owner, entry.oid);
+    dispatch("loading");
+    const url = getURL(repositoryName, owner, entry.name, entry.oid);
     await goto(url);
   }
 </script>
@@ -61,3 +65,5 @@
     </div>
   {/each}
 </div>
+
+<svelte:options immutable />

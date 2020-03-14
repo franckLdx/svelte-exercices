@@ -24,3 +24,5 @@
     </div>
   </div>
 </Modal>
+
+<svelte:options immutable />

@@ -15,3 +15,5 @@
   style="background-color:{language.color}">
   {language.name}
 </span>
+
+<svelte:options immutable />
