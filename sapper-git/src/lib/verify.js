@@ -4,6 +4,10 @@ export function checkRepository(repository) {
   return repository !== undefined && validator.test(repository)
 }
 
+export function checkFile(file) {
+  return file !== undefined && validator.test(file)
+}
+
 export function checkOwner(owner) {
   return owner !== undefined && validator.test(owner)
 }
