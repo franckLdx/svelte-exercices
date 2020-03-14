@@ -17,6 +17,7 @@
 <script>
   import { goto } from "@sapper/app";
   import Loading from "@Components/Loading.svelte";
+  import { reset } from "@Lib/history";
   import Pagination from "@Pagination";
   import Repository from "@Repositories/_Repository.svelte";
   import { getURL } from "@Repositories/repository.svelte";
@@ -25,9 +26,13 @@
     getNextRepositories,
     getLastRepositories
   } from "@Services/repositories";
+  import { stores } from "@sapper/app";
+  const { session } = stores();
 
   export let repositories;
   export let pageInfo;
+
+  $session.history = reset();
 
   let isLoading = false;
 
@@ -64,7 +69,7 @@
     await update(request);
   }
 
-  function onLoadRepository() {
+  function onLoading() {
     isLoading = true;
   }
 </script>
@@ -85,7 +90,7 @@
     <div class="col-12 col-lg-6">
       <Repository
         class="repository-margin"
-        on:loading={onLoadRepository}
+        on:loading={onLoading}
         {repository} />
     </div>
   {/each}

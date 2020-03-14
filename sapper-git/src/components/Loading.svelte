@@ -2,9 +2,9 @@
   import { beforeUpdate, afterUpdate, onMount } from "svelte";
 
   export let isLoading = false;
-  export let initial = 10;
-  export let incement = 10;
-  export let timeout = 200;
+  export let initial = 1;
+  export let incement = 4;
+  export let timeout = 300;
 
   let progress = 0;
   let interval = undefined;
@@ -13,11 +13,7 @@
   const startAnimation = () => {
     progress = initial;
     interval = setInterval(() => {
-      if (progress < 100) {
-        progress = Math.min(progress + incement, 100);
-      } else {
-        progress = 0;
-      }
+      progress = Math.min(progress + incement, 100);
     }, timeout);
   };
 

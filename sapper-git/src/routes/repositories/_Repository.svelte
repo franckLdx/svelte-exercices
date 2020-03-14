@@ -11,7 +11,7 @@
   let className = "";
   export { className as class };
 
-  async function onLoad() {
+  async function onLoading() {
     try {
       dispatch("loading");
       const repositoryURL = getURL(repository.name, repository.owner.login);
@@ -33,7 +33,7 @@
   <div class="card-header d-flex justify-content-between">
     <nav aria-label="Page navigation ">
       <ul class="pagination m-0">
-        <PageItem aria-label="go to first page" on:click={onLoad}>
+        <PageItem aria-label="go to first page" on:click={onLoading}>
           {repository.name}
         </PageItem>
       </ul>

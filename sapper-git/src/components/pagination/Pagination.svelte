@@ -6,6 +6,7 @@
   export let hasNextPage;
 
   const dispatch = createEventDispatcher();
+
   const onFirstPage = () => dispatch("firstPage");
   const onPreviousPage = () => dispatch("previousPage");
   const onNextPage = () => dispatch("nextPage");

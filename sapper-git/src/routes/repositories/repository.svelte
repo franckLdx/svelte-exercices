@@ -37,15 +37,24 @@
 <script>
   import Language from "@Components/Language.svelte";
   import Loading from "@Components/Loading.svelte";
+  import History from "@Components/History.svelte";
   import { addItem } from "@Lib/history";
   export let repository;
   export let repositoryName;
   export let owner;
 
+  import { stores } from "@sapper/app";
+  const { preloading, page, session } = stores();
+
   let isLoading = false;
-  function onLoad() {
+  function onLoading() {
     isLoading = true;
   }
+  $session.history = addItem(
+    $session.history,
+    repositoryName,
+    getURL($page.query.repository, $page.query.owner)
+  );
 </script>
 
 <style>
@@ -55,6 +64,7 @@
 </style>
 
 <Loading {isLoading} />
+<History history={$session.history} on:loading={onLoading} />
 <article class="card">
   <div class="card-header mb-0">
     <p class="h1 mb-4">{repository.name}</p>
@@ -77,7 +87,7 @@
       entries={repository.object.entries}
       {repositoryName}
       {owner}
-      on:loading={onLoad} />
+      on:loading={onLoading} />
   </div>
 </article>
 

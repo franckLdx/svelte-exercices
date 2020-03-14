@@ -21,7 +21,7 @@
     return format(dateUTC, "yyyy/MM/dd hh:mm a");
   }
 
-  async function onLoad(entry) {
+  async function onLoading(entry) {
     dispatch("loading");
     const url = getURL(repositoryName, owner, entry.name, entry.oid);
     await goto(url);
@@ -45,7 +45,7 @@
   {#each entries as entry, index (entry.oid)}
     <div
       class="item border border-dark mb-2 p-2 row no-gutters"
-      on:click={async () => await onLoad(entry)}>
+      on:click={async () => await onLoading(entry)}>
       <span class="col col-xs-12 col-sm-6 col-lg-4">
         {#if entry.type === 'tree'}
           <span class="mr-2">

@@ -1,14 +1,17 @@
-export function addItem(history, item) {
+export function addItem(history, name, url) {
+  const item = { name, url };
   if (history === undefined) {
     return [item];
   }
-  const index = history.indexOf(current => isSame(item, current));
+  const index = history.findIndex(current => isSame(item, current));
   if (index === -1) {
     return [...history, item];
   }
-  const result = [history.slice(0, index), item];
-  console.log(result);
-  return result;
+  return [...history.slice(0, index), item];
 }
 
-const isSame = (object1, object2) => object1.path === object2.path;
+export function reset() {
+  return []
+}
+
+const isSame = (object1, object2) => object1.url === object2.url;
