@@ -3,7 +3,7 @@
   import { goto } from "@sapper/app";
   import PageItem from "@Components/Pagination/PageItem.svelte";
   import Language from "@Components/Language.svelte";
-  import { getURL } from "@Repositories/repository.svelte";
+  import { getRepositoryURL } from "@Lib/url";
 
   const dispatch = createEventDispatcher();
 
@@ -14,7 +14,10 @@
   async function onLoading() {
     try {
       dispatch("loading");
-      const repositoryURL = getURL(repository.name, repository.owner.login);
+      const repositoryURL = getRepositoryURL(
+        repository.name,
+        repository.owner.login
+      );
       await goto(repositoryURL);
     } catch (err) {
       isLoading = false;

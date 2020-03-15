@@ -1,4 +1,4 @@
-const validator = RegExp(/^[\w\-]{1,100}$/);
+const validator = RegExp(/^[\.\w\-]{1,100}$/);
 
 export function checkRepository(repository) {
   return repository !== undefined && validator.test(repository)
@@ -6,6 +6,10 @@ export function checkRepository(repository) {
 
 export function checkFile(file) {
   return file !== undefined && validator.test(file)
+}
+
+export function checkFolder(folder) {
+  return folder !== undefined && validator.test(folder)
 }
 
 export function checkOwner(owner) {

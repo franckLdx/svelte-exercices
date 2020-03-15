@@ -17,10 +17,10 @@
 <script>
   import { goto } from "@sapper/app";
   import Loading from "@Components/Loading.svelte";
-  import { reset } from "@Lib/history";
   import Pagination from "@Pagination";
   import Repository from "@Repositories/_Repository.svelte";
-  import { getURL } from "@Repositories/repository.svelte";
+  import { reset } from "@Lib/history";
+  import { getRepositoryURL } from "@Lib/url";
   import {
     getPreviousRepositories,
     getNextRepositories,

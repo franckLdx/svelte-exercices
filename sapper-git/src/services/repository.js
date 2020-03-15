@@ -39,7 +39,6 @@ query($repositoryName: String!, $owner: String!) {
           oid
           name
           type
-
         }
       }
     }

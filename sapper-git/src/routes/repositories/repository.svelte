@@ -1,13 +1,9 @@
 <script context="module">
   import { getRepository } from "@Services/repository";
-  import { getLastCommit } from "@Services/commit";
+  import { addCommitToEntries } from "@Services/commit";
   import { displayErrorPage } from "@Routes/Error.svelte";
   import Folder from "@Repositories/_Folder.svelte";
   import { checkRepository, checkOwner } from "@Lib/verify";
-
-  export function getURL(repository, login) {
-    return `/repositories/repository?repository=${repository}&owner=${login}`;
-  }
 
   export async function preload(page) {
     const { repository: repositoryName, owner } = page.query;
@@ -15,17 +11,12 @@
       return this.error(400, "Bad parameters");
     }
     const repository = await getRepository(this.fetch, repositoryName, owner);
-    const loading = [];
-    for (const entry of repository.object.entries) {
-      const loadCommit = getLastCommit(
-        this.fetch,
-        repositoryName,
-        owner,
-        entry.name
-      ).then(commit => (entry.commit = commit.object.history.nodes[0]));
-      loading.push(loadCommit);
-    }
-    await Promise.all(loading);
+    await addCommitToEntries(
+      this.fetch,
+      repository.object.entries,
+      repositoryName,
+      owner
+    );
     return {
       repositoryName,
       owner,
@@ -39,6 +30,8 @@
   import Loading from "@Components/Loading.svelte";
   import History from "@Components/History.svelte";
   import { addItem } from "@Lib/history";
+  import { getRepositoryURL } from "@Lib/url";
+
   export let repository;
   export let repositoryName;
   export let owner;
@@ -53,7 +46,7 @@
   $session.history = addItem(
     $session.history,
     repositoryName,
-    getURL($page.query.repository, $page.query.owner)
+    getRepositoryURL($page.query.repository, $page.query.owner)
   );
 </script>
 

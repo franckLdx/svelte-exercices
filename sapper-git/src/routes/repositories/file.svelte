@@ -3,10 +3,6 @@
   import { displayErrorPage } from "@Routes/Error.svelte";
   import { checkRepository, checkOwner, checkOid } from "@Lib/verify";
 
-  export function getURL(repositoryName, login, fileName, oid) {
-    return `/repositories/file?repository=${repositoryName}&owner=${login}&fileName=${fileName}&oid=${oid}`;
-  }
-
   export async function preload(page) {
     const { repository: repositoryName, owner, oid } = page.query;
     if (
@@ -26,6 +22,7 @@
   import History from "@Components/History.svelte";
   import Loading from "@Components/Loading.svelte";
   import { addItem } from "@Lib/history";
+  import { getFileURL } from "@Lib/url";
   const { session, page } = stores();
 
   export let content;
@@ -33,7 +30,7 @@
   $session.history = addItem(
     $session.history,
     $page.query.fileName,
-    getURL(
+    getFileURL(
       $page.query.repositoryName,
       $page.query.owner,
       $page.query.fileName,

@@ -3,7 +3,7 @@
   import { parseISO, format } from "date-fns";
   import { goto } from "@sapper/app";
   import { getLastCommit } from "@Services/commit";
-  import { getURL as getBlobUrl } from "@Repositories/file.svelte";
+  import { getFileURL, getFolderURL } from "@Lib/url";
   import Icon from "svelte-awesome/components/Icon.svelte";
   import folder from "svelte-awesome/icons/folder-open-o";
   import file from "svelte-awesome/icons/file-o";
@@ -23,7 +23,10 @@
 
   async function onLoading(entry) {
     dispatch("loading");
-    const url = getBlobUrl(repositoryName, owner, entry.name, entry.oid);
+    const url =
+      entry.type === "blob"
+        ? getFileURL(repositoryName, owner, entry.name, entry.oid)
+        : getFolderURL(repositoryName, owner, entry.name, entry.oid);
     await goto(url);
   }
 </script>
