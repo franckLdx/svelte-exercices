@@ -20,7 +20,6 @@
   import Pagination from "@Pagination";
   import Repository from "@Repositories/_Repository.svelte";
   import { reset } from "@Lib/history";
-  import { getRepositoryURL } from "@Lib/url";
   import {
     getPreviousRepositories,
     getNextRepositories,

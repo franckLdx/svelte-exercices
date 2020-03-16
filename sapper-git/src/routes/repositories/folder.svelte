@@ -4,21 +4,17 @@
   import {
     checkRepository,
     checkFolder,
+    checkParentPath,
     checkOwner,
     checkOid
   } from "@Lib/verify";
 
   export async function preload(page) {
-    const {
-      owner,
-      repository: repositoryName,
-      parentPath,
-      folderName,
-      oid
-    } = page.query;
+    const { owner, repositoryName, parentPath, folderName, oid } = page.query;
     if (
-      !checkRepository(repositoryName) ||
       !checkOwner(owner) ||
+      !checkRepository(repositoryName) ||
+      !checkParentPath(parentPath) ||
       !checkFolder(folderName) ||
       !checkOid(oid)
     ) {
@@ -49,9 +45,6 @@
   import History from "@Components/History.svelte";
   import { addItem } from "@Lib/history";
   import { getFolderURL } from "@Lib/url";
-  import { stores } from "@sapper/app";
-
-  const { page, session } = stores();
 
   export let owner;
   export let repositoryName;
@@ -64,16 +57,10 @@
   function onLoading() {
     isLoading = true;
   }
-
-  $: $session.history = addItem(
-    $session.history,
-    folderName,
-    getFolderURL({ owner, repositoryName, parentPath, folderName, oid })
-  );
 </script>
 
 <Loading {isLoading} />
-<History history={$session.history} on:loading={onLoading} />
+<!-- <History history={$session.history} on:loading={onLoading} /> -->
 <Folder {owner} {repositoryName} {parentPath} {folderName} {entries} />
 
 <svelte:options immutable />

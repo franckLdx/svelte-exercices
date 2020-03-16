@@ -1,4 +1,5 @@
-const validator = RegExp(/^[\.\w\-]{1,100}$/);
+const validator = RegExp(/^[\.\-\w]{1,100}$/);
+const pathValidator = RegExp(/^[\/\.\-\w]{1,100}$/);
 
 export function checkRepository(repository) {
   return repository !== undefined && validator.test(repository)
@@ -6,6 +7,10 @@ export function checkRepository(repository) {
 
 export function checkFile(file) {
   return file !== undefined && validator.test(file)
+}
+
+export function checkParentPath(parentPath) {
+  return !parentPath || pathValidator.test(parentPath)
 }
 
 export function checkFolder(folder) {

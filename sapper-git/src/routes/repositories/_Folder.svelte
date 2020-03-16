@@ -27,10 +27,10 @@
     dispatch("loading");
     const url =
       entry.type === "blob"
-        ? getFileURL(repositoryName, owner, entry.name, entry.oid)
+        ? getFileURL(owner, repositoryName, entry.name, entry.oid)
         : getFolderURL({
-            repositoryName,
             owner,
+            repositoryName,
             parentPath: parentPath ? `${parentPath}/${folderName}` : folderName,
             folderName: entry.name,
             oid: entry.oid

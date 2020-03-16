@@ -5,24 +5,33 @@
   import Folder from "@Repositories/_Folder.svelte";
   import { checkRepository, checkOwner } from "@Lib/verify";
 
-  export async function preload(page) {
-    const { repository: repositoryName, owner } = page.query;
+  export async function preload(page, session) {
+    const { repositoryName, owner } = page.query;
     if (!checkRepository(repositoryName) || !checkRepository(owner)) {
       return this.error(400, "Bad parameters");
     }
-    const repository = await getRepository(this.fetch, repositoryName, owner);
-    repository.object.entries = await getEntriesWhithCommit({
+    session.history = addItem(
+      session.history,
+      repositoryName,
+      getRepositoryURL(page.query.owner, page.query.repository)
+    );
+    const { object, ...repositoryInfo } = await getRepository(
+      this.fetch,
+      repositoryName,
+      owner
+    );
+    const entries = await getEntriesWhithCommit({
       fetch: this.fetch,
-      entries: repository.object.entries,
+      entries: object.entries,
       parentPath: undefined,
       repositoryName,
       owner
     });
 
     return {
-      repositoryName,
       owner,
-      repository
+      repositoryInfo,
+      entries
     };
   }
 </script>
@@ -34,22 +43,14 @@
   import { addItem } from "@Lib/history";
   import { getRepositoryURL } from "@Lib/url";
 
-  export let repository;
-  export let repositoryName;
   export let owner;
-
-  import { stores } from "@sapper/app";
-  const { preloading, page, session } = stores();
+  export let repositoryInfo;
+  export let entries;
 
   let isLoading = false;
   function onLoading() {
     isLoading = true;
   }
-  $session.history = addItem(
-    $session.history,
-    repositoryName,
-    getRepositoryURL($page.query.repository, $page.query.owner)
-  );
 </script>
 
 <style>
@@ -59,31 +60,31 @@
 </style>
 
 <Loading {isLoading} />
-<History history={$session.history} on:loading={onLoading} />
+<!-- <History history={$session.history} on:loading={onLoading} /> -->
 <article class="card">
   <div class="card-header mb-0">
-    <p class="h1 mb-4">{repository.name}</p>
-    <p class="h4 mb-3">{repository.description}</p>
+    <p class="h1 mb-4">{repositoryInfo.name}</p>
+    <p class="h4 mb-3">{repositoryInfo.description}</p>
     <p class="m-0">
       <span class="mr-5">
-        License: {repository.licenseInfo ? repository.licenseInfo.name : 'Not defined'}
+        License: {repositoryInfo.licenseInfo ? repositoryInfo.licenseInfo.name : 'Not defined'}
       </span>
-      <span class="mr-5">Watchers: {repository.watchers.totalCount}</span>
-      <span>Stars: {repository.stargazers.totalCount}</span>
+      <span class="mr-5">Watchers: {repositoryInfo.watchers.totalCount}</span>
+      <span>Stars: {repositoryInfo.stargazers.totalCount}</span>
     </p>
   </div>
   <div class="card-body pt-2 pl-3 pr-3">
     <div class="border border-dark p-2 mb-3">
-      {#each repository.languages.nodes as language (language.name)}
+      {#each repositoryInfo.languages.nodes as language (language.name)}
         <Language class="add-margin" {language} />
       {/each}
     </div>
     <Folder
       {owner}
-      {repositoryName}
+      repositoryName={repositoryInfo.name}
       parentPath={null}
       folderName={null}
-      entries={repository.object.entries}
+      {entries}
       on:loading={onLoading} />
   </div>
 </article>

@@ -15,8 +15,8 @@
     try {
       dispatch("loading");
       const repositoryURL = getRepositoryURL(
-        repository.name,
-        repository.owner.login
+        repository.owner.login,
+        repository.name
       );
       await goto(repositoryURL);
     } catch (err) {
