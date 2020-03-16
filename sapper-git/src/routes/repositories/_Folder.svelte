@@ -10,6 +10,8 @@
 
   export let owner;
   export let repositoryName;
+  export let parentPath;
+  export let folderName;
   export let entries;
 
   const dispatch = createEventDispatcher();
@@ -26,7 +28,13 @@
     const url =
       entry.type === "blob"
         ? getFileURL(repositoryName, owner, entry.name, entry.oid)
-        : getFolderURL(repositoryName, owner, entry.name, entry.oid);
+        : getFolderURL({
+            repositoryName,
+            owner,
+            parentPath: parentPath ? `${parentPath}/${folderName}` : folderName,
+            folderName: entry.name,
+            oid: entry.oid
+          });
     await goto(url);
   }
 </script>
@@ -61,10 +69,12 @@
         {/if}
         {entry.name}
       </span>
-      <span class="col col-sm-6 col-lg-3" hidden={width < 576}>
-        {formatDate(entry.commit.committedDate)}
-      </span>
-      <span class="col" hidden={width <= 920}>{entry.commit.message}</span>
+      {#if entry.commit !== undefined}
+        <span class="col col-sm-6 col-lg-3" hidden={width < 576}>
+          {formatDate(entry.commit.committedDate)}
+        </span>
+        <span class="col" hidden={width <= 920}>{entry.commit.message}</span>
+      {/if}
     </div>
   {/each}
 </div>

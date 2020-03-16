@@ -13,6 +13,9 @@
       return this.error(400, "Bad parameters");
     }
     const content = await getContent(this.fetch, repositoryName, owner, oid);
+    if (content === undefined) {
+      return this.error(404, "File content not found");
+    }
     return { content };
   }
 </script>

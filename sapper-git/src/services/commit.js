@@ -2,11 +2,11 @@ import { gql } from 'apollo-boost';
 import { getClient } from '@Services/makeClient';
 
 const GET_LAST_COMMIT = gql`
-query($repositoryName: String!, $owner: String!, $resourceName: String!) {
+query($repositoryName: String!, $owner: String!, $resourcePath: String!) {
   repository(name: $repositoryName, owner: $owner) {
     object(expression: "master") {
       ...on Commit {
-        history(path: $resourceName, first: 1) {
+        history(path: $resourcePath, first: 1) {
           nodes {
             committedDate, message
           }
@@ -17,27 +17,29 @@ query($repositoryName: String!, $owner: String!, $resourceName: String!) {
 }
 `;
 
-export async function getLastCommit(fetch, repositoryName, owner, resourceName) {
+export async function getLastCommit({ fetch, owner, repositoryName, resourcePath }) {
   const client = getClient(fetch);
   const response = await client.query({
     query: GET_LAST_COMMIT,
-    variables: { repositoryName, owner, resourceName }
+    variables: { repositoryName, owner, resourcePath }
   });
   return response.data.repository;
 }
 
-export async function addCommitToEntries(fetch, entries, repositoryName, owner) {
+export async function getEntriesWhithCommit({ fetch, owner, repositoryName, parentPath, entries, }) {
   const loading = [];
+  const results = [];
   for (const entry of entries) {
-    const loadCommit = getLastCommit(
+    const loadCommit = getLastCommit({
       fetch,
-      repositoryName,
       owner,
-      entry.name
-    ).then(commit => {
-      entry.commit = commit.object.history.nodes[0];
+      repositoryName,
+      resourcePath: parentPath ? `${parentPath}/${entry.name}` : entry.name
+    }).then(commit => {
+      results.push({ ...entry, commit: commit.object.history.nodes[0] });
     });
     loading.push(loadCommit);
   }
   await Promise.all(loading);
+  return results;
 }
