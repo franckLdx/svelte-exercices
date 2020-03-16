@@ -3,7 +3,7 @@
   import { parseISO, format } from "date-fns";
   import { goto } from "@sapper/app";
   import { getLastCommit } from "@Services/commit";
-  import { getFileURL, getFolderURL } from "@Lib/url";
+  import { getFileURL, getFolderURL, getPath } from "@Lib/url";
   import Icon from "svelte-awesome/components/Icon.svelte";
   import folder from "svelte-awesome/icons/folder-open-o";
   import file from "svelte-awesome/icons/file-o";
@@ -31,7 +31,7 @@
         : getFolderURL({
             owner,
             repositoryName,
-            parentPath: parentPath ? `${parentPath}/${folderName}` : folderName,
+            parentPath: getPath(parentPath, folderName),
             folderName: entry.name,
             oid: entry.oid
           });

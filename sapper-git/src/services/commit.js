@@ -1,5 +1,6 @@
 import { gql } from 'apollo-boost';
 import { getClient } from '@Services/makeClient';
+import { getPath } from '@Lib/url';
 
 const GET_LAST_COMMIT = gql`
 query($repositoryName: String!, $owner: String!, $resourcePath: String!) {
@@ -34,7 +35,7 @@ export async function getEntriesWhithCommit({ fetch, owner, repositoryName, pare
       fetch,
       owner,
       repositoryName,
-      resourcePath: parentPath ? `${parentPath}/${entry.name}` : entry.name
+      resourcePath: getPath(parentPath, entry.name),
     }).then(commit => {
       results.push({ ...entry, commit: commit.object.history.nodes[0] });
     });

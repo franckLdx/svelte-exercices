@@ -10,3 +10,7 @@ export function getFileURL(owner, repositoryName, fileName, oid) {
 export function getFolderURL({ owner, repositoryName, parentPath, folderName, oid }) {
   return `/repositories/folder?owner=${owner}&repositoryName=${repositoryName}&parentPath=${parentPath || ''}&folderName=${folderName || ''}&oid=${oid}`;
 }
+
+export function getPath(parentPath, entryName) {
+  return parentPath ? `${parentPath}/${entryName}` : entryName;
+}

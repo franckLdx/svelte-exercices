@@ -8,6 +8,7 @@
     checkOwner,
     checkOid
   } from "@Lib/verify";
+  import { getPath } from "@Lib/url";
 
   export async function preload(page) {
     const { owner, repositoryName, parentPath, folderName, oid } = page.query;
@@ -25,16 +26,15 @@
       fetch: this.fetch,
       owner,
       repositoryName,
-      parentPath: parentPath ? `${parentPath}/${folderName}` : folderName,
+      parentPath: getPath(parentPath, folderName),
       entries: rawEntries
     });
     return {
-      oid,
-      repositoryName,
       owner,
+      repositoryName,
+      parentPath,
       folderName,
-      entries,
-      parentPath
+      entries
     };
   }
 </script>
@@ -50,7 +50,6 @@
   export let repositoryName;
   export let parentPath;
   export let folderName;
-  export let oid;
   export let entries;
 
   let isLoading = false;
