@@ -40,6 +40,7 @@
 </script>
 
 <script>
+  import { stores } from "@sapper/app";
   import Folder from "@Repositories/_Folder.svelte";
   import Loading from "@Components/Loading.svelte";
   import History from "@Components/History.svelte";
@@ -52,6 +53,8 @@
   export let folderName;
   export let entries;
 
+  const { session } = stores();
+
   let isLoading = false;
   function onLoading() {
     isLoading = true;
@@ -59,7 +62,7 @@
 </script>
 
 <Loading {isLoading} />
-<!-- <History history={$session.history} on:loading={onLoading} /> -->
+<History history={session.history} on:loading={onLoading} />
 <Folder {owner} {repositoryName} {parentPath} {folderName} {entries} />
 
 <svelte:options immutable />

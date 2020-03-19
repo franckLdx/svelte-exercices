@@ -10,11 +10,6 @@
     if (!checkRepository(repositoryName) || !checkRepository(owner)) {
       return this.error(400, "Bad parameters");
     }
-    session.history = addItem(
-      session.history,
-      repositoryName,
-      getRepositoryURL(page.query.owner, page.query.repository)
-    );
     const { object, ...repositoryInfo } = await getRepository(
       this.fetch,
       repositoryName,
@@ -37,15 +32,17 @@
 </script>
 
 <script>
+  import { stores } from "@sapper/app";
   import Language from "@Components/Language.svelte";
   import Loading from "@Components/Loading.svelte";
   import History from "@Components/History.svelte";
-  import { addItem } from "@Lib/history";
   import { getRepositoryURL } from "@Lib/url";
 
   export let owner;
   export let repositoryInfo;
   export let entries;
+
+  const { session } = stores();
 
   let isLoading = false;
   function onLoading() {
@@ -60,7 +57,7 @@
 </style>
 
 <Loading {isLoading} />
-<!-- <History history={$session.history} on:loading={onLoading} /> -->
+<History history={session.history} on:loading={onLoading} />
 <article class="card">
   <div class="card-header mb-0">
     <p class="h1 mb-4">{repositoryInfo.name}</p>

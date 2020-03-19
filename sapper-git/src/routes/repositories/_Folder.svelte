@@ -7,6 +7,8 @@
   import Icon from "svelte-awesome/components/Icon.svelte";
   import folder from "svelte-awesome/icons/folder-open-o";
   import file from "svelte-awesome/icons/file-o";
+  import { stores } from "@sapper/app";
+  import { addItem } from "@Lib/history";
 
   export let owner;
   export let repositoryName;
@@ -35,6 +37,8 @@
             folderName: entry.name,
             oid: entry.oid
           });
+    const { session } = stores();
+    session.history = addItem(session.history, entry.name, url);
     await goto(url);
   }
 </script>

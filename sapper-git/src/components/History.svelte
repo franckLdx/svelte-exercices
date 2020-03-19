@@ -1,8 +1,13 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { stores } from "@sapper/app";
+  import { addItem } from "@Lib/history";
 
   export let history;
 
+  const { session } = stores();
+
+  $: console.log("_____________HISTORY :", history);
   const dispatch = createEventDispatcher();
 
   let previous, current;
@@ -12,8 +17,9 @@
     current = history[history.length - 1];
   }
 
-  function onLoading() {
+  function onLoading(name, url) {
     dispatch("loading");
+    stores.history = addItem(stores.history, name, url);
   }
 </script>
 
@@ -23,7 +29,7 @@
       <li
         class="breadcrumb-item"
         aria-current={`back to ${item.name}`}
-        on:click={onLoading}>
+        on:click={() => onLoading(item.name, item.url)}>
         <a href={item.url}>{item.name}</a>
       </li>
     {/each}

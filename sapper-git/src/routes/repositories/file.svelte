@@ -27,6 +27,8 @@
   import { addItem } from "@Lib/history";
   import { getFileURL } from "@Lib/url";
 
+  const { session } = stores();
+
   export let content;
   let isLoading = false;
   function onLoading() {
@@ -35,7 +37,7 @@
 </script>
 
 <Loading {isLoading} />
-<!-- <History history={$session.history} on:loading={onLoading} /> -->
+<History history={session.history} on:loading={onLoading} />
 <article class="card">
   <div class="card-body">
     {@html content
