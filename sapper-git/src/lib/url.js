@@ -1,4 +1,8 @@
 
+export function getRepositoriesURL() {
+  return "/repositories";
+}
+
 export function getRepositoryURL(owner, repository) {
   return canical(`/repositories/${owner}/${repository}`);
 }

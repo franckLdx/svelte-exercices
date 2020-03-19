@@ -40,12 +40,10 @@
 </script>
 
 <script>
-  import { stores } from "@sapper/app";
   import Folder from "@Components/Folder.svelte";
   import File from "@Components/File.svelte";
   import Loading from "@Components/Loading.svelte";
   import History from "@Components/History.svelte";
-  import { addItem } from "@Lib/history";
   import { getFolderURL } from "@Lib/url";
 
   export let owner;
@@ -53,8 +51,6 @@
   export let path;
   export let content;
   export let type;
-
-  const { session } = stores();
 
   let isLoading = false;
   function onLoading() {

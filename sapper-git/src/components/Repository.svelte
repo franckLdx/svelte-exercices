@@ -1,11 +1,11 @@
 <script>
+  import { goto } from "@sapper/app";
   import { createEventDispatcher } from "svelte";
-  import { goto, stores } from "@sapper/app";
   import PageItem from "@Components/Pagination/PageItem.svelte";
   import Language from "@Components/Language.svelte";
   import { displayErrorPage } from "@Routes/Error.svelte";
   import { getRepositoryURL } from "@Lib/url";
-  import { addItem } from "@Lib/history";
+  import { load } from "@Lib/history";
 
   const dispatch = createEventDispatcher();
 
@@ -13,19 +13,12 @@
   let className = "";
   export { className as class };
 
-  const { session } = stores();
-
   async function onLoading() {
     try {
       dispatch("loading");
       const repositoryURL = getRepositoryURL(
         repository.owner.login,
         repository.name
-      );
-      session.history = addItem(
-        session.history,
-        repository.name,
-        repositoryURL
       );
       await goto(repositoryURL);
     } catch (err) {

@@ -5,7 +5,7 @@
   import Folder from "@Components/Folder.svelte";
   import { checkRepository, checkOwner } from "@Lib/verify";
 
-  export async function preload(page, session) {
+  export async function preload(page) {
     const { owner, repository } = page.params;
 
     if (!checkOwner(owner) || !checkRepository(repository)) {
@@ -27,7 +27,6 @@
 </script>
 
 <script>
-  import { stores } from "@sapper/app";
   import Language from "@Components/Language.svelte";
   import Loading from "@Components/Loading.svelte";
   import History from "@Components/History.svelte";
@@ -36,8 +35,6 @@
   export let owner;
   export let repositoryInfo;
   export let content;
-
-  const { session } = stores();
 
   let isLoading = false;
   function onLoading() {

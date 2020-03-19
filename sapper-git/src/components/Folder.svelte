@@ -1,13 +1,13 @@
 <script>
+  import { goto } from "@sapper/app";
   import { createEventDispatcher } from "svelte";
-  import { stores, goto } from "@sapper/app";
-  import { parseISO, format } from "date-fns";
   import Icon from "svelte-awesome/components/Icon.svelte";
-  import { getLastCommit } from "@Services/commit";
-  import { getFolderURL, addToPath } from "@Lib/url";
-  import { addItem } from "@Lib/history";
   import folder from "svelte-awesome/icons/folder-open-o";
   import file from "svelte-awesome/icons/file-o";
+  import { parseISO, format } from "date-fns";
+  import { getLastCommit } from "@Services/commit";
+  import { getFolderURL, addToPath } from "@Lib/url";
+  import { load } from "@Lib/history";
 
   export let owner;
   export let repository;
@@ -32,8 +32,6 @@
       oid: entry.oid,
       type: entry.type
     });
-    const { session } = stores();
-    session.history = addItem(session.history, entry.name, url);
     await goto(url);
   }
 </script>

@@ -2,11 +2,7 @@
   import { getFirstRepositories } from "@Services/repositories";
   import { displayErrorPage } from "@Routes/Error.svelte";
 
-  export function getUrl() {
-    return "/repositories";
-  }
-
-  export async function preload() {
+  export async function preload(page) {
     const { nodes: repositories, pageInfo } = await getFirstRepositories(
       this.fetch
     );
@@ -15,23 +11,17 @@
 </script>
 
 <script>
-  import { goto } from "@sapper/app";
   import Loading from "@Components/Loading.svelte";
   import Repository from "@Components/Repository.svelte";
   import Pagination from "@Pagination";
-  import { reset } from "@Lib/history";
   import {
     getPreviousRepositories,
     getNextRepositories,
     getLastRepositories
   } from "@Services/repositories";
-  import { stores } from "@sapper/app";
-  const { session } = stores();
 
   export let repositories;
   export let pageInfo;
-
-  $session.history = reset();
 
   let isLoading = false;
 
