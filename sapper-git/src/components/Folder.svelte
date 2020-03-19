@@ -1,20 +1,18 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { stores, goto } from "@sapper/app";
   import { parseISO, format } from "date-fns";
-  import { goto } from "@sapper/app";
-  import { getLastCommit } from "@Services/commit";
-  import { getFileURL, getFolderURL, getPath } from "@Lib/url";
   import Icon from "svelte-awesome/components/Icon.svelte";
+  import { getLastCommit } from "@Services/commit";
+  import { getFolderURL, addToPath } from "@Lib/url";
+  import { addItem } from "@Lib/history";
   import folder from "svelte-awesome/icons/folder-open-o";
   import file from "svelte-awesome/icons/file-o";
-  import { stores } from "@sapper/app";
-  import { addItem } from "@Lib/history";
 
   export let owner;
-  export let repositoryName;
-  export let parentPath;
-  export let folderName;
-  export let entries;
+  export let repository;
+  export let path;
+  export let content;
 
   const dispatch = createEventDispatcher();
 
@@ -27,16 +25,13 @@
 
   async function onLoading(entry) {
     dispatch("loading");
-    const url =
-      entry.type === "blob"
-        ? getFileURL(owner, repositoryName, entry.name, entry.oid)
-        : getFolderURL({
-            owner,
-            repositoryName,
-            parentPath: getPath(parentPath, folderName),
-            folderName: entry.name,
-            oid: entry.oid
-          });
+    const url = getFolderURL({
+      owner,
+      repository,
+      path: addToPath(path, entry.name),
+      oid: entry.oid,
+      type: entry.type
+    });
     const { session } = stores();
     session.history = addItem(session.history, entry.name, url);
     await goto(url);
@@ -57,7 +52,7 @@
 </style>
 
 <div class="border border-dark pt-2 pl-2 pr-2 mb-2" bind:clientWidth={width}>
-  {#each entries as entry, index (entry.oid)}
+  {#each content as entry, index (entry.oid)}
     <div
       class="item border border-dark mb-2 p-2 row no-gutters"
       on:click={async () => await onLoading(entry)}>

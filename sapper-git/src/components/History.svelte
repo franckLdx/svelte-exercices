@@ -7,7 +7,6 @@
 
   const { session } = stores();
 
-  $: console.log("_____________HISTORY :", history);
   const dispatch = createEventDispatcher();
 
   let previous, current;

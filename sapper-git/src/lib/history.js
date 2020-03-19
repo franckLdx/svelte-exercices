@@ -5,10 +5,8 @@ export function addItem(history, name, url) {
   }
   const index = history.findIndex(current => isSame(item, current));
   if (index === -1) {
-    console.log('______ ADDED', item);
     return [...history, item];
   }
-  console.log('______ REPLACED', item);
   return [...history.slice(0, index), item];
 }
 

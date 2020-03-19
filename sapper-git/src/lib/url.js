@@ -1,16 +1,24 @@
 
-export function getRepositoryURL(owner, repositoryName) {
-  return `/repositories/repository?repositoryName=${repositoryName}&owner=${owner}`;
+export function getRepositoryURL(owner, repository) {
+  return canical(`/repositories/${owner}/${repository}`);
 }
 
-export function getFileURL(owner, repositoryName, fileName, oid) {
-  return `/repositories/file?repositoryName=${repositoryName}&owner=${owner}&fileName=${fileName}&oid=${oid}`;
+export function getFolderURL({ owner, repository, path, oid, type }) {
+  const repositorySlug = getRepositoryURL(owner, repository);
+  const oidParam = getOidParam(oid);
+  const typeParam = getTypeParam(type);
+  return canical(`${repositorySlug}/${path}?${oidParam}&${typeParam}`);
 }
 
-export function getFolderURL({ owner, repositoryName, parentPath, folderName, oid }) {
-  return `/repositories/folder?owner=${owner}&repositoryName=${repositoryName}&parentPath=${parentPath || ''}&folderName=${folderName || ''}&oid=${oid}`;
+const getOidParam = oid => `oid=${oid}`;
+const getTypeParam = type => `type=${type}`;
+
+export function addToPath(path, item) {
+  return canical(`${path}/${item}`);
 }
 
-export function getPath(parentPath, entryName) {
-  return parentPath ? `${parentPath}/${entryName}` : entryName;
+export function getPath(items) {
+  return `/${items.join('/')}`;
 }
+
+const canical = path => path.replace(/\/{2,}/g, '/'); 

@@ -13,7 +13,7 @@ query($repositoryName: String!, $owner: String!, $oid: GitObjectID!) {
 }
 `;
 
-export async function getContent(fetch, repositoryName, owner, oid) {
+export async function getBlobContent(fetch, repositoryName, owner, oid) {
   const client = getClient(fetch);
   const response = await client.query({
     query: GET_CONTENT,

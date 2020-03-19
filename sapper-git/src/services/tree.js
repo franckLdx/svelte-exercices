@@ -1,5 +1,7 @@
 import { gql } from 'apollo-boost';
 import { getClient } from '@Services/makeClient';
+import { getEntriesWhithCommit } from '@Services/commit';
+
 
 const GET_TREE = gql`
 query($repository: String!, $owner: String!, $oid: GitObjectID!) {
@@ -23,4 +25,15 @@ export async function getTree(fetch, repository, owner, oid) {
     variables: { repository, owner, oid }
   });
   return response.data.repository.object.entries;
+}
+
+export async function getTreeContent(fetch, repository, owner, oid) {
+  const rawContent = await getTree(this.fetch, repository, owner, oid);
+  return await getEntriesWhithCommit({
+    fetch: this.fetch,
+    owner,
+    repository,
+    path,
+    entries: rawContent
+  });
 }

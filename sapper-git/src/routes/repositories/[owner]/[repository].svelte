@@ -1,32 +1,27 @@
 <script context="module">
-  import { getRepository } from "@Services/repository";
+  import { getRepositoryContent } from "@Services/repository";
   import { getEntriesWhithCommit } from "@Services/commit";
   import { displayErrorPage } from "@Routes/Error.svelte";
-  import Folder from "@Repositories/_Folder.svelte";
+  import Folder from "@Components/Folder.svelte";
   import { checkRepository, checkOwner } from "@Lib/verify";
 
   export async function preload(page, session) {
-    const { repositoryName, owner } = page.query;
-    if (!checkRepository(repositoryName) || !checkRepository(owner)) {
+    const { owner, repository } = page.params;
+
+    if (!checkOwner(owner) || !checkRepository(repository)) {
       return this.error(400, "Bad parameters");
     }
-    const { object, ...repositoryInfo } = await getRepository(
+
+    const { content, repositoryInfo } = await getRepositoryContent(
       this.fetch,
-      repositoryName,
-      owner
+      owner,
+      repository
     );
-    const entries = await getEntriesWhithCommit({
-      fetch: this.fetch,
-      entries: object.entries,
-      parentPath: undefined,
-      repositoryName,
-      owner
-    });
 
     return {
       owner,
       repositoryInfo,
-      entries
+      content
     };
   }
 </script>
@@ -40,7 +35,7 @@
 
   export let owner;
   export let repositoryInfo;
-  export let entries;
+  export let content;
 
   const { session } = stores();
 
@@ -57,7 +52,7 @@
 </style>
 
 <Loading {isLoading} />
-<History history={session.history} on:loading={onLoading} />
+<!-- <History history={session.history} on:loading={onLoading} /> -->
 <article class="card">
   <div class="card-header mb-0">
     <p class="h1 mb-4">{repositoryInfo.name}</p>
@@ -78,10 +73,9 @@
     </div>
     <Folder
       {owner}
-      repositoryName={repositoryInfo.name}
-      parentPath={null}
-      folderName={null}
-      {entries}
+      repository={repositoryInfo.name}
+      path={'/'}
+      {content}
       on:loading={onLoading} />
   </div>
 </article>

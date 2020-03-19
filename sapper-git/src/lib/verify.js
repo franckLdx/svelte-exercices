@@ -9,12 +9,17 @@ export function checkFile(file) {
   return file !== undefined && validator.test(file)
 }
 
-export function checkParentPath(parentPath) {
-  return !parentPath || pathValidator.test(parentPath)
-}
-
 export function checkFolder(folder) {
   return folder !== undefined && validator.test(folder)
+}
+
+export function checkFolders(folders) {
+  for (let folder of folders) {
+    if (!checkFolder(folder)) {
+      return false
+    }
+  }
+  return true;
 }
 
 export function checkOwner(owner) {
@@ -23,4 +28,8 @@ export function checkOwner(owner) {
 
 export function checkOid(oid) {
   return oid !== undefined && validator.test(oid)
+}
+
+export function checkType(type) {
+  return type === "blob" || type === "tree";
 }
