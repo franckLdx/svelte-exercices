@@ -10,9 +10,8 @@
   const dispatch = createEventDispatcher();
 
   let previous, current;
-  const home = { name: "Home", url: "/" };
   $: {
-    previous = [home, ...history.slice(0, history.length - 1)];
+    previous = history.slice(0, history.length - 1);
     current = history[history.length - 1];
   }
 
@@ -21,6 +20,12 @@
     stores.history = addItem(stores.history, name, url);
   }
 </script>
+
+<style>
+  .breadcrumb-item {
+    text-transform: capitalize;
+  }
+</style>
 
 <nav aria-label="history">
   <ol class="breadcrumb">

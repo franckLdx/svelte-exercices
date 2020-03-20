@@ -10,8 +10,9 @@
     checkType
   } from "@Lib/verify";
   import { addToPath, getPath } from "@Lib/url";
+  import { addItem } from "@Lib/history";
 
-  export async function preload(page) {
+  export async function preload(page, session) {
     const { owner, repository, folders } = page.params;
     const { oid, type } = page.query;
 
@@ -29,12 +30,25 @@
       type === "tree"
         ? await getTree(this.fetch, repository, owner, oid)
         : await getBlobContent(this.fetch, repository, owner, oid);
+
+    const url = getFolderURL({
+      owner,
+      repository,
+      path,
+      oid,
+      type
+    });
+    const name = folders[folders.length - 1];
+    session.history = addItem(session.history, name, url);
+
     return {
       owner,
       repository,
       path,
       content,
-      type
+      type,
+      history: session.history,
+      isLoading: false
     };
   }
 </script>
@@ -51,15 +65,16 @@
   export let path;
   export let content;
   export let type;
+  export let history;
 
-  let isLoading = false;
+  export let isLoading = false;
   function onLoading() {
     isLoading = true;
   }
 </script>
 
 <Loading {isLoading} />
-<!-- <History history={session.history} on:loading={onLoading} /> -->
+<History {history} on:loading={onLoading} />
 {#if type === 'tree'}
   <Folder {owner} {repository} {path} {content} />
 {:else}

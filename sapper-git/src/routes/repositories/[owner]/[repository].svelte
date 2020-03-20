@@ -4,8 +4,10 @@
   import { displayErrorPage } from "@Routes/Error.svelte";
   import Folder from "@Components/Folder.svelte";
   import { checkRepository, checkOwner } from "@Lib/verify";
+  import { addItem } from "@Lib/history";
+  import { getRepositoryURL } from "@Lib/url";
 
-  export async function preload(page) {
+  export async function preload(page, session) {
     const { owner, repository } = page.params;
 
     if (!checkOwner(owner) || !checkRepository(repository)) {
@@ -18,10 +20,17 @@
       repository
     );
 
+    session.history = addItem(
+      session.history,
+      repository,
+      getRepositoryURL(owner, repository)
+    );
+
     return {
       owner,
       repositoryInfo,
-      content
+      content,
+      isLoading: false
     };
   }
 </script>
@@ -30,13 +39,12 @@
   import Language from "@Components/Language.svelte";
   import Loading from "@Components/Loading.svelte";
   import History from "@Components/History.svelte";
-  import { getRepositoryURL } from "@Lib/url";
 
   export let owner;
   export let repositoryInfo;
   export let content;
+  export let isLoading;
 
-  let isLoading = false;
   function onLoading() {
     isLoading = true;
   }

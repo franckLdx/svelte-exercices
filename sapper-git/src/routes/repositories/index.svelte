@@ -1,12 +1,19 @@
 <script context="module">
   import { getFirstRepositories } from "@Services/repositories";
   import { displayErrorPage } from "@Routes/Error.svelte";
+  import { addItem } from "@Lib/history";
+  import { getRepositoriesURL } from "@Lib/url";
 
-  export async function preload(page) {
+  export async function preload(page, session) {
     const { nodes: repositories, pageInfo } = await getFirstRepositories(
       this.fetch
     );
-    return { repositories, pageInfo };
+    session.history = addItem(
+      session.history,
+      "Repositories",
+      getRepositoriesURL()
+    );
+    return { repositories, pageInfo, isLoading: false };
   }
 </script>
 
@@ -22,8 +29,7 @@
 
   export let repositories;
   export let pageInfo;
-
-  let isLoading = false;
+  export let isLoading = false;
 
   async function update(requestPromise) {
     try {

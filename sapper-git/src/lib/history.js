@@ -6,14 +6,15 @@ export async function load(session, name, url) {
 }
 
 export function addItem(history, name, url) {
+  const item = { name, url };
   if (history === undefined) {
-    return [{ name, url }];
+    return [item];
   }
   const index = history.findIndex(current => isSame(url, current));
   if (index === -1) {
-    return [...history, { name, url }];
+    return [...history, item];
   }
-  return [...history.slice(0, index), item];
+  return history.slice(0, index + 1);
 }
 
 export function reset() {
