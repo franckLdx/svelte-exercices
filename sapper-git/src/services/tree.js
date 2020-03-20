@@ -18,7 +18,7 @@ query($repository: String!, $owner: String!, $oid: GitObjectID!) {
   }
 }`;
 
-export async function getTree(fetch, repository, owner, oid) {
+export async function getTree(fetch, owner, repository, oid) {
   const client = getClient(fetch);
   const response = await client.query({
     query: GET_TREE,
@@ -27,13 +27,13 @@ export async function getTree(fetch, repository, owner, oid) {
   return response.data.repository.object.entries;
 }
 
-export async function getTreeContent(fetch, repository, owner, oid) {
-  const rawContent = await getTree(this.fetch, repository, owner, oid);
+export async function getTreeContent({ fetch, owner, repository, resourcePath, oid }) {
+  const rawContent = await getTree(fetch, owner, repository, oid);
   return await getEntriesWhithCommit({
-    fetch: this.fetch,
+    fetch: fetch,
     owner,
     repository,
-    path,
+    resourcePath,
     entries: rawContent
   });
 }

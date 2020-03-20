@@ -1,5 +1,5 @@
 <script context="module">
-  import { getTree } from "@Services/tree";
+  import { getTreeContent } from "@Services/tree";
   import { getBlobContent } from "@Services/blob";
   import { getEntriesWhithCommit } from "@Services/commit";
   import {
@@ -28,8 +28,14 @@
     const path = getPath(folders);
     const content =
       type === "tree"
-        ? await getTree(this.fetch, repository, owner, oid)
-        : await getBlobContent(this.fetch, repository, owner, oid);
+        ? await getTreeContent({
+            fetch: this.fetch,
+            owner,
+            repository,
+            resourcePath: path,
+            oid
+          })
+        : await getBlobContent(this.fetch, owner, repository, oid);
 
     const url = getFolderURL({
       owner,

@@ -35,12 +35,24 @@ export async function getEntriesWhithCommit({ fetch, owner, repository, resource
       fetch,
       owner,
       repository,
-      resourcePath: addToPath(resourcePath, entry.name),
+      resourcePath: addToPath(resourcePath, entry.name).slice(1),
     }).then(commit => {
       results.push({ ...entry, commit: commit.object.history.nodes[0] });
     });
     loading.push(loadCommit);
   }
   await Promise.all(loading);
-  return results;
+  return results.sort((a, b) => {
+    if (a.type < b.type) {
+      return 1;
+    } else if (a.type > b.type) {
+      return -1;
+    } else if (a.name > b.name) {
+      return 1;
+    } else if (a.name < b.name) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
 }

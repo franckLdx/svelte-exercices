@@ -65,7 +65,7 @@ export async function getRepositoryContent(fetch, owner, repository) {
     fetch,
     owner,
     repository: repositoryInfo.name,
-    parentPath: "/",
+    resourcePath: "/",
     entries: object.entries
   });
   return { repositoryInfo, content };
