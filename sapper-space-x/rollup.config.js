@@ -6,12 +6,32 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+import alias from '@rollup/plugin-alias';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+
+
+const srcDir = `${__dirname}/src`;
+const components = `${srcDir}/components`;
+const lib = `${srcDir}/lib`;
+const services = `${srcDir}/services`;
+const routes = `${srcDir}/routes`;
+const repositories = `${routes}/repositories`;
+
+const aliases = {
+	entries: [
+		{ find: '@Routes', replacement: routes },
+		{ find: '@Services', replacement: services },
+		{ find: '@Components', replacement: components },
+		{ find: '@Pagination', replacement: `${components}/pagination/Pagination.svelte` },
+		{ find: '@Repositories', replacement: repositories },
+		{ find: '@Lib', replacement: lib }
+	]
+};
 
 export default {
 	client: {
@@ -22,6 +42,7 @@ export default {
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
+			alias(aliases),
 			svelte({
 				dev,
 				hydratable: true,
@@ -66,6 +87,7 @@ export default {
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
+			alias(aliases),
 			svelte({
 				generate: 'ssr',
 				dev
