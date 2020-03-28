@@ -1,3 +1,3 @@
-export function getLastLaucnhesURL() {
-  return 'lastLaunches';
+export function getPastLaunchesURL() {
+  return 'pastLaunches';
 }

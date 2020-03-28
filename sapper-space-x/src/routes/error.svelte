@@ -1,6 +1,6 @@
 <script context="module">
   import { goto } from "@sapper/app";
-  import { checkErrorStatus, checkErrorStatusMessage } from "@Lib/verify";
+  import { checkErrorStatus, checkErrorStatusMessage } from "@Lib/check";
 
   export function displayErrorPage(err) {
     console.error(err);
