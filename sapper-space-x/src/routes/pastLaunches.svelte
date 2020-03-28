@@ -36,4 +36,4 @@
   {/each}
 </section>
 
-<NavPage {page} {lastPage} />
+<NavPage {page} {lastPage} on:page={({ detail }) => console.log(detail.page)} />
