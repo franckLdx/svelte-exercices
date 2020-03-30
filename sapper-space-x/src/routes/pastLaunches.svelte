@@ -25,9 +25,16 @@
 </script>
 
 <script>
+  import { goto } from "@sapper/app";
+  import { getPastLaunchesURL } from "@Lib/url";
+
   export let launches;
   export let page;
   export let lastPage;
+
+  async function loadPage(newPage) {
+    await goto(getPastLaunchesURL(newPage, lastPage));
+  }
 </script>
 
 <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 pb-4">
@@ -36,4 +43,7 @@
   {/each}
 </section>
 
-<NavPage {page} {lastPage} on:page={({ detail }) => console.log(detail.page)} />
+<NavPage
+  {page}
+  {lastPage}
+  on:page={async ({ detail }) => await loadPage(detail.page)} />
