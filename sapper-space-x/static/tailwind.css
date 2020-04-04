@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
+
+.container {
+  @apply bg-black;
+  @apply text-white;
+}
+
+.linkPill {
+  @apply font-bold;
+  @apply py-2;
+  @apply px-4;
+  @apply mr-1;
+  @apply border;
+  @apply border-white;
+  @apply rounded;
+}
+
+.linkPill:hover {
+  @apply bg-blue-700;
+}
+
+.linkPill.disabled {
+  @apply opacity-50;
+}
+
 @tailwind utilities;
