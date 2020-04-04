@@ -11,14 +11,15 @@
   }
 </style>
 
-<nav class="container pl-3 pt-2 pb-5 border-b border-gray-500 my-3">
-  <ul>
+<nav class="flex flex-wrap pl-3 pt-2 pb-6 border-b border-gray-500 my-4">
+  <img class="pr-4" src="spacex_logo_white.png" alt="SpaceX logo" />
+  <ul class="flex flex-wrap">
     <NavMenuItem
-      disabled={segment === pastLaunchesSegment}
+      current={segment === pastLaunchesSegment}
       href={pastLaunchesSegment}>
       Past Launches
     </NavMenuItem>
-    <NavMenuItem disabled={segment === 'about'} href="about">About</NavMenuItem>
-    <NavMenuItem disabled={segment === 'blog'} href="blog">Blog</NavMenuItem>
+    <NavMenuItem current={segment === 'about'} href="about">About</NavMenuItem>
+    <NavMenuItem current={segment === 'blog'} href="blog">Blog</NavMenuItem>
   </ul>
 </nav>

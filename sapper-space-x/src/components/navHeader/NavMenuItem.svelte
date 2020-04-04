@@ -1,22 +1,16 @@
 <script>
   export let href;
-  export let disabled;
+  export let current;
 </script>
-
-<style>
-  li {
-    list-style-type: none;
-    display: inline-block;
-  }
-</style>
 
 <li>
   <a
-    class="linkPill"
-    class:disabled
-    {disabled}
-    aria-disabled={disabled ? 'page' : undefined}
-    {href}>
-    <slot />
+    class={`pt-3 pr-4 font-semibold`}
+    {current}
+    aria-current={current ? 'page' : undefined}
+    href={current ? undefined : href}>
+    <span class={current ? 'pb-2 border-b-4' : ''}>
+      <slot />
+    </span>
   </a>
 </li>
