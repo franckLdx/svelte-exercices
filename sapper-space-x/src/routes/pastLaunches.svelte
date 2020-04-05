@@ -26,7 +26,7 @@
 
 <script>
   import { goto } from "@sapper/app";
-  import { getPastLaunchesURL } from "@Lib/url";
+  import { getPastLaunchesURL, getLaunchURL } from "@Lib/url";
 
   export let launches;
   export let page;
@@ -35,11 +35,15 @@
   async function loadPage(newPage) {
     await goto(getPastLaunchesURL(newPage, lastPage));
   }
+
+  async function loadLaunch(launchId) {
+    await goto(getLaunchURL(launchId));
+  }
 </script>
 
 <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 pb-4">
   {#each launches as launch (launch.id)}
-    <Launch {launch} />
+    <Launch {launch} on:click={() => loadLaunch(launch.id)} />
   {/each}
 </section>
 

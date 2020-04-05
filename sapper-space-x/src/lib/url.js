@@ -11,3 +11,7 @@ export function getPastLaunchesURL(page, totalPage) {
 
   return `${pastLaunchesSegment}${query}`;
 }
+
+export function getLaunchURL(launchId) {
+  return `launches/${launchId}`
+}

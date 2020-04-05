@@ -43,3 +43,46 @@ export async function getLastLaunchesCount(fetch) {
   });
   return response.data.launchesPast.length;
 }
+
+const GET_LAUNCH = gql`
+query($id: ID!) {
+  launch(id: $id) {
+    id
+    mission_name
+    details
+    launch_date_utc
+    launch_site {
+      site_name_long
+    }
+    links {
+      mission_patch
+      article_link
+      flickr_images
+      mission_patch_small
+      presskit
+      reddit_campaign
+      reddit_launch
+      reddit_media
+      reddit_recovery
+      video_link
+      wikipedia
+    }
+    rocket {
+      rocket_name
+      rocket_type
+    }
+    ships {
+      name
+      model
+      image
+    }
+  }
+}`;
+export async function getLaunch(fetch, id) {
+  const client = getClient(fetch);
+  const response = await client.query({
+    query: GET_LAUNCH,
+    variables: { id }
+  });
+  return response.data.launch;
+}
