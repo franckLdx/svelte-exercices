@@ -56,16 +56,10 @@ query($id: ID!) {
     }
     links {
       mission_patch
-      article_link
       flickr_images
       mission_patch_small
-      presskit
-      reddit_campaign
-      reddit_launch
-      reddit_media
-      reddit_recovery
-      video_link
       wikipedia
+      video_link
     }
     rocket {
       rocket_name

@@ -845,6 +845,11 @@
   dependencies:
     estree-walker "^1.0.1"
 
+"@sveltecasts/svelte-youtube@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@sveltecasts/svelte-youtube/-/svelte-youtube-0.0.5.tgz#10b9c1d59205995158b60adcd4ef7b9b70072e08"
+  integrity sha512-5Cuoh6DAL7cyw8yaP+IycjLCSXCPMGaUh6eXf4VMJjrAyLmdt1eQ/5ws7pLKkW8ax9UogdiE2HfiwSTRpVXtbg==
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"

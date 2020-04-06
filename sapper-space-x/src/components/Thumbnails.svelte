@@ -1,7 +1,8 @@
 <script>
   import { onMount } from "svelte";
+
   export let thumbnails;
-  let className;
+  let className = "";
   export { className as class };
 
   let index = 0;
@@ -22,4 +23,6 @@
   });
 </script>
 
-<img class={className} src={thumbnails[index]} alt="Mission image" />
+{#if thumbnails.length}
+  <img class={className} src={thumbnails[index]} alt="Mission image" />
+{/if}

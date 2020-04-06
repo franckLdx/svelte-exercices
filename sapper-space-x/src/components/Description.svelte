@@ -1,7 +1,7 @@
 <script>
   import { distanceDate } from "@Lib/misc";
 
-  let className;
+  let className = "";
   export { className as class };
   export let launch;
 </script>
@@ -18,6 +18,8 @@
     <div class="mt-2">
       {launch.details} (
       <a href={launch.links.wikipedia}>Related wikipedia article</a>
+      ,
+      <a href={launch.links.video_link}>Related video article</a>
       )
     </div>
   </div>

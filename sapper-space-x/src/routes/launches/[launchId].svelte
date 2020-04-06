@@ -22,14 +22,25 @@
   import Thumbnails from "@Components/Thumbnails.svelte";
   import Ships from "@Components/Ships.svelte";
   import Description from "@Components/Description.svelte";
-  import { distanceDate } from "@Lib/misc";
+  import YouTubeReader from "@Components/YouTubeReader.svelte";
 
   export let launch;
 </script>
 
-<h1 class="font-serif text-4xl font-bold mb-10">
-  {launch.mission_name} -- A {launch.rocket.rocket_name} mission
-</h1>
-<Description class="mb-10" {launch} />
-<Thumbnails class="mb-10" thumbnails={launch.links.flickr_images} />
-<Ships ships={launch.ships} />
+<style>
+  .launch :global(.images) {
+    max-height: 25rem;
+  }
+</style>
+
+<div class="launch mx-auto">
+  <h1 class="font-serif text-4xl font-bold mb-10">
+    {launch.mission_name} -- A {launch.rocket.rocket_name} mission
+  </h1>
+  <Description class="mb-10" {launch} />
+  <Thumbnails
+    class="ml-8 mb-10 images object-scale-down object-cover"
+    thumbnails={launch.links.flickr_images} />
+  <YouTubeReader class="mb-10" videoLink={launch.links.video_link} />
+  <Ships class="ml-8" ships={launch.ships} />
+</div>

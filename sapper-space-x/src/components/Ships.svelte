@@ -2,15 +2,15 @@
   let className;
   export { className as class };
 
-  export let ships;
+  export let ships = "";
 </script>
 
 <style>
   .ship {
-    max-width: 50rem;
-    max-height: 50rem;
+    max-width: 30rem;
+    max-height: 30rem;
     margin-right: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 </style>
 
