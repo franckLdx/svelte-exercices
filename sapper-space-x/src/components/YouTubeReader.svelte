@@ -21,7 +21,7 @@
 </script>
 
 {#if videoId}
-  <div class={className}>
+  <div class={`inline-block ${className}`}>
     <Youtube {videoId} />
   </div>
 {/if}

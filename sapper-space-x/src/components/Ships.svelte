@@ -7,8 +7,6 @@
 
 <style>
   .ship {
-    max-width: 30rem;
-    max-height: 30rem;
     margin-right: 1rem;
     margin-bottom: 2rem;
   }
@@ -20,7 +18,7 @@
     {#each ships as ship}
       <div class="flex flex-wrap">
         <img
-          class="ship object-scale-down"
+          class="ship images object-scale-down"
           src={ship.image}
           alt="Ship's photo" />
         {#if ship.model}{ship.name} -- {ship.model}{:else}{ship.name}{/if}

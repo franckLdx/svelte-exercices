@@ -29,7 +29,8 @@
 
 <style>
   .launch :global(.images) {
-    max-height: 25rem;
+    max-width: 30rem;
+    max-height: 30rem;
   }
 </style>
 
@@ -41,6 +42,8 @@
   <Thumbnails
     class="ml-8 mb-10 images object-scale-down object-cover"
     thumbnails={launch.links.flickr_images} />
-  <YouTubeReader class="mb-10" videoLink={launch.links.video_link} />
+  <YouTubeReader
+    class="ml-8 mb-10 border border-white"
+    videoLink={launch.links.video_link} />
   <Ships class="ml-8" ships={launch.ships} />
 </div>
