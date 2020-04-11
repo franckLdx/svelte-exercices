@@ -4,6 +4,7 @@
   import { displayErrorPage } from "@Routes/Error.svelte";
   import { getLaunchesPast, getLastLaunchesCount } from "@Services/launches";
   import { checkNumber } from "@Lib/check";
+  import { loadingStore } from "@Lib/store";
 
   const pageSize = 9;
   export async function preload(page) {
@@ -16,8 +17,10 @@
     if (!checkNumber(pageNumber) || !checkNumber(lastPage)) {
       return this.error(400, "Bad parameters");
     }
+    const launches = await getLaunchesPast(this.fetch, pageNumber, 9);
+    loadingStore.setLoading(false);
     return {
-      launches: await getLaunchesPast(this.fetch, pageNumber, 9),
+      launches,
       page: pageNumber,
       lastPage
     };
@@ -33,13 +36,19 @@
   export let lastPage;
 
   async function loadPage(newPage) {
+    loadingStore.setLoading(true);
     await goto(getPastLaunchesURL(newPage, lastPage));
   }
 
   async function loadLaunch(launchId) {
+    loadingStore.setLoading(true);
     await goto(getLaunchURL(launchId));
   }
 </script>
+
+<svelte:head>
+  <title>Past Launches</title>
+</svelte:head>
 
 <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 pb-4">
   {#each launches as launch (launch.id)}

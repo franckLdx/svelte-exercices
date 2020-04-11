@@ -1,6 +1,7 @@
 <script context="module">
   import { getLaunch } from "@Services/launches";
   import { checkNumber } from "@Lib/check";
+  import { loadingStore } from "@Lib/store";
 
   export async function preload(page, session) {
     const { launchId } = page.params;
@@ -14,6 +15,7 @@
       return this.error(404, `Sorry, found no launch wih id ${launchId}`);
     }
 
+    loadingStore.setLoading(false);
     return { launch };
   }
 </script>
@@ -33,6 +35,10 @@
     max-height: 30rem;
   }
 </style>
+
+<svelte:head>
+  <title>{launch.mission_name}</title>
+</svelte:head>
 
 <div class="launch mx-auto">
   <h1 class="font-serif text-4xl font-bold mb-10">
