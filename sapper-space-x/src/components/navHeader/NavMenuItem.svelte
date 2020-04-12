@@ -12,7 +12,7 @@
     href={isCurrent ? undefined : href}
     on:click={!isCurrent ? () => loadingStore.setLoading(true) : ''}>
     <span
-      class={isCurrent ? 'pb-2 border-b-4' : ''}
+      class={isCurrent ? 'pb-2 border-b-4' : 'hover:opacity-75'}
       class:cursor-wait={$loadingStore.isLoading}>
       <slot />
     </span>
