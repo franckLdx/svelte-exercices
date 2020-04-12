@@ -17,9 +17,10 @@
     <NavMenuItem
       isCurrent={segment === pastLaunchesSegment}
       href={pastLaunchesSegment}>
-      Past Launches
+      Launches
     </NavMenuItem>
-    <NavMenuItem current={segment === 'about'} href="about">About</NavMenuItem>
-    <NavMenuItem current={segment === 'blog'} href="blog">Blog</NavMenuItem>
+    <NavMenuItem isCurrent={segment === 'about'} href="about">
+      About
+    </NavMenuItem>
   </ul>
 </nav>

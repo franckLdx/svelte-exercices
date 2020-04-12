@@ -9,7 +9,7 @@
     class={`pt-3 pr-4 font-semibold`}
     current={isCurrent}
     aria-current={isCurrent ? 'page' : undefined}
-    href={isCurrent ? undefined : href}
+    href={!isCurrent ? href : undefined}
     on:click={!isCurrent ? () => loadingStore.setLoading(true) : ''}>
     <span
       class={isCurrent ? 'pb-2 border-b-4' : 'hover:opacity-75'}
