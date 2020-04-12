@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { distanceDate } from "@Lib/misc";
   import Thumbnails from "@Components/Thumbnails.svelte";
+  import { loadingStore } from "@Lib/store";
 
   export let launch;
 
@@ -12,10 +13,11 @@
   function onClick() {
     dispatch("click");
   }
+  $: cursor = $loadingStore.isLoading ? "cusrsor-wait" : "cursor-pointer";
 </script>
 
 <article
-  class="border border-gray-400 rounded px-3 pb-1"
+  class={`border border-gray-400 rounded px-3 pb-1 ${cursor}`}
   on:click={() => onClick()}>
   <h1 class="font-serif text-2xl font-semibold">
     {launch.mission_name} -- {launch.rocket.rocket_name}

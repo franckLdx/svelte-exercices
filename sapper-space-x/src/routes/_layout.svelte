@@ -6,8 +6,10 @@
   export let segment;
 </script>
 
-<Nav {segment} />
-<Loading isLoading={$loadingStore.isLoading} />
-<main class="container px-5 py-2">
-  <slot />
-</main>
+<div class:cursor-wait={$loadingStore.isLoading}>
+  <Nav {segment} />
+  <Loading isLoading={$loadingStore.isLoading} />
+  <main class="container px-5 py-2">
+    <slot />
+  </main>
+</div>
