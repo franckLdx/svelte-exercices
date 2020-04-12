@@ -15,7 +15,7 @@
   <img class="pr-4" src="spacex_logo_white.png" alt="SpaceX logo" />
   <ul class="flex flex-wrap">
     <NavMenuItem
-      current={segment === pastLaunchesSegment}
+      isCurrent={segment === pastLaunchesSegment}
       href={pastLaunchesSegment}>
       Past Launches
     </NavMenuItem>
