@@ -3,24 +3,20 @@
 
 .container {
   @apply bg-black;
+  @apply text-gray-300;
+  @apply border-gray-300;
+}
+
+.link {
+  @apply cursor-pointer
+}
+
+.link:hover {
   @apply text-white;
-}
-
-.linkPill {
-  @apply font-bold;
-  @apply py-2;
-  @apply px-4;
-  @apply mr-1;
-  @apply border;
   @apply border-white;
-  @apply rounded;
 }
 
-.linkPill:hover {
-  @apply bg-blue-700;
-}
-
-.linkPill.disabled {
+.link:disabled {
   @apply opacity-50;
 }
 

@@ -13,7 +13,7 @@
     aria-current={isCurrent ? 'page' : undefined}
     {href}>
     <span
-      class={isCurrent ? 'pb-2 border-b-4' : 'hover:opacity-75'}
+      class={`link p-2 ${isCurrent ? 'border-b-4' : ''}`}
       class:cursor-wait={$preloading}>
       <slot />
     </span>

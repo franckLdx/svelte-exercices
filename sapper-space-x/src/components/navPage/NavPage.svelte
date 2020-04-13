@@ -14,7 +14,7 @@
 </script>
 
 <div
-  class="flex justify-center"
+  class="container flex justify-center"
   aria-label="Page nagigation"
   aria-valuenow={page}
   aria-valuemin="1"

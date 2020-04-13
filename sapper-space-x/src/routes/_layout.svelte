@@ -6,7 +6,7 @@
   const { page, preloading } = stores();
 </script>
 
-<div class:cursor-wait={$preloading}>
+<div class="container" class:cursor-wait={$preloading}>
   <Nav path={$page.path} />
   <Loading isLoading={$preloading} />
   <main class="container px-5 py-2">

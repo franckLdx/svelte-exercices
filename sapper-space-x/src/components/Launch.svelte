@@ -19,12 +19,12 @@
 </script>
 
 <article
-  class={`border border-gray-400 rounded px-3 pb-1 hover:opacity-75 ${cursor}`}
+  class={`link border rounded px-3 pb-1 ${cursor}`}
   on:click={() => onClick()}>
   <h1 class="font-serif text-2xl font-semibold">
     {launch.mission_name} -- {launch.rocket.rocket_name}
   </h1>
-  <span class="text-gray-200">
+  <span>
     {distanceDate(launch.launch_date_utc, now)} ago from {launch.launch_site.site_name_long}
   </span>
   <Thumbnails
