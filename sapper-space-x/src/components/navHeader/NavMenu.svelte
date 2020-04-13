@@ -1,8 +1,12 @@
 <script>
-  import { pastLaunchesSegment } from "@Lib/url";
+  import {
+    launchesSegment,
+    pastLaunchesSegment,
+    getPastLaunchesURL
+  } from "@Lib/url";
   import NavMenuItem from "@Components/NavHeader/NavMenuItem.svelte";
 
-  export let segment;
+  export let path;
 </script>
 
 <style>
@@ -15,12 +19,10 @@
   <img class="pr-4" src="spacex_logo_white.png" alt="SpaceX logo" />
   <ul class="flex flex-wrap">
     <NavMenuItem
-      isCurrent={segment === pastLaunchesSegment}
-      href={pastLaunchesSegment}>
+      isCurrent={path.startsWith(launchesSegment)}
+      href={getPastLaunchesURL()}>
       Launches
     </NavMenuItem>
-    <NavMenuItem isCurrent={segment === 'about'} href="about">
-      About
-    </NavMenuItem>
+    <NavMenuItem isCurrent={path === '/about'} href="/about">About</NavMenuItem>
   </ul>
 </nav>

@@ -2,9 +2,11 @@
   import { createEventDispatcher } from "svelte";
   import { distanceDate } from "@Lib/misc";
   import Thumbnails from "@Components/Thumbnails.svelte";
-  import { loadingStore } from "@Lib/store";
+  import { stores } from "@sapper/app";
 
   export let launch;
+
+  const { preloading } = stores();
 
   const dispatch = createEventDispatcher();
 
@@ -13,7 +15,7 @@
   function onClick() {
     dispatch("click");
   }
-  $: cursor = $loadingStore.isLoading ? "cusrsor-wait" : "cursor-pointer";
+  $: cursor = $preloading ? "cusrsor-wait" : "cursor-pointer";
 </script>
 
 <article

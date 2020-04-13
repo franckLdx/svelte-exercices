@@ -1,7 +1,9 @@
 <script>
   export let href;
   export let isCurrent;
-  import { loadingStore } from "@Lib/store";
+
+  import { stores } from "@sapper/app";
+  const { preloading } = stores();
 </script>
 
 <li>
@@ -9,11 +11,10 @@
     class={`pt-3 pr-4 font-semibold`}
     current={isCurrent}
     aria-current={isCurrent ? 'page' : undefined}
-    href={!isCurrent ? href : undefined}
-    on:click={!isCurrent ? () => loadingStore.setLoading(true) : ''}>
+    {href}>
     <span
       class={isCurrent ? 'pb-2 border-b-4' : 'hover:opacity-75'}
-      class:cursor-wait={$loadingStore.isLoading}>
+      class:cursor-wait={$preloading}>
       <slot />
     </span>
   </a>

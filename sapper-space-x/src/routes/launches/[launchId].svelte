@@ -1,21 +1,17 @@
 <script context="module">
   import { getLaunch } from "@Services/launches";
   import { checkNumber } from "@Lib/check";
-  import { loadingStore } from "@Lib/store";
 
   export async function preload(page, session) {
     const { launchId } = page.params;
-
     if (!checkNumber(launchId)) {
       return this.error(400, "Bad parameters");
     }
-    const launch = await getLaunch(this.fetch, launchId);
 
+    const launch = await getLaunch(this.fetch, launchId);
     if (!launch) {
       return this.error(404, `Sorry, found no launch wih id ${launchId}`);
     }
-
-    loadingStore.setLoading(false);
     return { launch };
   }
 </script>

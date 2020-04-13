@@ -2,13 +2,13 @@
   import Nav from "@Components/navHeader/NavMenu.svelte";
   import Loading from "@Components/Loading.svelte";
 
-  import { loadingStore } from "@Lib/store";
-  export let segment;
+  import { stores } from "@sapper/app";
+  const { page, preloading } = stores();
 </script>
 
-<div class:cursor-wait={$loadingStore.isLoading}>
-  <Nav {segment} />
-  <Loading isLoading={$loadingStore.isLoading} />
+<div class:cursor-wait={$preloading}>
+  <Nav path={$page.path} />
+  <Loading isLoading={$preloading} />
   <main class="container px-5 py-2">
     <slot />
   </main>

@@ -1,8 +1,3 @@
-<script>
-  import { loadingStore } from "@Lib/store";
-  loadingStore.setLoading(false);
-</script>
-
 <svelte:head>
   <title>About</title>
 </svelte:head>

@@ -1,7 +1,6 @@
 <script context="module">
   import { goto } from "@sapper/app";
   import { checkErrorStatus, checkErrorStatusMessage } from "@Lib/check";
-  import { loadingStore } from "@Lib/store";
 
   export function displayErrorPage(err) {
     console.error(err);
@@ -14,7 +13,6 @@
     if (!checkErrorStatus(status) || !checkErrorStatusMessage(error)) {
       return { status: 500, error: "unknwon error" };
     }
-    loadingStore.setLoading(false);
     return {
       status,
       error

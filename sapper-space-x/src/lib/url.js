@@ -1,4 +1,7 @@
-export const pastLaunchesSegment = 'pastLaunches';
+export const launchesSegment = '/launches';
+export const pastLaunchesSegment = '/pastLaunches';
+
+
 export function getPastLaunchesURL(page, totalPage) {
   let query = ''
   if (page !== undefined) {
@@ -9,9 +12,9 @@ export function getPastLaunchesURL(page, totalPage) {
   }
   query = query.replace(/&/, '?')
 
-  return `${pastLaunchesSegment}${query}`;
+  return `${launchesSegment}${pastLaunchesSegment}${query}`;
 }
 
 export function getLaunchURL(launchId) {
-  return `launches/${launchId}`
+  return `${launchesSegment}/${launchId}`
 }
