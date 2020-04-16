@@ -18,9 +18,9 @@
 
 <script>
   import Thumbnails from "@Components/Thumbnails.svelte";
-  import Ships from "@Components/Ships.svelte";
-  import Description from "@Components/Description.svelte";
   import YouTubeReader from "@Components/YouTubeReader.svelte";
+  import Description from "./_launch/Description.svelte";
+  import Ships from "./_launch/Ships.svelte";
 
   export let launch;
 </script>

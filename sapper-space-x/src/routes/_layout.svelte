@@ -1,5 +1,5 @@
 <script>
-  import Nav from "@Components/navHeader/NavMenu.svelte";
+  import Nav from "./_layout/MainNav.svelte";
   import Loading from "@Components/Loading.svelte";
 
   import { stores } from "@sapper/app";

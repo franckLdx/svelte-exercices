@@ -17,7 +17,7 @@
 <script>
   import { goto } from "@sapper/app";
   import { getRocketUrl } from "@Lib/url";
-  import NavMenuItem from "@Components/navheader/NavMenuItem.svelte";
+  import NavItem from "@Components/NavItem.svelte";
 
   export let rockets;
   export let segment;
@@ -26,11 +26,9 @@
 <nav>
   <ul class="container flex flex-wrap border-b pl-3 pt-2 pb-6 mb-0 my-4">
     {#each rockets as rocket (rocket.id)}
-      <NavMenuItem
-        isCurrent={segment === rocket.id}
-        href={getRocketUrl(rocket.id)}>
+      <NavItem isCurrent={segment === rocket.id} href={getRocketUrl(rocket.id)}>
         {rocket.name}
-      </NavMenuItem>
+      </NavItem>
     {/each}
   </ul>
 </nav>
