@@ -11,9 +11,9 @@
   ];
   $: thrustItems = [{ Thrust: `${rocket.second_stage.thrust.kN} kn` }];
 
-  const marginBottom = "mb-5";
+  const classes = "md:mb-5";
 </script>
 
 <Title>Second stage</Title>
-<HorizontalList class={marginBottom} items={enginesItems} />
-<HorizontalList class={marginBottom} items={thrustItems} />
+<HorizontalList class={classes} items={enginesItems} />
+<HorizontalList class={classes} items={thrustItems} />
