@@ -29,7 +29,7 @@ export async function getRockets(fetch) {
 const GET_ROCKET = gql`
 query($id: ID!) {
   rocket(id: $id) {
-    id, name, description, 
+    id, name, description, wikipedia 
     cost_per_launch,
     diameter { meters }
     height { meters }

@@ -628,6 +628,11 @@ video {
   cursor: pointer
 }
 
+.text-link {
+  font-style: italic;
+  text-decoration: underline;
+}
+
 .link:hover {
   color: #fff;
   border-color: #fff;

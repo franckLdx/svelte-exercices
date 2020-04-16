@@ -64,6 +64,9 @@ query($id: ID!) {
     rocket {
       rocket_name
       rocket_type
+      rocket {
+        id
+      }
     }
     ships {
       name

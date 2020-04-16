@@ -29,7 +29,7 @@
   export let rocket;
 </script>
 
-<h1 class="title1">{rocket.name}</h1>
+<h1 class="title1 mb-5">{rocket.name}</h1>
 <Description {rocket} />
 <Payload {rocket} />
 <FirstStage {rocket} />

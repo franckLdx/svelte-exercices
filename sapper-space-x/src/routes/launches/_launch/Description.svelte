@@ -1,4 +1,5 @@
 <script>
+  import Link from "@Components/Link.svelte";
   import { distanceDate } from "@Lib/misc";
 
   let className = "";
@@ -17,9 +18,9 @@
     </div>
     <div class="mt-2">
       {launch.details} (
-      <a href={launch.links.wikipedia}>Related wikipedia article</a>
+      <Link href={launch.links.wikipedia}>Related wikipedia article</Link>
       ,
-      <a href={launch.links.video_link}>Related video article</a>
+      <Link href={launch.links.video_link}>Related video article</Link>
       )
     </div>
   </div>

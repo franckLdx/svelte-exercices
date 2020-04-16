@@ -17,8 +17,10 @@
 </script>
 
 <script>
+  import { getRocketUrl } from "@Lib/url";
   import Thumbnails from "@Components/Thumbnails.svelte";
   import YouTubeReader from "@Components/YouTubeReader.svelte";
+  import Link from "@Components/Link.svelte";
   import Description from "./_launch/Description.svelte";
   import Ships from "./_launch/Ships.svelte";
 
@@ -38,7 +40,10 @@
 
 <div class="launch mx-auto">
   <h1 class="title1 mb-10">
-    {launch.mission_name} -- A {launch.rocket.rocket_name} mission
+    {launch.mission_name} --
+    <Link href={getRocketUrl(launch.rocket.rocket.id)}>
+      A {launch.rocket.rocket_name} mission
+    </Link>
   </h1>
   <Description class="mb-10" {launch} />
   <Thumbnails

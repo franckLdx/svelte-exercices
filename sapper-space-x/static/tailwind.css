@@ -23,6 +23,11 @@
   @apply cursor-pointer
 }
 
+.text-link {
+  @apply italic;
+  @apply underline;
+}
+
 .link:hover {
   @apply text-white;
   @apply border-white;
