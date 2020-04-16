@@ -19,7 +19,7 @@
     { "Vacuum thrust": `${rocket.first_stage.thrust_vacuum.kN} kn` }
   ];
 
-  const classes = "mb-5";
+  const classes = "md:mb-5";
 </script>
 
 <Title>First stage</Title>
