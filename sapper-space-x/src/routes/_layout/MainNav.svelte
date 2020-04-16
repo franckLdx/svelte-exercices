@@ -27,7 +27,7 @@
       href={getPastLaunchesURL()}>
       Launches
     </NavItem>
-    <NavItem isCurrent={path === rocketsSegment} href={getRocketsUrl()}>
+    <NavItem isCurrent={path.startsWith(rocketsSegment)} href={getRocketsUrl()}>
       Rockets
     </NavItem>
     <NavItem isCurrent={path === aboutSegment} href={getAboutUrl()}>

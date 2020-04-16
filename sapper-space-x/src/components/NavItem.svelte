@@ -13,7 +13,7 @@
     aria-current={isCurrent ? 'page' : undefined}
     {href}>
     <span
-      class={`link p-2 ${isCurrent ? 'border-b-4' : ''}`}
+      class={`link sm:p-0 md:p-1 ${isCurrent ? 'border-b-4' : ''}`}
       class:cursor-wait={$preloading}>
       <slot />
     </span>
