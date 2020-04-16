@@ -37,7 +37,7 @@
 </svelte:head>
 
 <div class="launch mx-auto">
-  <h1 class="font-serif text-4xl font-bold mb-10">
+  <h1 class="title1 mb-10">
     {launch.mission_name} -- A {launch.rocket.rocket_name} mission
   </h1>
   <Description class="mb-10" {launch} />

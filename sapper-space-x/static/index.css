@@ -612,6 +612,18 @@ video {
   border-color: #e2e8f0;
 }
 
+.title1 {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.title2 {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
 .link {
   cursor: pointer
 }

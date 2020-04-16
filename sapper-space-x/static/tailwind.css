@@ -7,6 +7,18 @@
   @apply border-gray-300;
 }
 
+.title1 {
+  @apply font-serif; 
+  @apply text-4xl;
+  @apply font-bold;
+}
+
+.title2 {
+  @apply font-serif;
+  @apply text-2xl;
+  @apply font-bold;
+}
+
 .link {
   @apply cursor-pointer
 }
