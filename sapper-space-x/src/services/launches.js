@@ -83,3 +83,31 @@ export async function getLaunch(fetch, id) {
   });
   return response.data.launch;
 }
+
+// At this time of writing grapqhQl server sort function does not work !
+const GET_ROCKET_LAUNCHES = gql`
+query ($rocketId: String!) {
+  launches(find: {rocket_id: $rocketId}) {
+    id
+    launch_date_utc
+    mission_name
+  }
+}`;
+export async function getRocketLaunches(fetch, rocketId) {
+  const client = getClient(fetch);
+  const response = await client.query({
+    query: GET_ROCKET_LAUNCHES,
+    variables: { rocketId }
+  });
+  return response.data.launches.sort(
+    (launch1, launch2) => {
+      if (launch1.launch_date_utc < launch2.launch_date_utc) {
+        return 1;
+      } else if (launch1.launch_date_utc > launch2.launch_date_utc) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+  );
+}
