@@ -1,9 +1,10 @@
 import { gql } from 'apollo-boost';
 import { getClient } from '@Services/spaceX-client';
+import { sortByLaunchDate } from '@Lib/misc';
 
 const LAST_LAUNCHES = gql`
 query($limit: Int!, $offset: Int!) {
-  launchesPast(limit: $limit, offset: $offset) {
+  launches(limit: $limit, offset: $offset, order:"launch_date_utc", sort:"desc") {
     id
     mission_name
     launch_date_utc
@@ -19,7 +20,7 @@ query($limit: Int!, $offset: Int!) {
   }
 }`;
 
-export async function getLaunchesPast(fetch, pageNumber, pageSize) {
+export async function getLaunches(fetch, pageNumber, pageSize) {
   const client = getClient(fetch);
   const limit = pageSize;
   const offset = (pageNumber - 1) * pageSize;
@@ -27,21 +28,21 @@ export async function getLaunchesPast(fetch, pageNumber, pageSize) {
     query: LAST_LAUNCHES,
     variables: { limit, offset }
   });
-  return response.data.launchesPast;
+  return response.data.launches;
 }
 
-const LAST_LAUNCHES_ALL = gql`
+const GET_LAUNCHES_COUNT = gql`
 {
-  launchesPast {
+  launches {
     id
   }
 }`;
-export async function getLastLaunchesCount(fetch) {
+export async function getLaunchesCount(fetch) {
   const client = getClient(fetch);
   const response = await client.query({
-    query: LAST_LAUNCHES_ALL,
+    query: GET_LAUNCHES_COUNT,
   });
-  return response.data.launchesPast.length;
+  return response.data.launches.length;
 }
 
 const GET_LAUNCH = gql`
@@ -84,10 +85,9 @@ export async function getLaunch(fetch, id) {
   return response.data.launch;
 }
 
-// At this time of writing grapqhQl server sort function does not work !
 const GET_ROCKET_LAUNCHES = gql`
 query ($rocketId: String!) {
-  launches(find: {rocket_id: $rocketId}) {
+  launches(find: {rocket_id: $rocketId}, order:"launch_date_utc", sort:"desc") {
     id
     launch_date_utc
     mission_name
@@ -100,14 +100,6 @@ export async function getRocketLaunches(fetch, rocketId) {
     variables: { rocketId }
   });
   return response.data.launches.sort(
-    (launch1, launch2) => {
-      if (launch1.launch_date_utc < launch2.launch_date_utc) {
-        return 1;
-      } else if (launch1.launch_date_utc > launch2.launch_date_utc) {
-        return -1;
-      } else {
-        return 1;
-      }
-    }
+    sortByLaunchDate
   );
 }

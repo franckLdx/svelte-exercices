@@ -1,8 +1,8 @@
 <script context="module">
-  import { getPastLaunchesURL } from "@Lib/url";
+  import { getLaunchesURL } from "@Lib/url";
 
   export function preload(page) {
-    this.redirect(302, getPastLaunchesURL());
+    this.redirect(302, getLaunchesURL());
   }
 </script>
 
@@ -10,7 +10,7 @@
   import { goto } from "@sapper/app";
   import { onMount } from "svelte";
 
-  onMount(() => goto(getLaunchesPast()));
+  onMount(() => goto(getLaunches()));
 </script>
 
 <main>

@@ -41,6 +41,7 @@
   import FirstStage from "./_rocket/FirstStage.svelte";
   import SecondStage from "./_rocket/SecondStage.svelte";
   import Launches from "./_rocket/Launches.svelte";
+  import { rocketsImage } from "@Lib/url";
 
   export let rocket;
   export let launches;

@@ -1,9 +1,8 @@
 <script>
   import {
     launchesSegment,
-    pastLaunchesSegment,
     rocketsSegment,
-    getPastLaunchesURL,
+    getLaunchesURL,
     getRocketsUrl,
     aboutSegment,
     getAboutUrl
@@ -18,7 +17,7 @@
   <ul class="flex flex-wrap">
     <NavItem
       isCurrent={path.startsWith(launchesSegment)}
-      href={getPastLaunchesURL()}>
+      href={getLaunchesURL()}>
       Launches
     </NavItem>
     <NavItem isCurrent={path.startsWith(rocketsSegment)} href={getRocketsUrl()}>

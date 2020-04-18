@@ -1,9 +1,9 @@
 <script context="module">
-  import { getRockets } from "@Services/rockets";
+  import { getRockets as getRocketsRequest } from "@Services/rockets";
   import { rocketsSegment } from "@Lib/url";
 
-  export async function preload(page) {
-    const rockets = await getRockets(this.fetch);
+  export async function preload(page, session) {
+    const rockets = await getRockets(this.fetch, session);
     if (rockets.length === 0) {
       return this.error(404, "No rocket found");
     }
@@ -11,6 +11,13 @@
       return this.redirect(302, getRocketUrl(rockets[0].id));
     }
     return { rockets };
+  }
+
+  async function getRockets(fetch, session) {
+    if (session.rockets.length === 0) {
+      session.rockets = await getRocketsRequest(fetch);
+    }
+    return session.rockets;
   }
 </script>
 

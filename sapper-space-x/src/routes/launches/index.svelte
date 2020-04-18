@@ -2,7 +2,7 @@
   import Launch from "@Components/Launch.svelte";
   import NavPage from "@Components/navPage/NavPage.svelte";
   import { displayErrorPage } from "@Routes/Error.svelte";
-  import { getLaunchesPast, getLastLaunchesCount } from "@Services/launches";
+  import { getLaunches, getLaunchesCount } from "@Services/launches";
   import { checkNumber } from "@Lib/check";
 
   const pageSize = 9;
@@ -10,13 +10,13 @@
     const pageNumber = page.query.page || 1;
     let lastPage = page.query.lastPage;
     if (lastPage === undefined) {
-      const total = await getLastLaunchesCount(this.fetch);
+      const total = await getLaunchesCount(this.fetch);
       lastPage = Math.ceil(total / pageSize);
     }
     if (!checkNumber(pageNumber) || !checkNumber(lastPage)) {
       return this.error(400, "Bad parameters");
     }
-    const launches = await getLaunchesPast(this.fetch, pageNumber, 9);
+    const launches = await getLaunches(this.fetch, pageNumber, 9);
     return {
       launches,
       page: pageNumber,
@@ -27,14 +27,14 @@
 
 <script>
   import { goto } from "@sapper/app";
-  import { getPastLaunchesURL, getLaunchURL } from "@Lib/url";
+  import { getLaunchesURL, getLaunchURL } from "@Lib/url";
 
   export let launches;
   export let page;
   export let lastPage;
 
   async function loadPage(newPage) {
-    await goto(getPastLaunchesURL(newPage, lastPage));
+    await goto(getLaunchesURL(newPage, lastPage));
   }
 
   async function loadLaunch(launchId) {
