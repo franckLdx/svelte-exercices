@@ -61,6 +61,7 @@ query($id: ID!) {
       }
     }
     ships {
+      id
       name
       model
       image
