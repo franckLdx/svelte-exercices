@@ -624,10 +624,6 @@ video {
   font-weight: 700;
 }
 
-.link {
-  cursor: pointer
-}
-
 .text-link {
   font-style: italic;
   text-decoration: underline;

@@ -2,7 +2,7 @@
   import Link from "@Components/Link.svelte";
   import Title from "./Title.svelte";
   import { formatDate } from "@Lib/misc";
-  import { getLaunchURL } from "@Lib/url";
+  import { getLaunchUrl } from "@Lib/url";
 
   export let launches;
 </script>
@@ -11,7 +11,7 @@
 <ol class="list-disc list-inside">
   {#each launches as launch (launch.id)}
     <li>
-      <Link href={getLaunchURL(launch.id)}>
+      <Link href={getLaunchUrl(launch.id)}>
         {launch.mission_name} - {formatDate(launch.launch_date_utc)}
       </Link>
     </li>

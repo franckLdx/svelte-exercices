@@ -1,27 +1,27 @@
 export const launchesSegment = '/launches';
 export const rocketsSegment = '/rockets';
+export const shipsSegment = '/ships';
 export const aboutSegment = '/about';
 
-export function getLaunchesURL(page, totalPage) {
-  let query = ''
-  if (page !== undefined) {
-    query = `&page=${page}`;
-  }
-  if (totalPage !== undefined) {
-    query += `&totalPages=${totalPage}`;
-  }
-  query = query.replace(/&/, '?')
-
-  return `${launchesSegment}${query}`;
+export function getLaunchesPageUrl(pageNumber = 1) {
+  return `${launchesSegment}?${getPageNumber(pageNumber)}`;
 }
 
-export function getLaunchURL(launchId) {
+export function getLaunchUrl(launchId) {
   return `${launchesSegment}/${launchId}`
 }
 
 export function getRocketsUrl() { return rocketsSegment; }
 
 export function getRocketUrl(rocketId) { return `${rocketsSegment}/${rocketId}`; }
+
+export function getShipsPageUrl(pageNumber = 1) {
+  return `${shipsSegment}?${getPageNumber(pageNumber)}`
+}
+
+export function getShipUrl(shipId) {
+  return `${shipsSegment}/${shipId}`;
+}
 
 export function getAboutUrl() { return aboutSegment; }
 
@@ -31,3 +31,4 @@ export const rocketsImage = {
   falconheavy: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/KSC-20190624-PH_KLS01_0056.jpg/1200px-KSC-20190624-PH_KLS01_0056.jpg",
   starship: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Starship_2019.png/1200px-Starship_2019.png"
 }
+const getPageNumber = pageNumber => `page=${pageNumber}`;

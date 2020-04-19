@@ -19,10 +19,6 @@
   @apply font-bold;
 }
 
-.link {
-  @apply cursor-pointer
-}
-
 .text-link {
   @apply italic;
   @apply underline;

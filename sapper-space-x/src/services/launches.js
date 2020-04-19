@@ -4,18 +4,23 @@ import { sortByLaunchDate } from '@Lib/misc';
 
 const LAST_LAUNCHES = gql`
 query($limit: Int!, $offset: Int!) {
-  launches(limit: $limit, offset: $offset, order:"launch_date_utc", sort:"desc") {
-    id
-    mission_name
-    launch_date_utc
-    launch_site {
-      site_name_long
+  launchesPastResult(limit: $limit, offset: $offset, order:"launch_date_utc", sort:"desc") {
+    data {
+      id
+      mission_name
+      launch_date_utc
+      launch_site {
+        site_name_long
+      }
+      rocket {
+        rocket_name
+      }
+      links {
+        flickr_images
+      }
     }
-    rocket {
-      rocket_name
-    }
-    links {
-      flickr_images
+    result {
+      totalCount
     }
   }
 }`;
@@ -28,21 +33,7 @@ export async function getLaunches(fetch, pageNumber, pageSize) {
     query: LAST_LAUNCHES,
     variables: { limit, offset }
   });
-  return response.data.launches;
-}
-
-const GET_LAUNCHES_COUNT = gql`
-{
-  launches {
-    id
-  }
-}`;
-export async function getLaunchesCount(fetch) {
-  const client = getClient(fetch);
-  const response = await client.query({
-    query: GET_LAUNCHES_COUNT,
-  });
-  return response.data.launches.length;
+  return { launches: response.data.launchesPastResult.data, totalCount: response.data.launchesPastResult.result.totalCount };
 }
 
 const GET_LAUNCH = gql`

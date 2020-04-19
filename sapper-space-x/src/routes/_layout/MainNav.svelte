@@ -2,8 +2,10 @@
   import {
     launchesSegment,
     rocketsSegment,
-    getLaunchesURL,
+    shipsSegment,
+    getLaunchesPageUrl,
     getRocketsUrl,
+    getShipsPageUrl,
     aboutSegment,
     getAboutUrl
   } from "@Lib/url";
@@ -17,11 +19,14 @@
   <ul class="flex flex-wrap">
     <NavItem
       isCurrent={path.startsWith(launchesSegment)}
-      href={getLaunchesURL()}>
+      href={getLaunchesPageUrl()}>
       Launches
     </NavItem>
     <NavItem isCurrent={path.startsWith(rocketsSegment)} href={getRocketsUrl()}>
       Rockets
+    </NavItem>
+    <NavItem isCurrent={path.startsWith(shipsSegment)} href={getShipsPageUrl()}>
+      Ships
     </NavItem>
     <NavItem isCurrent={path === aboutSegment} href={getAboutUrl()}>
       About

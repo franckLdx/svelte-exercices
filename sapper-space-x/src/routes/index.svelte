@@ -1,8 +1,8 @@
 <script context="module">
-  import { getLaunchesURL } from "@Lib/url";
+  import { getLaunchesPageUrl } from "@Lib/url";
 
   export function preload(page) {
-    this.redirect(302, getLaunchesURL());
+    this.redirect(302, getLaunchesPageUrl());
   }
 </script>
 

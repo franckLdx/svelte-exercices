@@ -2,12 +2,12 @@
   import { createEventDispatcher } from "svelte";
   import NavItem from "./NavItem.svelte";
 
-  export let page;
-  export let lastPage;
+  export let currentPageNumber;
+  export let lastPageNumber;
 
   let width;
 
-  const pages = [...Array(lastPage).keys()].map(i => i + 1);
+  const pages = [...Array(lastPageNumber).keys()].map(i => i + 1);
 
   const dispatch = createEventDispatcher();
   const onPage = page => dispatch("page", { page });
@@ -16,30 +16,30 @@
 <div
   class="container flex justify-center"
   aria-label="Page nagigation"
-  aria-valuenow={page}
+  aria-valuenow={currentPageNumber}
   aria-valuemin="1"
-  aria-valuemax={lastPage}>
+  aria-valuemax={lastPageNumber}>
   <div class="inline lg:hidden">
     <NavItem
       ariaLabel={'prev'}
-      disabled={page === 1}
-      on:click={() => onPage(page - 1)}>
+      disabled={currentPageNumber === 1}
+      on:click={() => onPage(currentPageNumber - 1)}>
       &lt;
     </NavItem>
     <NavItem
       ariaLabel={'next'}
-      disabled={page === lastPage}
-      on:click={() => onPage(page + 1)}>
+      disabled={currentPageNumber === lastPageNumber}
+      on:click={() => onPage(currentPageNumber + 1)}>
       &gt;
     </NavItem>
   </div>
   <div class="hidden lg:inline">
-    {#each pages as number (number)}
+    {#each pages as pageNumber (pageNumber)}
       <NavItem
-        ariaLabel={number}
-        disabled={number == page}
-        on:click={() => onPage(number)}>
-        {number}
+        ariaLabel={pageNumber}
+        disabled={pageNumber == currentPageNumber}
+        on:click={() => onPage(pageNumber)}>
+        {pageNumber}
       </NavItem>
     {/each}
   </div>
