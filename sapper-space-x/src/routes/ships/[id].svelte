@@ -17,6 +17,7 @@
 </script>
 
 <script>
+  import Separator from "@Components/Separator.svelte";
   import { getLaunchUrl } from "@Lib/url";
   import Link from "@Components/Link.svelte";
 
@@ -24,13 +25,13 @@
 </script>
 
 <h1 class="title1 mb-10">{ship.name} -- A {ship.type} of {ship.year_built}</h1>
-<img src={ship.image} alt={`A ${ship.name} photo`} />
+<img class="mb-10" src={ship.image} alt={`A ${ship.name} photo`} />
 <HorizontalList
   items={[{ Roles: ship.roles }, { 'Home port': ship.home_port }]} />
 {#if ship.weight_kg}
-  <HorizontalList items={[{ Weight: `${ship.weight_kg}kg` }]} />
+  <HorizontalList class="mt-8" items={[{ Weight: `${ship.weight_kg}kg` }]} />
 {/if}
-Launches
+<Separator>Launches</Separator>
 <ol class="list-disc list-inside">
   {#each ship.missions as mission (mission.flight)}
     <li>

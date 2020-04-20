@@ -9,7 +9,7 @@
 </script>
 
 <MediaDescription
-  {className}
+  class={className}
   imgUrl={launch.links.mission_patch}
   altImg="mission patch logo">
   <div>

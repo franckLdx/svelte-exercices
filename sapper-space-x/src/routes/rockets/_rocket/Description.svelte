@@ -4,12 +4,14 @@
   import { rocketsImage } from "@Lib/url";
 
   export let rocket;
+  let className = "";
+  export { className as class };
 
   $: imgUrl = rocketsImage[rocket.id];
   $: altImg = `A ${rocket.name} image`;
 </script>
 
-<MediaDescription {imgUrl} {altImg}>
+<MediaDescription class={className} {imgUrl} {altImg}>
   <div class="mb-3">
     {rocket.description} (
     <Link href={rocket.wikipedia}>Related wikipedia article</Link>

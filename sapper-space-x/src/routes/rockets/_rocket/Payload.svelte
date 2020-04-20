@@ -1,10 +1,10 @@
 <script>
-  import Title from "./Title.svelte";
+  import Separator from "@Components/Separator.svelte";
 
   export let rocket;
 </script>
 
-<Title>Payload</Title>
+<Separator>Payload</Separator>
 <table class="table-auto">
   <thead>
     <tr>

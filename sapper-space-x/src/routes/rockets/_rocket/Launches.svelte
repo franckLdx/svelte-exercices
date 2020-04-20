@@ -1,13 +1,13 @@
 <script>
   import Link from "@Components/Link.svelte";
-  import Title from "./Title.svelte";
+  import Separator from "@Components/Separator.svelte";
   import { formatDate } from "@Lib/misc";
   import { getLaunchUrl } from "@Lib/url";
 
   export let launches;
 </script>
 
-<Title>Launches</Title>
+<Separator>Launches</Separator>
 <ol class="list-disc list-inside">
   {#each launches as launch (launch.id)}
     <li>

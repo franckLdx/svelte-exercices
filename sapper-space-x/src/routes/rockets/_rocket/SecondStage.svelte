@@ -1,6 +1,6 @@
 <script>
   import HorizontalList from "@Components/HorizontalList.svelte";
-  import Title from "./Title.svelte";
+  import Separator from "@Components/Separator.svelte";
 
   export let rocket;
 
@@ -14,6 +14,6 @@
   const classes = "md:mb-5";
 </script>
 
-<Title>Second stage</Title>
+<Separator>Second stage</Separator>
 <HorizontalList class={classes} items={enginesItems} />
 <HorizontalList class={classes} items={thrustItems} />
