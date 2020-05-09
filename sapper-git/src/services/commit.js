@@ -7,7 +7,8 @@ query($owner: String!, $repository: String!, $resourcePath: String!) {
   repository(owner: $owner, name: $repository) {
     object(expression: "master") {
       ...on Commit {
-        history(path: $resourcePath, first: 1) {
+        history(path: $resou
+          rcePath, first: 1) {
           nodes {
             committedDate, message
           }
