@@ -8,6 +8,7 @@
   export let launch;
 </script>
 
+
 <MediaDescription
   class={className}
   imgUrl={launch.links.mission_patch}

@@ -7,7 +7,7 @@
 
   let index = 0;
 
-  function next() {
+  function nextImage() {
     index = index < thumbnails.length - 1 ? index + 1 : 0;
   }
 
@@ -18,11 +18,11 @@
   }
 
   onMount(() => {
-    const interval = setInterval(next, pickInterval());
+    const interval = setInterval(nextImage, pickInterval());
     return () => clearTimeout(interval);
   });
 </script>
 
 {#if thumbnails.length}
-  <img class={className} src={thumbnails[index]} alt="Mission image" />
+  <img class={className} src={thumbnails[index]} alt="Mission photos" />
 {/if}

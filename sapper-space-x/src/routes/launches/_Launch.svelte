@@ -13,5 +13,5 @@
   {distanceDate(launch.launch_date_utc, now)} ago from {launch.launch_site.site_name_long}
 </span>
 <Thumbnails
-  class="h-64 w-64 mx-auto mt-2 mb-2 object-scale-down"
+  class="h-64 w-64 mx-auto mt-2 mb-2 object-cover"
   thumbnails={launch.links.flickr_images} />

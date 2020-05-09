@@ -14,7 +14,6 @@ const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
-
 const srcDir = `${__dirname}/src`;
 const components = `${srcDir}/components`;
 const lib = `${srcDir}/lib`;

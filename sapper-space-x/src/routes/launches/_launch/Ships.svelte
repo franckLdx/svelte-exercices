@@ -28,7 +28,7 @@
           <img
             class="ship images object-scale-down"
             src={ship.image}
-            alt="Ship's photo" />
+            alt={ship.name} />
         {/if}
         {ship.name}
         {#if ship.model}-- {ship.model}{/if}
