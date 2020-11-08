@@ -5,14 +5,8 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
-import alias from '@rollup/plugin-alias';
 
 const production = !process.env.ROLLUP_WATCH;
-
-const aliases = [
-	{ find: 'TrafficInfo', replacement: 'src/trafficInfo/TrafficInfo.svelte' },
-	{ find: 'Loading', replacement: 'src/Loading.svelte' },
-];
 
 const svelteConfig = {
 	// enable run-time checks when not in production
@@ -60,8 +54,6 @@ export default {
 	},
 	plugins: [
 		svelte(svelteConfig),
-		alias({ entries: aliases }),
-
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
 		// some cases you'll need additional configuration -

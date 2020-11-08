@@ -1,7 +1,7 @@
 <script lang="ts">
   import { traficApi } from "../api/ratp.ts";
+  import Loading from "../Loading.svelte";
   import Info from "./Info.svelte";
-  import Loading from "Loading";
 
   async function getTrafficMetroInfo() {
     const trafficInfo = await traficApi();

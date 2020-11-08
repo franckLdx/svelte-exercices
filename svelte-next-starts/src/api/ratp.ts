@@ -1,17 +1,7 @@
+import type { Trafic } from "../models/traffic";
+
 const url = "https://api-ratp.pierre-grimaud.fr/v4";
 
-export interface TraficInfo {
-  line: string;
-  slug: string;
-  title: string;
-  message: string;
-}
-
-interface Trafic {
-  metros: TraficInfo[];
-  rers: TraficInfo[];
-  tramways: TraficInfo[];
-}
 
 var headers = new Headers();
 headers.append("accept", "application/json");

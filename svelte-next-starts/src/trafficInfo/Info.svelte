@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { TraficInfo } from "../api/ratp.ts";
+  import type { TraficInfo } from "../models/traffic";
+
   export let trafficInfo: TraficInfo;
 </script>
 
