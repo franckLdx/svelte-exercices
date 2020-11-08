@@ -5,7 +5,7 @@
     destinationsStore,
     loadDestination,
     saveDestination,
-  } from "../stores/destinations";
+  } from "../../stores/destinations";
 
   onMount(() => {
     loadDestination();

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { traficApi } from "../api/ratp.ts";
+  import { traficApi } from "../../api/ratp";
   import Loading from "../Loading.svelte";
   import Info from "./Info.svelte";
 
