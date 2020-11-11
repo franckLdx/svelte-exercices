@@ -16,7 +16,7 @@ export function saveDestination(destinations: Destinations) {
   localStorage.setItem(itemKey, JSON.stringify(destinations));
 }
 
-export const currentDetinationStore = writable<string | undefined>(undefined);
+export const currentDetinationStore = writable<string | undefined>(defaultDestinations[0].name);
 type CurrentDetinationStore = typeof currentDetinationStore;
 
 export const currentDetinationInfoStore = derived<[CurrentDetinationStore, DestinationsStore], Destination | undefined>(
