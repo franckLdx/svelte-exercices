@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TraficInfo } from "../models/traffic";
+  import type { TraficInfo } from "../../models/traffic";
 
   export let trafficInfo: TraficInfo;
 </script>

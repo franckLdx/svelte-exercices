@@ -1,5 +1,7 @@
+import type { LineType } from "./line";
+
 export interface TraficInfo {
-  line: string;
+  line: LineType;
   slug: string;
   title: string;
   message: string;

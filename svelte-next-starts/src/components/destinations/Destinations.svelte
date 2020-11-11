@@ -1,22 +1,11 @@
 <script lang="ts">
-  import { Button } from "svelte-materialify";
-  import { onMount } from "svelte";
-  import {
-    destinationsStore,
-    loadDestination,
-    saveDestination,
-  } from "../../stores/destinations";
-
-  onMount(() => {
-    loadDestination();
-    return destinationsStore.subscribe(saveDestination);
-  });
+  // import { Button } from "svelte-materialify";
+  import { destinationsStore } from "../../stores/destinations";
 
   function add() {
-    console.log("**************************");
-    $destinationsStore = [...$destinationsStore, { name: "test" }];
+    $destinationsStore = [...$destinationsStore];
   }
 </script>
 
-{$destinationsStore.length}
-<Button class="primary-color" on:click={add}>Add</Button>
+<!-- {$destinationsStore.length}
+<Button class="secondary-color" on:click={add}>Add</Button> -->
