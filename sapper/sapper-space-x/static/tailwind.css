@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+
+.container {
+  @apply bg-black;
+  @apply text-gray-300;
+  @apply border-gray-300;
+}
+
+.title1 {
+  @apply font-serif; 
+  @apply text-4xl;
+  @apply font-bold;
+}
+
+.title2 {
+  @apply font-serif;
+  @apply text-2xl;
+  @apply font-bold;
+}
+
+.text-link {
+  @apply italic;
+  @apply underline;
+}
+
+.link:hover {
+  @apply text-white;
+  @apply border-white;
+}
+
+.link:disabled {
+  @apply opacity-50;
+}
+
+@tailwind utilities;
