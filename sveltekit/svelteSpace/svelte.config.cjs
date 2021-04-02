@@ -6,16 +6,14 @@ const pkg = require('./package.json');
 module.exports = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
-	preprocess: sveltePreprocess(
-		[
-			"@snowpack/plugin-svelte",
-			{
-				compilerOptions: {
-					hydratable: true
-				}
-			}
-		]
-	),
+	preprocess: [
+		sveltePreprocess({
+			defaults: {
+				style: "postcss",
+			},
+			postcss: true
+		}),
+	],
 	kit: {
 		// By default, `npm run build` will create a standard Node app.
 		// You can create optimized builds for different platforms by
