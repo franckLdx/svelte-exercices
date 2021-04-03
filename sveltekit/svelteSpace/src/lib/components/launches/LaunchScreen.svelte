@@ -10,6 +10,6 @@
 	div {
 		@apply bg-component;
 		@apply text-component font-component;
-		@apply m-2;
+		@apply h-20;
 	}
 </style>

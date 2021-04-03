@@ -20,6 +20,7 @@
 <style lang="postcss">
 	div {
 		@apply flex flex-col;
+		@apply h-full;
 	}
 	header {
 		@apply flex-grow-0;
