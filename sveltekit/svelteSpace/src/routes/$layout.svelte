@@ -4,19 +4,28 @@
 	import NavItem from '$lib/components/Nav/NavItem.svelte';
 </script>
 
-<header>
-	<NavBar>
-		<NavItem href=".">Home</NavItem>
-		<NavItem href="about">About</NavItem>
-	</NavBar>
-</header>
+<div>
+	<header>
+		<NavBar>
+			<NavItem href=".">Home</NavItem>
+			<NavItem href="about">About</NavItem>
+		</NavBar>
+	</header>
 
-<main>
-	<slot />
-</main>
+	<main>
+		<slot />
+	</main>
+</div>
 
 <style lang="postcss">
+	div {
+		@apply flex flex-col;
+	}
 	header {
-		@apply mb-3;
+		@apply flex-grow-0;
+		@apply mb-1;
+	}
+	main {
+		@apply flex-grow;
 	}
 </style>
