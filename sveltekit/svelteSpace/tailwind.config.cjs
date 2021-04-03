@@ -19,19 +19,25 @@ module.exports = {
 	theme: {
 		extend: {
 			textColor: {
-				'primary-100': colors.white,
+				component: colors.white,
 			},
+			fontWeight: theme => ({
+				component: theme('font-weight.bold')
+			}),
 			backgroundColor: {
-				'primary-100': colors.red['200'],
-				'primary-200': colors.red['500'],
-				'primary_hover-100': colors.red['700'],
+				container: colors.red['200'],
+				component: colors.red['500'],
+				component_hover: colors.red['700'],
 			},
 			borderColor: {
-				'primary-100': colors.red['500'],
+				component: colors.red['500'],
 			},
 			ringColor: {
-				'primary-100': colors.red['400'],
-			}
+				'color-component': colors.red['400'],
+			},
+			ringWidth: theme => ({
+				'width-component': theme('ring.ring-2')
+			}),
 		},
 	},
 	variants: {

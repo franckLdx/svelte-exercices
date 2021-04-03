@@ -6,13 +6,13 @@
 
 <style lang="postcss">
 	a {
-		@apply bg-primary-200;
-		@apply text-primary-100 font-bold;
+		@apply bg-component;
+		@apply text-component font-component;
 		@apply px-2 py-1;
 	}
 
 	a:hover {
-		@apply bg-primary_hover-100;
-		@apply ring-2 ring-primary-100;
+		@apply bg-component_hover;
+		@apply ring-width-component ring-color-component;
 	}
 </style>

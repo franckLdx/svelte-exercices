@@ -2,8 +2,8 @@
 
 <style lang="postcss">
 	nav {
-		@apply bg-primary-100;
+		@apply bg-container;
+		@apply border-b-2 border-component;
 		@apply px-5 pt-3 pb-2;
-		@apply border-b-2 border-primary-100;
 	}
 </style>
