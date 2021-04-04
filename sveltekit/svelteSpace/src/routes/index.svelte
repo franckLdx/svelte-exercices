@@ -1,26 +1,33 @@
 <script lang="ts">
-	import LaunchScreen from '$lib/components/launches/LaunchScreen.svelte';
+	import LaunchCard from '$lib/components/launches/LaunchCard.svelte';
+	import Grid from '$lib/components/Grid.svelte';
 	import { request, gql } from 'graphql-request/dist';
 	import type { Launch } from 'src/model/Launch';
 
 	const query = gql`
 		{
-			launchesPast(limit: 10) {
+			launches(limit: 1000, sort: "launch_date_utc", order: "desc") {
 				mission_name
+				details
+				links {
+					mission_patch_small
+				}
 			}
 		}
 	`;
 
-	const result = request<{ launchesPast: Launch[] }>('https://api.spacex.land/graphql', query);
+	const result = request<{ launches: Launch[] }>('https://api.spacex.land/graphql', query);
 </script>
 
 <div>
 	{#await result}
 		<p>...waiting</p>
 	{:then foo}
-		{#each foo.launchesPast as launch}
-			<LaunchScreen {launch} />
-		{/each}
+		<Grid>
+			{#each foo.launches as launch}
+				<LaunchCard {launch} />
+			{/each}
+		</Grid>
 	{:catch error}
 		BOOM
 	{/await}
@@ -29,8 +36,6 @@
 <style lang="postcss">
 	div {
 		@apply bg-container;
-		@apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5;
-		@apply gap-2 xl:gap-3 p-2 xl:p-3;
 		@apply h-full;
 	}
 </style>

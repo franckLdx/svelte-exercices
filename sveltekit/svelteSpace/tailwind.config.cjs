@@ -38,10 +38,18 @@ module.exports = {
 			ringWidth: theme => ({
 				'width-component': theme('ring.ring-2')
 			}),
+			lineClamp: {
+				7: '7',
+				8: '8',
+				9: '9',
+				10: '10',
+			}
 		},
 	},
 	variants: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [
+		require('@tailwindcss/line-clamp'),
+	],
 };
