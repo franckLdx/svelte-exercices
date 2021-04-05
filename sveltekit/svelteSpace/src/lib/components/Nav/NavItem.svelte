@@ -1,13 +1,13 @@
 <script lang="ts">
+	import { typos } from '../Typographie/tools';
 	export let href: string;
 </script>
 
-<a {href}><slot /></a>
+<a class={typos.component} {href}><slot /></a>
 
 <style lang="postcss">
 	a {
 		@apply bg-component;
-		@apply text-component font-component;
 		@apply px-2 py-1;
 	}
 

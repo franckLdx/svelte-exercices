@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Image from './Image.svelte';
-	import TextClamp from './TextClamp.svelte';
+	import Typographie from './Typographie/Typographie.svelte';
 
 	export let title: string;
 	export let imageRef: string | null;
@@ -14,17 +14,17 @@
 </script>
 
 <article>
-	{title}
+	<Typographie typo="component-header" text={title} clamp={1} />
 	<div class="h-3/5">
 		<Image {alt} href={imageRef} />
 	</div>
-	<TextClamp text={descriptionContent} clamp={description.clamp} />
+	<Typographie typo="component" text={descriptionContent} clamp={description.clamp} />
 </article>
 
 <style lang="postcss">
 	article {
+		@apply rounded-md;
 		@apply bg-component;
-		@apply text-component font-component;
 		@apply h-full w-full;
 		@apply px-2 py-1;
 	}

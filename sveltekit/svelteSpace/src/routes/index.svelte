@@ -1,12 +1,13 @@
 <script lang="ts">
-	import LaunchCard from '$lib/components/launches/LaunchCard.svelte';
+	import LaunchCard from '$lib/app/launches/LaunchCard.svelte';
+	import LaunchPagination from '$lib/app/launches/LaunchPagination.svelte';
 	import Grid from '$lib/components/Grid.svelte';
 	import { request, gql } from 'graphql-request/dist';
 	import type { Launch } from 'src/model/Launch';
 
 	const query = gql`
 		{
-			launches(limit: 1000, sort: "launch_date_utc", order: "desc") {
+			launches(limit: 10, sort: "launch_date_utc", order: "desc") {
 				mission_name
 				details
 				links {
@@ -22,12 +23,13 @@
 <div>
 	{#await result}
 		<p>...waiting</p>
-	{:then foo}
+	{:then launchesResult}
 		<Grid>
-			{#each foo.launches as launch}
+			{#each launchesResult.launches as launch}
 				<LaunchCard {launch} />
 			{/each}
 		</Grid>
+		<LaunchPagination />
 	{:catch error}
 		BOOM
 	{/await}

@@ -1,5 +1,7 @@
 const { tailwindExtractor } = require("tailwindcss/lib/lib/purgeUnusedStyles");
-const colors = require("tailwindcss/colors")
+const colors = require("tailwindcss/colors");
+const defaultConfig = require("tailwindcss/defaultConfig");
+const defaultTheme = defaultConfig.theme;
 
 module.exports = {
 	purge: {
@@ -18,12 +20,25 @@ module.exports = {
 	},
 	theme: {
 		extend: {
-			textColor: {
-				component: colors.white,
+			// font-
+			fontWeight: {
+				paragraph: defaultTheme.fontWeight.black,
+				component: defaultTheme.fontWeight.bold,
+				'component-header': defaultTheme.fontWeight.extrabold,
 			},
-			fontWeight: theme => ({
-				component: theme('font-weight.bold')
-			}),
+			// text-
+			fontSize: {
+				'paragraph_font-size': defaultTheme.fontSize.base,
+				'component_font-size': defaultTheme.fontSize.base,
+				'component-header_font-size': defaultTheme.fontSize.xl,
+			},
+			// text-
+			textColor: {
+				paragraph: colors.black,
+				component: colors.white,
+				'component-header': colors.white,
+			},
+			// bg-
 			backgroundColor: {
 				container: colors.red['200'],
 				component: colors.red['500'],
@@ -35,9 +50,9 @@ module.exports = {
 			ringColor: {
 				'color-component': colors.red['400'],
 			},
-			ringWidth: theme => ({
-				'width-component': theme('ring.ring-2')
-			}),
+			ringWidth: {
+				'width-component': defaultTheme.ringWidth[2]
+			},
 			lineClamp: {
 				7: '7',
 				8: '8',
