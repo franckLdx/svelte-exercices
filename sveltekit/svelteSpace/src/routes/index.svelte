@@ -1,11 +1,10 @@
 <script lang="ts">
-	import LaunchCard from '$lib/app/launches/LaunchCard.svelte';
-	import LaunchPagination from '$lib/app/launches/LaunchPagination.svelte';
-	import Grid from '$lib/components/Grid.svelte';
-	import { request, gql } from 'graphql-request/dist';
+	import { get, prepareQuery } from '$lib/api/spaceX';
+	import LaunchesList from '$lib/app/launches/LaunchesList.svelte';
+	import Loading from '$lib/components/Loading.svelte';
 	import type { Launch } from 'src/model/Launch';
 
-	const query = gql`
+	const query = prepareQuery(`
 		{
 			launches(limit: 10, sort: "launch_date_utc", order: "desc") {
 				mission_name
@@ -15,29 +14,27 @@
 				}
 			}
 		}
-	`;
+	`);
 
-	const result = request<{ launches: Launch[] }>('https://api.spacex.land/graphql', query);
+	const result = get<{ launches: Launch[] }>(query);
 </script>
 
-<div>
+<div id="container">
 	{#await result}
-		<p>...waiting</p>
+		<div id="loading"><Loading /></div>
 	{:then launchesResult}
-		<Grid>
-			{#each launchesResult.launches as launch}
-				<LaunchCard {launch} />
-			{/each}
-		</Grid>
-		<LaunchPagination />
+		<LaunchesList launches={launchesResult.launches} />
 	{:catch error}
 		BOOM
 	{/await}
 </div>
 
 <style lang="postcss">
-	div {
+	#container {
 		@apply bg-container;
 		@apply h-full;
+	}
+	#loading {
+		@apply pl-5;
 	}
 </style>

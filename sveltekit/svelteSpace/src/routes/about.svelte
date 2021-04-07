@@ -1,3 +1,7 @@
+<script context="module">
+	export const prerender = true;
+</script>
+
 <section>A space X presentation made with svelteKit, tailwind, graphql</section>
 
 <style lang="postcss">

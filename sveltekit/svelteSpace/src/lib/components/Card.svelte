@@ -14,11 +14,11 @@
 </script>
 
 <article>
-	<Typographie typo="component-header" text={title} clamp={1} />
+	<Typographie elementType="component-header" text={title} clamp={1} />
 	<div class="h-3/5">
 		<Image {alt} href={imageRef} />
 	</div>
-	<Typographie typo="component" text={descriptionContent} clamp={description.clamp} />
+	<Typographie elementType="component" text={descriptionContent} clamp={description.clamp} />
 </article>
 
 <style lang="postcss">

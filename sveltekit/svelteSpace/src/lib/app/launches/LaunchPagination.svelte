@@ -1,32 +1,28 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import { request, gql } from 'graphql-request/dist';
+	import { get, prepareQuery } from '$lib/api/spaceX';
+	import Pagination from '../Pagination.svelte';
 
 	interface Id {
 		mission_id: string;
 	}
 
-	const query = gql`
+	const query = prepareQuery(`
 		{
 			launches(limit: 1000000) {
 				mission_id
 			}
 		}
-	`;
+	`);
 
-	const pageCountP: Promise<number> = request<{ launches: Id[] }>(
-		'https://api.spacex.land/graphql',
-		query
-	).then((result) => Math.ceil(result.launches.length / 10));
+	const pagestP: Promise<number> = get<{ launches: Id[] }>(query).then((result) =>
+		Math.ceil(result.launches.length / 10)
+	);
 </script>
 
-{#await pageCountP}
-	<p>...waiting</p>
-{:then count}
-	<div class="bg-red-300">
-		Pages count: {count}
-		<Button>1</Button>
-		<Button>2</Button>
-		<Button>3</Button>
-	</div>
-{/await}
+<div id="paginationContainer">
+	{#await pagestP}
+		<p>...waiting</p>
+	{:then pagesCount}
+		<Pagination {pagesCount} />
+	{/await}
+</div>

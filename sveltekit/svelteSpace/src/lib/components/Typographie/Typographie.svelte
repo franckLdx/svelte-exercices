@@ -1,12 +1,13 @@
 <script lang="ts">
-	import type { Typo } from './tools';
+	import type { ElementType } from '../elements';
+
 	import { getClamp, getTypo } from './tools';
 
 	export let text: string;
 	export let clamp: number = 0;
-	export let typo: Typo;
+	export let elementType: ElementType;
 
-	$: classes = `${getTypo(typo)} ${getClamp(clamp)}`;
+	$: classes = `${getTypo(elementType)} ${getClamp(clamp)}`;
 </script>
 
 <div class={classes}>{text}</div>
