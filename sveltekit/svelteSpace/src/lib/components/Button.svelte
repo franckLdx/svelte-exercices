@@ -1,4 +1,14 @@
-<button><slot /></button>
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	const onClick: svelte.JSX.MouseEventHandler<HTMLButtonElement> = (e) => {
+		dispatch('click', e);
+	};
+</script>
+
+<button on:click={onClick}><slot /></button>
 
 <style>
 	button {

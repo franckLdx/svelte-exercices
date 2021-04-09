@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { get, prepareQuery } from '$lib/api/spaceX';
-	import Pagination from '../Pagination.svelte';
+	import Pagination from '$lib/components/Pagination.svelte';
 
 	interface Id {
 		mission_id: string;
