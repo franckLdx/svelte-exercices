@@ -1,41 +1,29 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { getNumberQueryParameter } from '$lib/queryParameters';
-	import { get, prepareQuery } from '$lib/api/spaceX';
 	import LaunchesList from '$lib/app/launches/LaunchesList.svelte';
 	import Loading from '$lib/components/Loading.svelte';
-	import type { Launch } from 'src/model/Launch';
-	import { page } from '$app/stores';
+	import LaunchPagination from '$lib/app/launches/LaunchPagination.svelte';
+	import launchesStore from '$lib/app/launches/LaunchesStore';
 
 	const pageKey = 'page';
 	const limitKey = 'limit';
 
-	const pageNumber = getNumberQueryParameter($page.query, pageKey) ?? 0;
-	const limit = getNumberQueryParameter($page.query, limitKey) ?? 10;
-	$: offset = pageNumber * limit;
-
-	const query = prepareQuery(`
-		query ($offset: Int!, $limit: Int!) {
-			launches(limit: $limit, offset: $offset, sort: "launch_date_utc", order: "desc") {
-				mission_name
-				details
-				links {
-					mission_patch_small
-				}
-			}
-		}
-	`);
-
-	$: result = get<{ launches: Launch[] }>(query, { offset, limit });
+	$: pageNumber = getNumberQueryParameter($page.query, pageKey) ?? 1;
+	$: limit = getNumberQueryParameter($page.query, limitKey) ?? 10;
+	$: launchesStore.setLimit(limit);
+	$: loading = launchesStore.loadPage(pageNumber);
 </script>
 
 <div id="container">
-	{#await result}
+	{#await loading}
 		<div id="loading"><Loading /></div>
-	{:then launchesResult}
-		<LaunchesList launches={launchesResult.launches} />
+	{:then _launchesResult}
+		<LaunchesList {pageNumber} />
 	{:catch error}
 		BOOM
 	{/await}
+	<LaunchPagination />
 </div>
 
 <style lang="postcss">

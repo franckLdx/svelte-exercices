@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { get, prepareQuery } from '$lib/api/spaceX';
+	import { load, prepareQuery } from '$lib/api/spaceX';
 	import Pagination from '$lib/components/Pagination.svelte';
+	import { goto } from '$app/navigation';
+	import { getLaucnhesUrl } from '../routes';
 
 	interface Id {
 		mission_id: string;
@@ -14,15 +16,14 @@
 		}
 	`);
 
-	const pagestP: Promise<number> = get<{ launches: Id[] }>(query).then((result) =>
+	const pagestP: Promise<number> = load<{ launches: Id[] }>(query).then((result) =>
 		Math.ceil(result.launches.length / 10)
 	);
+	const onPage = ({ detail }: CustomEvent<number>) => goto(getLaucnhesUrl(detail));
 </script>
 
 <div id="paginationContainer">
-	{#await pagestP}
-		<p>...waiting</p>
-	{:then pagesCount}
-		<Pagination {pagesCount} />
+	{#await pagestP then pagesCount}
+		<Pagination on:page={onPage} {pagesCount} />
 	{/await}
 </div>

@@ -3,11 +3,11 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let pagesCount: number;
-	$: pages = Array.from(Array(pagesCount).keys());
+	$: pages = Array.from(Array(pagesCount).keys()).map((num) => num + 1);
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{ page: number }>();
 
-	const onClick = (pageNumber: number) => dispatch('click', pageNumber);
+	const onClick = (pageNumber: number) => dispatch('page', pageNumber);
 </script>
 
 <div id="paginationContainer">

@@ -12,7 +12,7 @@ module.exports = {
 				style: "postcss",
 			},
 			postcss: true
-		}),
+		})
 	],
 	kit: {
 		// By default, `npm run build` will create a standard Node app.

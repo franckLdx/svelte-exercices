@@ -1,10 +1,11 @@
 <script lang="ts">
-	import type { Launch } from 'src/model/Launch';
 	import Grid from '$lib/components/Grid.svelte';
 	import LaunchCard from '$lib/app/launches/LaunchCard.svelte';
-	import LaunchPagination from '$lib/app/launches/LaunchPagination.svelte';
+	import launchesStore from './LaunchesStore';
 
-	export let launches: Launch[];
+	export let pageNumber: number;
+	$: launchesData = $launchesStore;
+	$: launches = launchesData.launches[pageNumber];
 </script>
 
 <Grid>
@@ -12,4 +13,3 @@
 		<LaunchCard {launch} />
 	{/each}
 </Grid>
-<LaunchPagination />

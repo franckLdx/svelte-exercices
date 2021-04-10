@@ -5,7 +5,7 @@ export function prepareQuery(rawQuery: string): string {
   return gql`${rawQuery}`;
 }
 
-export async function get<Returned>(query: string, variables?: Variables): Promise<Returned> {
+export async function load<Returned>(query: string, variables?: Variables): Promise<Returned> {
   return request<Returned>(
     'https://api.spacex.land/graphql',
     query,
