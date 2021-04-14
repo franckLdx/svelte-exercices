@@ -10,6 +10,7 @@ interface LaucnhesUrlParams {
   pageNumber: number,
   limit: number
 }
+
 export const getLaucnhesUrl = (params?: Partial<LaucnhesUrlParams>): string => {
   const store = get(launchesStore)
   const pageNumber = params?.pageNumber ?? defaultPageNumber;
@@ -23,4 +24,3 @@ export const getLauchParameters = (query: URLSearchParams): LaucnhesUrlParams =>
   const limit = getNumberQueryParameter(query, limitKey) ?? store.limit;
   return { pageNumber, limit };
 }
-
