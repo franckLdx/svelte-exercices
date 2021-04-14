@@ -1,29 +1,25 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { getNumberQueryParameter } from '$lib/queryParameters';
 	import LaunchesList from '$lib/app/launches/LaunchesList.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import LaunchPagination from '$lib/app/launches/LaunchPagination.svelte';
 	import launchesStore from '$lib/app/launches/LaunchesStore';
+	import { getLauchParameters } from '$lib/app/launches/launchRoutes';
 
-	const pageKey = 'page';
-	const limitKey = 'limit';
-
-	$: pageNumber = getNumberQueryParameter($page.query, pageKey) ?? 1;
-	$: limit = getNumberQueryParameter($page.query, limitKey) ?? 10;
-	$: launchesStore.setLimit(limit);
-	$: loading = launchesStore.loadPage(pageNumber);
+	$: parameters = getLauchParameters($page.query);
+	$: launchesStore.setLimit(parameters.limit);
+	$: loading = launchesStore.loadPage(parameters.pageNumber);
 </script>
 
 <div id="container">
 	{#await loading}
 		<div id="loading"><Loading /></div>
 	{:then _launchesResult}
-		<LaunchesList {pageNumber} />
+		<LaunchesList pageNumber={parameters.pageNumber} />
 	{:catch error}
 		BOOM
 	{/await}
-	<LaunchPagination />
+	<LaunchPagination currentPageNumber={parameters.pageNumber} />
 </div>
 
 <style lang="postcss">

@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import { getLaucnhesUrl } from '$lib/app/routes';
+	import { getLaucnhesUrl } from '$lib/app/launches/launchRoutes';
 
 	import type { LoadOutput } from '@sveltejs/kit/types.internal';
 

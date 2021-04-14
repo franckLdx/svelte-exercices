@@ -1,1 +1,0 @@
-export const getLaucnhesUrl = (pageNumber = 1): string => `launches?page=${pageNumber}`
